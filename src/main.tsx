@@ -1,10 +1,10 @@
 import * as React from "react";
 import ReactDOM from "react-dom/client";
-import Home from "./pages/Home/Home";
+import Login from "./pages/Login";
 import "./index.css";
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <React.StrictMode>
-    <Home />
+    <Login />
   </React.StrictMode>
 );
