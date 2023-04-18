@@ -128,6 +128,35 @@
   color: var(--violet-800);
 }
 
+.box-input-password {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.input-password {
+  all: unset;
+  box-sizing: border-box;
+  width: 100%;
+}
+
+.input-password::placeholder {
+  font-size: 1.4rem;
+  font-weight: 300;
+}
+
+.input-focused {
+  outline: none;
+  box-shadow: 0 0 0 0.2rem var(--violet-500);
+}
+
+.login__input-eye {
+  all: unset;
+  cursor: pointer;
+  width: 2rem;
+  color: var(--violet-800);
+}
+
 .login__input::placeholder {
   font-size: 1.4rem;
   font-weight: 300;

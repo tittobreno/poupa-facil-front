@@ -1,7 +1,21 @@
-import "./styles.css";
+import { useState } from "react";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 import Logo from "../../assets/logo-pf.png";
-
+import "./styles.css";
 function Login() {
+  const [showPassword, setShowPassword] = useState(false);
+  const [isFocused, setIsFocused] = useState(false);
+  const handleTogglePassword = () => {
+    setShowPassword(!showPassword);
+  };
+
+  const handleFocus = () => {
+    setIsFocused(true);
+  };
+
+  const handleBlur = () => {
+    setIsFocused(false);
+  };
   return (
     <div className="container__login">
       <img className="login__logo" src={Logo} alt="Logo da página!" />
@@ -42,12 +56,31 @@ function Login() {
                     Esqueceu sua senha?
                   </a>
                 </div>
-                <input
-                  className="login__input"
-                  id="password"
-                  type="password"
-                  placeholder="Digite sua senha"
-                />
+                <div
+                  className={`login__input box-input-password ${
+                    isFocused ? "input-focused" : ""
+                  }`}
+                >
+                  <input
+                    className="input-password"
+                    id="password"
+                    type={showPassword ? "text" : "password"}
+                    placeholder="Digite sua senha"
+                    onFocus={handleFocus}
+                    onBlur={handleBlur}
+                  />
+                  <button
+                    className="login__input-eye"
+                    type="button"
+                    onClick={handleTogglePassword}
+                  >
+                    {showPassword ? (
+                      <FaEye title="Mostrar senha" />
+                    ) : (
+                      <FaEyeSlash title="Ocultar senha" />
+                    )}
+                  </button>
+                </div>
               </div>
 
               <button className="login__btn--submit">Entrar</button>
