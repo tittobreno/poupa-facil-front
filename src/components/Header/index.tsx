@@ -1,6 +1,5 @@
 import Logo from "../../assets/logo-pf.png";
 import "./styles.css";
-// import { FiUser, FiLogOut } from "react-icons/fi";
 import { HiUserCircle, HiOutlineLogout } from "react-icons/hi";
 const Header = () => {
   return (
