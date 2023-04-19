@@ -2,6 +2,7 @@ import { useState } from "react";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import Logo from "../../assets/logo-pf.png";
 import "./styles.css";
+import { Link } from "react-router-dom";
 function Login() {
   const [showPassword, setShowPassword] = useState(false);
   const [isFocused, setIsFocused] = useState(false);
@@ -27,7 +28,9 @@ function Login() {
             Simplifique sua vida financeira e economize dinheiro de forma
             inteligente. Experimente agora mesmo o Poupa Fácil!
           </h2>
-          <button className="login__btn--register">Cadastre-se</button>
+          <Link to="/cadastrar" className="login__btn--register">
+            Cadastre-se
+          </Link>
         </div>
 
         <section className="login__right-page">
