@@ -133,6 +133,10 @@
   transition: background-color 0.1s ease-in-out;
 }
 
+.control__apply:active {
+  box-shadow: 0px 2px 11px 1px rgba(0, 0, 0, 0.3);
+}
+
 .control__apply:hover {
   background-color: var(--violet-700);
 }

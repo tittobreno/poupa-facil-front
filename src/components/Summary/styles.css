@@ -1,0 +1,96 @@
+.summary__container {
+  display: flex;
+  flex-direction: column;
+  font-family: "Rubik", sans-serif;
+}
+
+.summary__main {
+  display: flex;
+  flex-direction: column;
+  justify-content: space;
+  width: 28rem;
+  height: 25rem;
+  background-color: var(--violet-100);
+  padding: 2.6rem 3.4rem;
+  border-radius: 1rem;
+  box-shadow: 0px 2px 11px rgba(0, 0, 0, 0.3);
+  margin-top: 6rem;
+}
+
+.summary__title {
+  font-weight: 700;
+  font-size: 2rem;
+  color: #4d4d4d;
+}
+
+.summary__section {
+  display: flex;
+  justify-content: space-between;
+}
+
+.summary__deposit {
+  margin-top: 2.2rem;
+  margin-bottom: 1.4rem;
+  font-weight: 500;
+  font-size: 1.5rem;
+}
+
+.deposit__title,
+.cash-out__title {
+  color: #4d4d4d;
+}
+
+.deposit__value {
+  color: var(--violet-500);
+}
+
+.summary__cash-out {
+  font-weight: 500;
+  font-size: 1.5rem;
+  padding-bottom: 1.6rem;
+  border-bottom: 2px solid var(--violet-300);
+}
+
+.cash-out__value {
+  color: #fa8c10;
+}
+
+.summary__balance {
+  margin-top: 1.6rem;
+  font-weight: 700;
+  font-size: 1.8rem;
+}
+
+.balance__title {
+  color: #4d4d4d;
+}
+
+.balance__value {
+  color: #4ade80;
+}
+
+.summary__button {
+  all: unset;
+  box-sizing: border-box;
+  padding: 1.4rem 2rem;
+  color: #fff;
+  background-color: var(--violet-500);
+  border-radius: 1rem;
+  text-align: center;
+  margin-top: 1.6rem;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
+  font-weight: 500;
+  font-size: 1.6rem;
+  box-shadow: 0px 0px 0px 1px var(--violet-500);
+}
+
+.summary__button:hover {
+  background-color: var(--violet-700);
+  box-shadow: 0px 0px 0px 1px var(--violet-700);
+}
+
+.summary__button:active {
+  box-shadow: 0px 0px 0px var(--violet-700);
+  background-color: var(--violet-800);
+}
