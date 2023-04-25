@@ -1,0 +1,52 @@
+.dashboard__container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 85rem;
+  font-family: "Lato", sans-serif;
+  transition: all 0.5s ease-in-out;
+}
+
+.dashboard__columns {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  height: 6rem;
+  padding: 1.8rem 2.2rem;
+  border-radius: 1rem;
+  background-color: var(--violet-100);
+  box-shadow: 0px 2px 11px rgba(0, 0, 0, 0.3);
+}
+
+.columns__item {
+  width: 30%;
+  text-align: center;
+  font-weight: 700;
+  font-size: 1.6rem;
+}
+
+.item__date {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.3rem;
+}
+
+.item__date-title {
+  cursor: pointer;
+  transition: transform 0.1s ease-in-out;
+}
+
+.item__date-title:active {
+  transform: scale(0.9);
+}
+
+.item__date-icon {
+  color: var(--violet-700);
+  transition: transform 0.2s ease-in-out;
+}
+
+.rotate {
+  transform: rotateX(180deg);
+}

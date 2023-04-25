@@ -1,10 +1,6 @@
-.summary__container {
-  display: flex;
-  flex-direction: column;
-  font-family: "Rubik", sans-serif;
-}
-
 .summary__main {
+  font-family: "Rubik", sans-serif;
+
   display: flex;
   flex-direction: column;
   justify-content: space;
@@ -14,7 +10,9 @@
   padding: 2.6rem 3.4rem;
   border-radius: 1rem;
   box-shadow: 0px 2px 11px rgba(0, 0, 0, 0.3);
-  margin-top: 6rem;
+  position: absolute;
+  top: 6rem;
+  right: 0;
 }
 
 .summary__title {
@@ -71,18 +69,21 @@
 
 .summary__button {
   all: unset;
+  width: 28rem;
   box-sizing: border-box;
   padding: 1.4rem 2rem;
   color: #fff;
   background-color: var(--violet-500);
   border-radius: 1rem;
   text-align: center;
-  margin-top: 1.6rem;
   cursor: pointer;
   transition: background-color 0.2s ease-in-out;
   font-weight: 500;
   font-size: 1.6rem;
   box-shadow: 0px 0px 0px 1px var(--violet-500);
+  position: absolute;
+  top: 27rem;
+  right: 0;
 }
 
 .summary__button:hover {

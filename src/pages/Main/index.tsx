@@ -2,6 +2,7 @@ import "./styles.css";
 import Header from "../../components/Header";
 import Filter from "../../components/Filter";
 import Summary from "../../components/Summary";
+import Dashboard from "../../components/Dashboard";
 const Main = () => {
   return (
     <div className="main__container">
@@ -11,6 +12,7 @@ const Main = () => {
           <Filter />
           <Summary />
         </section>
+        <Dashboard />
       </main>
     </div>
   );
