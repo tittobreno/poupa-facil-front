@@ -6,4 +6,8 @@ body {
   --violet-700: #6d28d9;
   --violet-800: #5b21b6;
   --purple-950: #3b0764;
+
+  --shadow-: box-shadow: 0px 2px 6px rgba(0,0,0,0.3);
 }
+
+

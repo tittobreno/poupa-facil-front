@@ -9,7 +9,7 @@
   background-color: var(--violet-100);
   padding: 2.6rem 3.4rem;
   border-radius: 1rem;
-  box-shadow: 0px 2px 11px rgba(0, 0, 0, 0.3);
+  box-shadow: 0px 1px 6px rgba(0, 0, 0, 0.3);
   position: absolute;
   top: 6rem;
   right: 0;
@@ -92,6 +92,6 @@
 }
 
 .summary__button:active {
-  box-shadow: 0px 0px 0px var(--violet-700);
   background-color: var(--violet-800);
+  transform: scale(0.98);
 }

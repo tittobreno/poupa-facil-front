@@ -93,9 +93,13 @@
   text-align: center;
   background-color: var(--violet-700);
   cursor: pointer;
-  transition: background-color 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;
   color: white;
   margin-top: 1rem;
+}
+
+.form__btn:active {
+  transform: scale(0.98);
 }
 
 .form__btn:hover {

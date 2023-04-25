@@ -16,7 +16,7 @@
   padding: 1.8rem 2.2rem;
   border-radius: 1rem;
   background-color: var(--violet-100);
-  box-shadow: 0px 2px 11px rgba(0, 0, 0, 0.3);
+  box-shadow: 0px 1px 6px rgba(0, 0, 0, 0.3);
 }
 
 .columns__item {

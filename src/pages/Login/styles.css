@@ -51,9 +51,13 @@
   padding: 1.6rem 10rem;
   border-radius: 0.4rem;
   cursor: pointer;
-  transition: background-color 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;
   background-color: var(--violet-700);
   box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.3);
+}
+
+.login__btn--register:active {
+  transform: scale(0.98);
 }
 
 .login__btn--register:hover {
@@ -176,8 +180,12 @@
   text-align: center;
   background-color: var(--violet-700);
   cursor: pointer;
-  transition: background-color 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;
   color: white;
+}
+
+.login__btn--submit:active {
+  transform: scale(0.98);
 }
 
 .login__btn--submit:hover {
