@@ -1,6 +1,9 @@
 import "./styles.css";
 
-const Summary = () => {
+const Summary = ({ setShowRegisterModal }: any) => {
+  const openModal = () => {
+    setShowRegisterModal(true);
+  };
   return (
     <aside className="summary__main">
       <h3 className="summary__title">Resumo</h3>
@@ -19,7 +22,9 @@ const Summary = () => {
         <span className="balance__value">R$ 100,00</span>
       </section>
 
-      <button className="summary__button">Adicionar Registro</button>
+      <button onClick={() => openModal()} className="summary__button">
+        Adicionar Registro
+      </button>
     </aside>
   );
 };
