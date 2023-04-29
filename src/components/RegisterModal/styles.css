@@ -1,4 +1,9 @@
+@import url("../../styles/global.css");
+
 .overlay {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   width: 100vw;
   height: 100vh;
   background: rgba(61, 61, 61, 0.48);
@@ -8,4 +13,94 @@
   left: 0;
   right: 0;
   bottom: 0;
+}
+
+.register__container {
+  display: flex;
+  flex-direction: column;
+
+  width: 48rem;
+  height: 60rem;
+  padding: 3.5rem 5.6rem;
+  border-radius: 1rem;
+  background-color: #ffffff;
+
+  font-family: "Rubik", sans-serif;
+}
+
+.register__header {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 4rem;
+}
+
+.register-modal__title {
+  font-weight: 700;
+  font-size: 3rem;
+  color: #000000;
+}
+
+.register__close {
+  all: unset;
+  box-sizing: border-box;
+  cursor: pointer;
+}
+
+.register__types {
+  margin-bottom: 2rem;
+}
+
+.types__input,
+.types__output {
+  all: unset;
+  box-sizing: border-box;
+  text-align: center;
+  color: #fff;
+  width: 50%;
+  padding: 14px 47px;
+  cursor: pointer;
+}
+
+.types__input {
+  background-color: var(--violet-500);
+  border-top-left-radius: 1rem;
+  border-bottom-left-radius: 1rem;
+}
+
+.types__output {
+  background-color: #484848;
+  border-top-right-radius: 1rem;
+  border-bottom-right-radius: 1rem;
+}
+
+.register__form {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  gap: 2rem;
+  width: 100%;
+}
+
+.form__section {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 0.4rem;
+}
+
+.register__form-label {
+  font-weight: 500;
+  font-size: 2rem;
+  color: #484848;
+}
+
+.register-modal__input {
+  all: unset;
+  box-sizing: border-box;
+  width: 100%;
+  padding: 1rem 1.4rem;
+  border: 1px solid var(--violet-500);
+  border-radius: 1rem;
 }
