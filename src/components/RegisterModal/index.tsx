@@ -1,6 +1,10 @@
+import { useGlobal } from "../../context/GlobalContext";
 import "./styles.css";
 import { HiOutlineX } from "react-icons/hi";
-const RegisterModal = ({ setShowRegisterModal }: any) => {
+
+const RegisterModal = () => {
+  const { setShowRegisterModal } = useGlobal();
+
   return (
     <div className="overlay">
       <div className="register__container">

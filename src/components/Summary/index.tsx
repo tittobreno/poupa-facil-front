@@ -1,6 +1,8 @@
+import { useGlobal } from "../../context/GlobalContext";
 import "./styles.css";
 
-const Summary = ({ setShowRegisterModal }: any) => {
+const Summary = () => {
+  const { setShowRegisterModal } = useGlobal();
   const openModal = () => {
     setShowRegisterModal(true);
   };

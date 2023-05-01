@@ -3,11 +3,14 @@ import ReactDOM from "react-dom/client";
 import MainRoutes from "./routes";
 import { BrowserRouter } from "react-router-dom";
 import "./index.css";
+import { GlobalProvider } from "./context/GlobalContext";
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <React.StrictMode>
     <BrowserRouter>
-      <MainRoutes />
+      <GlobalProvider>
+        <MainRoutes />
+      </GlobalProvider>
     </BrowserRouter>
   </React.StrictMode>
 );

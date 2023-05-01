@@ -5,21 +5,19 @@ import Summary from "../../components/Summary";
 import Dashboard from "../../components/Dashboard";
 import { useState } from "react";
 import RegisterModal from "../../components/RegisterModal";
+import { useGlobal } from "../../context/GlobalContext";
 const Main = () => {
-  const [showRegisterModal, setShowRegisterModal] = useState(false);
-
+  const { showRegisterModal } = useGlobal();
   return (
     <div className="main__container">
       <Header />
       <main className="main">
         <section className="main__filter">
           <Filter />
-          <Summary setShowRegisterModal={setShowRegisterModal} />
+          <Summary />
         </section>
         <Dashboard />
-        {showRegisterModal && (
-          <RegisterModal setShowRegisterModal={setShowRegisterModal} />
-        )}
+        {showRegisterModal && <RegisterModal />}
       </main>
     </div>
   );
