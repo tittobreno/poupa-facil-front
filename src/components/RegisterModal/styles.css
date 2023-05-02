@@ -16,6 +16,7 @@
 }
 
 .register__container {
+  position: relative;
   display: flex;
   flex-direction: column;
 
@@ -28,24 +29,30 @@
   font-family: "Rubik", sans-serif;
 }
 
-.register__header {
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 4rem;
-}
-
 .register-modal__title {
   font-weight: 700;
   font-size: 3rem;
   color: #000000;
+  margin-bottom: 3rem;
 }
 
 .register__close {
   all: unset;
   box-sizing: border-box;
   cursor: pointer;
+  position: absolute;
+  top: 2rem;
+  right: 2rem;
+
+  transition: all 0.2s ease-in-out;
+}
+
+.register__close:hover {
+  transform: scale(1.1);
+}
+
+.register__close:active {
+  transform: scale(0.9);
 }
 
 .register__types {
@@ -63,8 +70,13 @@
   cursor: pointer;
 }
 
+.types__input:hover,
+.types__output:hover {
+  opacity: 0.9;
+}
+
 .types__input {
-  background-color: var(--violet-500);
+  background-color: var(--violet-700);
   border-top-left-radius: 1rem;
   border-bottom-left-radius: 1rem;
 }
@@ -79,7 +91,6 @@
   display: flex;
   flex-direction: column;
   align-items: start;
-  gap: 2rem;
   width: 100%;
 }
 
@@ -102,5 +113,16 @@
   width: 100%;
   padding: 1rem 1.4rem;
   border: 1px solid var(--violet-500);
+  border-radius: 1rem;
+}
+
+.register-modal__input:focus {
+  outline: none;
+  box-shadow: 0 0 0 0.2rem var(--violet-500);
+}
+
+.form__btn {
+  width: 100%;
+  background-color: var(--violet-500);
   border-radius: 1rem;
 }

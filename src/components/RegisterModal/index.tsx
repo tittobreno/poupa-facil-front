@@ -5,23 +5,47 @@ import { HiOutlineX } from "react-icons/hi";
 const RegisterModal = () => {
   const { setShowRegisterModal } = useGlobal();
 
+  const handleChangeType = (type: string): void => {
+    const input = document.querySelector(".types__input") as HTMLButtonElement;
+    const output = document.querySelector(
+      ".types__output"
+    ) as HTMLButtonElement;
+
+    if (type === "input") {
+      input.style.backgroundColor = "#6d28d9";
+      output.style.backgroundColor = "#9ca3af";
+    } else {
+      output.style.backgroundColor = "#fa8c10";
+      input.style.backgroundColor = "#9ca3af";
+    }
+  };
+
   return (
     <div className="overlay">
       <div className="register__container">
-        <section className="register__header">
-          <h1 className="register-modal__title">Adicionar Registro</h1>
-          <button
-            className="register__close"
-            onClick={() => setShowRegisterModal(false)}
-          >
-            <HiOutlineX size={30} />
-          </button>
-        </section>
+        <button
+          className="register__close"
+          onClick={() => setShowRegisterModal(false)}
+        >
+          <HiOutlineX size={30} />
+        </button>
+
+        <h1 className="register-modal__title">Adicionar Registro</h1>
 
         <section className="register__types">
-          <button className="types__input">Entrada</button>
+          <button
+            className="types__input"
+            onClick={() => handleChangeType("input")}
+          >
+            Entrada
+          </button>
 
-          <button className="types__output">Saída</button>
+          <button
+            className="types__output"
+            onClick={() => handleChangeType("output")}
+          >
+            Saída
+          </button>
         </section>
 
         <form className="register__form">
@@ -69,8 +93,8 @@ const RegisterModal = () => {
             />
           </section>
 
-          <button type="submit" className="btn-confirm">
-            Confirmar
+          <button type="submit" className="form__btn">
+            Adicionar
           </button>
         </form>
       </div>
