@@ -2,9 +2,10 @@ import { useGlobal } from "../../context/GlobalContext";
 import "./styles.css";
 
 const Summary = () => {
-  const { setShowRegisterModal } = useGlobal();
+  const { setShowRegisterModal, setTypeModal } = useGlobal();
   const openModal = () => {
     setShowRegisterModal(true);
+    setTypeModal(true);
   };
   return (
     <aside className="summary__main">

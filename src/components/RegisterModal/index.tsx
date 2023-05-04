@@ -3,7 +3,7 @@ import "./styles.css";
 import { HiOutlineX } from "react-icons/hi";
 
 const RegisterModal = () => {
-  const { setShowRegisterModal } = useGlobal();
+  const { setShowRegisterModal, typeModal } = useGlobal();
 
   const handleChangeType = (type: string): void => {
     const input = document.querySelector(".types__input") as HTMLButtonElement;
@@ -15,8 +15,8 @@ const RegisterModal = () => {
       input.style.backgroundColor = "#6d28d9";
       output.style.backgroundColor = "#9ca3af";
     } else {
-      output.style.backgroundColor = "#fa8c10";
       input.style.backgroundColor = "#9ca3af";
+      output.style.backgroundColor = "#fa8c10";
     }
   };
 
@@ -30,7 +30,9 @@ const RegisterModal = () => {
           <HiOutlineX size={30} />
         </button>
 
-        <h1 className="register-modal__title">Adicionar Registro</h1>
+        <h1 className="register-modal__title">
+          {typeModal ? "Adicionar Registro" : "Editar Registro"}
+        </h1>
 
         <section className="register__types">
           <button
@@ -94,7 +96,7 @@ const RegisterModal = () => {
           </section>
 
           <button type="submit" className="form__btn">
-            Adicionar
+            Confirmar
           </button>
         </form>
       </div>

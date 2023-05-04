@@ -9,13 +9,24 @@ import {
 interface GlobalContextData {
   showRegisterModal: boolean;
   setShowRegisterModal: Dispatch<SetStateAction<boolean>>;
+  typeModal: boolean;
+  setTypeModal: Dispatch<SetStateAction<boolean>>;
 }
 const GlobalContext = createContext<GlobalContextData>({} as GlobalContextData);
 
 export const GlobalProvider = ({ children }: any) => {
   const [showRegisterModal, setShowRegisterModal] = useState(false);
+  const [typeModal, setTypeModal] = useState(false);
+
   return (
-    <GlobalContext.Provider value={{ showRegisterModal, setShowRegisterModal }}>
+    <GlobalContext.Provider
+      value={{
+        showRegisterModal,
+        setShowRegisterModal,
+        typeModal,
+        setTypeModal,
+      }}
+    >
       {children}
     </GlobalContext.Provider>
   );

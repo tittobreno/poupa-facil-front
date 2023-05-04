@@ -2,7 +2,12 @@ import { HiOutlinePencilSquare, HiOutlineTrash } from "react-icons/hi2";
 import "./styles.css";
 import { useGlobal } from "../../context/GlobalContext";
 const Register = () => {
-  const { setShowRegisterModal } = useGlobal();
+  const { setShowRegisterModal, setTypeModal } = useGlobal();
+
+  const handleOpenEditModal = () => {
+    setTypeModal(false);
+    setShowRegisterModal(true);
+  };
 
   return (
     <li className="register-component__container">
@@ -25,7 +30,7 @@ const Register = () => {
         <HiOutlinePencilSquare
           size={22}
           className="register-component__icons-item"
-          onClick={() => setShowRegisterModal(true)}
+          onClick={() => handleOpenEditModal()}
         />
         <HiOutlineTrash size={22} className="register-component__icons-item" />
       </div>
