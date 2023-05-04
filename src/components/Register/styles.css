@@ -1,0 +1,46 @@
+@import url("../../styles/global.css");
+.register-component__container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 1.8rem 2.2rem;
+  font-family: "Lato", sans-serif;
+  border-bottom: 1px solid var(--violet-300);
+}
+
+.register-component__item {
+  width: 30%;
+}
+
+.register-component__item--date,
+.register-component__item--cash {
+  font-weight: 700;
+  font-size: 1.4rem;
+}
+
+.register-component__item--day,
+.register-component__item--description,
+.register-component__item--category {
+  font-weight: 400;
+  font-size: 1.4rem;
+}
+
+.register-component__icons-container {
+  display: flex;
+  align-items: center;
+  gap: 3rem;
+}
+
+.register-component__icons-item {
+  cursor: pointer;
+  transition: all 0.1s ease-in-out;
+}
+
+.register-component__icons-item:hover {
+  transform: scale(1.05);
+}
+
+.register-component__icons-item:active {
+  transform: scale(0.95);
+}

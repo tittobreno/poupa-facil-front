@@ -1,6 +1,7 @@
 import { useState } from "react";
 import "./styles.css";
 import { HiChevronDoubleDown } from "react-icons/hi";
+import Register from "../Register";
 
 const Dashboard = () => {
   const [order, setOrder] = useState(false);
@@ -23,7 +24,9 @@ const Dashboard = () => {
         <div className="columns__item"></div>
       </section>
 
-      <section className="dashboard__registers"></section>
+      <ul className="dashboard__registers">
+        <Register />
+      </ul>
     </div>
   );
 };
