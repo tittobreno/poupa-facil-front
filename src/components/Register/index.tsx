@@ -1,8 +1,10 @@
 import { HiOutlinePencilSquare, HiOutlineTrash } from "react-icons/hi2";
 import "./styles.css";
 import { useGlobal } from "../../context/GlobalContext";
+import DeleteRegister from "../Popups/DeleteRegister";
 const Register = () => {
-  const { setShowRegisterModal, setTypeModal } = useGlobal();
+  const { setShowRegisterModal, setTypeModal, openPopUp, setOpenPopUp } =
+    useGlobal();
 
   const handleOpenEditModal = () => {
     setTypeModal(false);
@@ -28,12 +30,17 @@ const Register = () => {
       </span>
       <div className="register-component__item register-component__icons-container">
         <HiOutlinePencilSquare
-          size={22}
           className="register-component__icons-item"
+          size={22}
           onClick={() => handleOpenEditModal()}
         />
-        <HiOutlineTrash size={22} className="register-component__icons-item" />
+        <HiOutlineTrash
+          className="register-component__icons-item"
+          size={22}
+          onClick={() => setOpenPopUp(true)}
+        />
       </div>
+      {openPopUp && <DeleteRegister />}
     </li>
   );
 };

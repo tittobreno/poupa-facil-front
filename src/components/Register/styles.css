@@ -7,6 +7,7 @@
   padding: 1.8rem 2.2rem;
   font-family: "Lato", sans-serif;
   border-bottom: 1px solid var(--violet-300);
+  position: relative;
 }
 
 .register-component__item {

@@ -1,0 +1,55 @@
+@import url("../../../styles/global.css");
+
+.delete-register__container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  width: 12rem;
+  height: 5.4rem;
+  border-radius: 1rem;
+  padding: 0.7rem 1rem;
+  background-color: var(--violet-300);
+
+  position: absolute;
+  right: 7rem;
+  top: 5rem;
+  z-index: 1;
+
+  font-family: "Rubik", sans-serif;
+}
+
+.delete-register__title {
+  font-weight: 300;
+  font-size: 1.4rem;
+  text-align: center;
+}
+
+.delete-register__buttons {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.delete-register__buttons-btn {
+  all: unset;
+  box-sizing: border-box;
+  border-radius: 0.4rem;
+  padding: 0.2rem 1rem;
+  color: #fff;
+  font-weight: 500;
+  font-size: 1.2rem;
+  cursor: pointer;
+}
+
+.delete-register__buttons-btn:hover {
+  opacity: 0.8;
+}
+
+.delete-register__buttons-yes {
+  background-color: var(--violet-500);
+}
+
+.delete-register__buttons-not {
+  background-color: #fa8c13;
+}

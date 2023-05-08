@@ -11,13 +11,15 @@ interface GlobalContextData {
   setShowRegisterModal: Dispatch<SetStateAction<boolean>>;
   typeModal: boolean;
   setTypeModal: Dispatch<SetStateAction<boolean>>;
+  openPopUp: boolean;
+  setOpenPopUp: Dispatch<SetStateAction<boolean>>;
 }
 const GlobalContext = createContext<GlobalContextData>({} as GlobalContextData);
 
 export const GlobalProvider = ({ children }: any) => {
   const [showRegisterModal, setShowRegisterModal] = useState(false);
   const [typeModal, setTypeModal] = useState(false);
-
+  const [openPopUp, setOpenPopUp] = useState(false);
   return (
     <GlobalContext.Provider
       value={{
@@ -25,6 +27,8 @@ export const GlobalProvider = ({ children }: any) => {
         setShowRegisterModal,
         typeModal,
         setTypeModal,
+        openPopUp,
+        setOpenPopUp,
       }}
     >
       {children}
