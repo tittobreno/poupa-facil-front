@@ -6,8 +6,10 @@ import Dashboard from "../../components/Dashboard";
 import { useState } from "react";
 import RegisterModal from "../../components/RegisterModal";
 import { useGlobal } from "../../context/GlobalContext";
+import NewRegisterPopUp from "../../components/Popups/NewRegister";
 const Main = () => {
-  const { showRegisterModal } = useGlobal();
+  const { showRegisterModal, openPopUpNewRegister } = useGlobal();
+
   return (
     <div className="main__container">
       <Header />
@@ -19,6 +21,7 @@ const Main = () => {
         <Dashboard />
         {showRegisterModal && <RegisterModal />}
       </main>
+      {openPopUpNewRegister && <NewRegisterPopUp />}
     </div>
   );
 };

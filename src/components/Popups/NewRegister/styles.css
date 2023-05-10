@@ -1,0 +1,44 @@
+@import url("../../../styles/global.css");
+
+.new-register__popup {
+  background-color: var(--violet-300);
+  padding: 2rem 4rem;
+  border-radius: 1rem;
+  position: fixed;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: "Rubik", sans-serif;
+}
+
+.new-register__popup--close {
+  all: unset;
+  box-sizing: border-box;
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  cursor: pointer;
+}
+
+.new-register__popup--close:hover {
+  transform: scale(1.1);
+  color: var(--violet-700);
+}
+
+.new-register__popup--close:active {
+  transform: scale(0.95);
+}
+
+.new-register__popup-title {
+  font-weight: 500;
+}
+
+.new-register__progress-bar {
+  height: 5px;
+  background-color: var(--violet-500);
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  border-radius: 0 0 1rem 1rem;
+  transition: width 0.2s linear;
+}

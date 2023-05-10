@@ -3,7 +3,8 @@ import "./styles.css";
 import { HiOutlineX } from "react-icons/hi";
 
 const RegisterModal = () => {
-  const { setShowRegisterModal, typeModal } = useGlobal();
+  const { setShowRegisterModal, typeModal, setOpenPopUpNewRegister } =
+    useGlobal();
 
   const handleChangeType = (type: string): void => {
     const input = document.querySelector(".types__input") as HTMLButtonElement;
@@ -17,6 +18,13 @@ const RegisterModal = () => {
     } else {
       input.style.backgroundColor = "#9ca3af";
       output.style.backgroundColor = "#fa8c10";
+    }
+  };
+
+  const handleConfirm = () => {
+    if (typeModal) {
+      setOpenPopUpNewRegister(true);
+      setShowRegisterModal(false);
     }
   };
 
@@ -95,7 +103,11 @@ const RegisterModal = () => {
             />
           </section>
 
-          <button type="submit" className="form__btn">
+          <button
+            onClick={() => handleConfirm()}
+            type="button"
+            className="form__btn"
+          >
             Confirmar
           </button>
         </form>
