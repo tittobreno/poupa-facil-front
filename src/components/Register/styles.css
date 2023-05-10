@@ -31,6 +31,7 @@
   display: flex;
   align-items: center;
   gap: 3rem;
+  position: relative;
 }
 
 .register-component__icons-item {
@@ -44,4 +45,23 @@
 
 .register-component__icons-item:active {
   transform: scale(0.95);
+}
+
+.icons__pencil {
+  color: var(--violet-500);
+}
+
+.icons__trash {
+  color: #fa8c10;
+}
+
+.popup-arrow {
+  position: absolute;
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 0px 10px 10px 10px;
+  border-color: transparent transparent var(--violet-300) transparent;
+  bottom: -11px;
+  left: calc(50% - 13px);
 }

@@ -30,15 +30,16 @@ const Register = () => {
       </span>
       <div className="register-component__item register-component__icons-container">
         <HiOutlinePencilSquare
-          className="register-component__icons-item"
+          className="register-component__icons-item icons__pencil"
           size={22}
           onClick={() => handleOpenEditModal()}
         />
         <HiOutlineTrash
-          className="register-component__icons-item"
+          className="register-component__icons-item icons__trash"
           size={22}
           onClick={() => setOpenPopUp(true)}
         />
+        {openPopUp && <div className="popup-arrow"></div>}
       </div>
       {openPopUp && <DeleteRegister />}
     </li>
