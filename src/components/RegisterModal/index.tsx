@@ -22,10 +22,8 @@ const RegisterModal = () => {
   };
 
   const handleConfirm = () => {
-    if (typeModal) {
-      setOpenPopUpNewRegister(true);
-      setShowRegisterModal(false);
-    }
+    setOpenPopUpNewRegister(true);
+    setShowRegisterModal(false);
   };
 
   return (

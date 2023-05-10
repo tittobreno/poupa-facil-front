@@ -4,7 +4,7 @@ import { HiOutlineX } from "react-icons/hi";
 import { useGlobal } from "../../../context/GlobalContext";
 
 const NewRegisterPopUp = () => {
-  const { setOpenPopUpNewRegister } = useGlobal();
+  const { setOpenPopUpNewRegister, typeModal } = useGlobal();
 
   useEffect(() => {
     showPopup();
@@ -38,7 +38,7 @@ const NewRegisterPopUp = () => {
         <HiOutlineX size={20} />
       </button>
       <h4 className="new-register__popup-title">
-        Registro adicionado com sucesso!
+        {`Registro ${typeModal ? "adicionado" : "editado"} com sucesso!`}
       </h4>
       <div className="new-register__progress-bar"></div>
     </div>
