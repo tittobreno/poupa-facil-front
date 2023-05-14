@@ -3,7 +3,7 @@ import { useGlobal } from "../../contexts/GlobalContext";
 import "./styles.css";
 import { HiUserCircle, HiOutlineLogout } from "react-icons/hi";
 const Header = () => {
-  const { setShowEditUserModal } = useGlobal();
+  const { setIsOpenUserModal } = useGlobal();
 
   return (
     <header className="header">
@@ -13,7 +13,7 @@ const Header = () => {
           <button
             className="header__nav-icon profile"
             aria-label="Perfil de usuário"
-            onClick={() => setShowEditUserModal(true)}
+            onClick={() => setIsOpenUserModal(true)}
           >
             <HiUserCircle size={44} />
           </button>

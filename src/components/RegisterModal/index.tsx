@@ -3,7 +3,7 @@ import { useGlobal } from "../../contexts/GlobalContext";
 import "./styles.css";
 
 const RegisterModal = () => {
-  const { setShowRegisterModal, typeModal, setOpenPopUpNewRegister } =
+  const { setIsOpenRegisterModal, typeRegisterModal, setIsOpenNotification } =
     useGlobal();
 
   const handleChangeType = (type: string): void => {
@@ -22,8 +22,8 @@ const RegisterModal = () => {
   };
 
   const handleConfirm = () => {
-    setOpenPopUpNewRegister(true);
-    setShowRegisterModal(false);
+    setIsOpenNotification(true);
+    setIsOpenRegisterModal(false);
   };
 
   return (
@@ -31,13 +31,13 @@ const RegisterModal = () => {
       <div className="register__container">
         <button
           className="register__close"
-          onClick={() => setShowRegisterModal(false)}
+          onClick={() => setIsOpenRegisterModal(false)}
         >
           <HiOutlineX size={30} />
         </button>
 
         <h1 className="register-modal__title">
-          {typeModal + " " + "Registro"}
+          {typeRegisterModal + " " + "Registro"}
         </h1>
 
         <section className="register__types">

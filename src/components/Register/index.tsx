@@ -4,17 +4,17 @@ import { useGlobal } from "../../contexts/GlobalContext";
 import DeleteRegister from "../Popups/DeleteRegister";
 const Register = () => {
   const {
-    setShowRegisterModal,
-    setTypeModal,
-    openPopUpDeleteRegister,
-    setOpenPopUpDeleteRegister,
-    setTitlePopup,
+    setIsOpenRegisterModal,
+    setTypeRegisterModal,
+    isOpenDeleteRegister,
+    setIsOpenDeleteRegister,
+    setMessageNotification,
   } = useGlobal();
 
   const handleOpenEditModal = () => {
-    setTitlePopup("Registro editado com sucesso!");
-    setTypeModal("Editar");
-    setShowRegisterModal(true);
+    setMessageNotification("Registro editado com sucesso!");
+    setTypeRegisterModal("Editar");
+    setIsOpenRegisterModal(true);
   };
 
   return (
@@ -43,11 +43,11 @@ const Register = () => {
         <HiOutlineTrash
           className="register-component__icons-item icons__trash"
           size={22}
-          onClick={() => setOpenPopUpDeleteRegister(true)}
+          onClick={() => setIsOpenDeleteRegister(true)}
         />
-        {openPopUpDeleteRegister && <div className="popup-arrow"></div>}
+        {isOpenDeleteRegister && <div className="popup-arrow"></div>}
       </div>
-      {openPopUpDeleteRegister && <DeleteRegister />}
+      {isOpenDeleteRegister && <DeleteRegister />}
     </li>
   );
 };

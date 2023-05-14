@@ -2,13 +2,16 @@ import { useGlobal } from "../../../contexts/GlobalContext";
 import "./styles.css";
 
 const DeleteRegister = () => {
-  const { setOpenPopUpDeleteRegister, setTitlePopup, setOpenPopUpNewRegister } =
-    useGlobal();
+  const {
+    setIsOpenDeleteRegister,
+    setMessageNotification,
+    setIsOpenNotification,
+  } = useGlobal();
 
   const handleDeleteRegister = () => {
-    setTitlePopup("Registro deletado com sucesso!");
-    setOpenPopUpDeleteRegister(false);
-    setOpenPopUpNewRegister(true);
+    setMessageNotification("Registro deletado com sucesso!");
+    setIsOpenDeleteRegister(false);
+    setIsOpenNotification(true);
   };
 
   return (
@@ -23,7 +26,7 @@ const DeleteRegister = () => {
         </button>
         <button
           className="delete-register__buttons-btn delete-register__buttons-not"
-          onClick={() => setOpenPopUpDeleteRegister(false)}
+          onClick={() => setIsOpenDeleteRegister(false)}
         >
           Não
         </button>

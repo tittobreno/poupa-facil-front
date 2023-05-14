@@ -12,7 +12,7 @@ type UserContextType = {
   setForm: (newState: User) => void;
 };
 
-const initialValueUser = {
+const userInitialValue = {
   form: {
     name: "",
     email: "",
@@ -21,10 +21,10 @@ const initialValueUser = {
   },
   setForm: () => {},
 };
-const UserContext = createContext<UserContextType>(initialValueUser);
+const UserContext = createContext<UserContextType>(userInitialValue);
 
 export const GlobalProvider = ({ children }: any) => {
-  const [form, setForm] = useState(initialValueUser.form);
+  const [form, setForm] = useState(userInitialValue.form);
 
   return (
     <UserContext.Provider value={{ form, setForm }}>

@@ -2,12 +2,16 @@ import { useGlobal } from "../../contexts/GlobalContext";
 import "./styles.css";
 
 const Summary = () => {
-  const { setShowRegisterModal, setTypeModal, setTitlePopup } = useGlobal();
+  const {
+    setIsOpenRegisterModal,
+    setTypeRegisterModal,
+    setMessageNotification,
+  } = useGlobal();
 
   const handleAddRegister = () => {
-    setTitlePopup("Registro adicionado com sucesso!");
-    setShowRegisterModal(true);
-    setTypeModal("Adicionar");
+    setMessageNotification("Registro adicionado com sucesso!");
+    setIsOpenRegisterModal(true);
+    setTypeRegisterModal("Adicionar");
   };
   return (
     <aside className="summary__main">

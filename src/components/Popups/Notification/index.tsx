@@ -3,11 +3,8 @@ import "./styles.css";
 import { HiOutlineX } from "react-icons/hi";
 import { useGlobal } from "../../../contexts/GlobalContext";
 
-interface NewRegisterPopUpProps {
-  title: string;
-}
-const NewRegisterPopUp = ({ title }: NewRegisterPopUpProps) => {
-  const { setOpenPopUpNewRegister, typeModal, titlePopup } = useGlobal();
+const Notification = () => {
+  const { setIsOpenNotification, messageNotification } = useGlobal();
 
   useEffect(() => {
     showPopup();
@@ -28,22 +25,22 @@ const NewRegisterPopUp = ({ title }: NewRegisterPopUpProps) => {
     }, 28);
 
     setTimeout(() => {
-      setOpenPopUpNewRegister(false);
+      setIsOpenNotification(false);
     }, 3000);
   };
 
   return (
     <div className="new-register__popup">
       <button
-        onClick={() => setOpenPopUpNewRegister(false)}
+        onClick={() => setIsOpenNotification(false)}
         className="new-register__popup--close"
       >
         <HiOutlineX size={20} />
       </button>
-      <h4 className="new-register__popup-title">{titlePopup}</h4>
+      <h4 className="new-register__popup-title">{messageNotification}</h4>
       <div className="new-register__progress-bar"></div>
     </div>
   );
 };
 
-export default NewRegisterPopUp;
+export default Notification;

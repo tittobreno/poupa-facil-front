@@ -3,13 +3,13 @@ import { HiOutlineX, HiUserCircle } from "react-icons/hi";
 import { HiOutlinePencilSquare } from "react-icons/hi2";
 import { useGlobal } from "../../contexts/GlobalContext";
 const EditUserModal = () => {
-  const { setShowEditUserModal, setTitlePopup, setOpenPopUpNewRegister } =
+  const { setIsOpenUserModal, setMessageNotification, setIsOpenNotification } =
     useGlobal();
 
   const handleEditUser = () => {
-    setTitlePopup("Usuário editado com sucesso!");
-    setShowEditUserModal(false);
-    setOpenPopUpNewRegister(true);
+    setMessageNotification("Usuário editado com sucesso!");
+    setIsOpenUserModal(false);
+    setIsOpenNotification(true);
   };
   return (
     <div className="overlay">
@@ -17,7 +17,7 @@ const EditUserModal = () => {
         <HiOutlineX
           size={25}
           className="edit-user-modal__close"
-          onClick={() => setShowEditUserModal(false)}
+          onClick={() => setIsOpenUserModal(false)}
         />
         <h1 className="edit-user-modal__title">Editar Usuário</h1>
 

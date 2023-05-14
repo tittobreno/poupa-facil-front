@@ -3,13 +3,12 @@ import Header from "../../components/Header";
 import Filter from "../../components/Filter";
 import Summary from "../../components/Summary";
 import Dashboard from "../../components/Dashboard";
-import { useState } from "react";
 import RegisterModal from "../../components/RegisterModal";
 import { useGlobal } from "../../contexts/GlobalContext";
-import NewRegisterPopUp from "../../components/Popups/NewRegister";
 import EditUserModal from "../../components/EditUserModal";
+import Notification from "../../components/Popups/Notification";
 const Main = () => {
-  const { showRegisterModal, openPopUpNewRegister, showEditUserModal } =
+  const { isOpenRegisterModal, isOpenNotification, isOpenUserModal } =
     useGlobal();
 
   return (
@@ -21,10 +20,10 @@ const Main = () => {
           <Summary />
         </section>
         <Dashboard />
-        {showRegisterModal && <RegisterModal />}
-        {showEditUserModal && <EditUserModal />}
+        {isOpenRegisterModal && <RegisterModal />}
+        {isOpenUserModal && <EditUserModal />}
       </main>
-      {openPopUpNewRegister && <NewRegisterPopUp />}
+      {isOpenNotification && <Notification />}
     </div>
   );
 };

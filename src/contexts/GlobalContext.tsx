@@ -7,67 +7,71 @@ import {
 } from "react";
 
 type GlobalContextType = {
-  showRegisterModal: boolean;
-  setShowRegisterModal: (newState: boolean) => void;
-  showEditUserModal: boolean;
-  setShowEditUserModal: (newState: boolean) => void;
-  typeModal: string;
-  setTypeModal: (newstate: string) => void;
-  openPopUpDeleteRegister: boolean;
-  setOpenPopUpDeleteRegister: (newstate: boolean) => void;
-  openPopUpNewRegister: boolean;
-  setOpenPopUpNewRegister: (newstate: boolean) => void;
-  titlePopup: string;
-  setTitlePopup: (newState: string) => void;
+  isOpenRegisterModal: boolean;
+  setIsOpenRegisterModal: (newState: boolean) => void;
+  isOpenUserModal: boolean;
+  setIsOpenUserModal: (newState: boolean) => void;
+  typeRegisterModal: string;
+  setTypeRegisterModal: (newstate: string) => void;
+  isOpenDeleteRegister: boolean;
+  setIsOpenDeleteRegister: (newstate: boolean) => void;
+  isOpenNotification: boolean;
+  setIsOpenNotification: (newstate: boolean) => void;
+  messageNotification: string;
+  setMessageNotification: (newState: string) => void;
 };
 
 const initialGlobalValue = {
-  showRegisterModal: false,
-  setShowRegisterModal: () => {},
-  showEditUserModal: false,
-  setShowEditUserModal: () => {},
-  typeModal: "Editar",
-  setTypeModal: () => {},
-  openPopUpDeleteRegister: false,
-  setOpenPopUpDeleteRegister: () => {},
-  openPopUpNewRegister: false,
-  setOpenPopUpNewRegister: () => {},
-  titlePopup: "null",
-  setTitlePopup: () => {},
+  isOpenRegisterModal: false,
+  setIsOpenRegisterModal: () => {},
+  isOpenUserModal: false,
+  setIsOpenUserModal: () => {},
+  typeRegisterModal: "Editar",
+  setTypeRegisterModal: () => {},
+  isOpenDeleteRegister: false,
+  setIsOpenDeleteRegister: () => {},
+  isOpenNotification: false,
+  setIsOpenNotification: () => {},
+  messageNotification: "null",
+  setMessageNotification: () => {},
 };
 const GlobalContext = createContext<GlobalContextType>(initialGlobalValue);
 
 export const GlobalProvider = ({ children }: any) => {
-  const [showRegisterModal, setShowRegisterModal] = useState(
-    initialGlobalValue.showRegisterModal
+  const [isOpenRegisterModal, setIsOpenRegisterModal] = useState(
+    initialGlobalValue.isOpenRegisterModal
   );
-  const [showEditUserModal, setShowEditUserModal] = useState(
-    initialGlobalValue.showEditUserModal
+  const [isOpenUserModal, setIsOpenUserModal] = useState(
+    initialGlobalValue.isOpenUserModal
   );
-  const [typeModal, setTypeModal] = useState(initialGlobalValue.typeModal);
-  const [openPopUpDeleteRegister, setOpenPopUpDeleteRegister] = useState(
-    initialGlobalValue.openPopUpDeleteRegister
+  const [typeRegisterModal, setTypeRegisterModal] = useState(
+    initialGlobalValue.typeRegisterModal
   );
-  const [openPopUpNewRegister, setOpenPopUpNewRegister] = useState(
-    initialGlobalValue.openPopUpNewRegister
+  const [isOpenDeleteRegister, setIsOpenDeleteRegister] = useState(
+    initialGlobalValue.isOpenDeleteRegister
   );
-  const [titlePopup, setTitlePopup] = useState(initialGlobalValue.titlePopup);
+  const [isOpenNotification, setIsOpenNotification] = useState(
+    initialGlobalValue.isOpenNotification
+  );
+  const [messageNotification, setMessageNotification] = useState(
+    initialGlobalValue.messageNotification
+  );
 
   return (
     <GlobalContext.Provider
       value={{
-        showRegisterModal,
-        setShowRegisterModal,
-        showEditUserModal,
-        setShowEditUserModal,
-        typeModal,
-        setTypeModal,
-        openPopUpDeleteRegister,
-        setOpenPopUpDeleteRegister,
-        openPopUpNewRegister,
-        setOpenPopUpNewRegister,
-        titlePopup,
-        setTitlePopup,
+        isOpenRegisterModal,
+        setIsOpenRegisterModal,
+        isOpenUserModal,
+        setIsOpenUserModal,
+        typeRegisterModal,
+        setTypeRegisterModal,
+        isOpenDeleteRegister,
+        setIsOpenDeleteRegister,
+        isOpenNotification,
+        setIsOpenNotification,
+        messageNotification,
+        setMessageNotification,
       }}
     >
       {children}
