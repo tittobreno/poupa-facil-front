@@ -11,21 +11,24 @@ interface GlobalContextData {
   setShowRegisterModal: Dispatch<SetStateAction<boolean>>;
   showEditUserModal: boolean;
   setShowEditUserModal: Dispatch<SetStateAction<boolean>>;
-  typeModal: boolean;
-  setTypeModal: Dispatch<SetStateAction<boolean>>;
-  openPopUp: boolean;
-  setOpenPopUp: Dispatch<SetStateAction<boolean>>;
+  typeModal: string;
+  setTypeModal: Dispatch<SetStateAction<string>>;
+  openPopUpDeleteRegister: boolean;
+  setOpenPopUpDeleteRegister: Dispatch<SetStateAction<boolean>>;
   openPopUpNewRegister: boolean;
   setOpenPopUpNewRegister: Dispatch<SetStateAction<boolean>>;
+  titlePopup: string;
+  setTitlePopup: Dispatch<SetStateAction<string>>;
 }
 const GlobalContext = createContext<GlobalContextData>({} as GlobalContextData);
 
 export const GlobalProvider = ({ children }: any) => {
   const [showRegisterModal, setShowRegisterModal] = useState(false);
   const [showEditUserModal, setShowEditUserModal] = useState(false);
-  const [typeModal, setTypeModal] = useState(false);
-  const [openPopUp, setOpenPopUp] = useState(false);
+  const [typeModal, setTypeModal] = useState("");
+  const [openPopUpDeleteRegister, setOpenPopUpDeleteRegister] = useState(false);
   const [openPopUpNewRegister, setOpenPopUpNewRegister] = useState(false);
+  const [titlePopup, setTitlePopup] = useState("");
   return (
     <GlobalContext.Provider
       value={{
@@ -35,10 +38,12 @@ export const GlobalProvider = ({ children }: any) => {
         setShowEditUserModal,
         typeModal,
         setTypeModal,
-        openPopUp,
-        setOpenPopUp,
+        openPopUpDeleteRegister,
+        setOpenPopUpDeleteRegister,
         openPopUpNewRegister,
         setOpenPopUpNewRegister,
+        titlePopup,
+        setTitlePopup,
       }}
     >
       {children}

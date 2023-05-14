@@ -2,10 +2,12 @@ import { useGlobal } from "../../context/GlobalContext";
 import "./styles.css";
 
 const Summary = () => {
-  const { setShowRegisterModal, setTypeModal } = useGlobal();
-  const openModal = () => {
+  const { setShowRegisterModal, setTypeModal, setTitlePopup } = useGlobal();
+
+  const handleAddRegister = () => {
+    setTitlePopup("Registro adicionado com sucesso!");
     setShowRegisterModal(true);
-    setTypeModal(true);
+    setTypeModal("Adicionar");
   };
   return (
     <aside className="summary__main">
@@ -25,7 +27,7 @@ const Summary = () => {
         <span className="balance__value">R$ 100,00</span>
       </section>
 
-      <button onClick={() => openModal()} className="summary__button">
+      <button onClick={() => handleAddRegister()} className="summary__button">
         Adicionar Registro
       </button>
     </aside>

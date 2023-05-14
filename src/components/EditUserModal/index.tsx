@@ -3,8 +3,14 @@ import { HiOutlineX, HiUserCircle } from "react-icons/hi";
 import { HiOutlinePencilSquare } from "react-icons/hi2";
 import { useGlobal } from "../../context/GlobalContext";
 const EditUserModal = () => {
-  const { setShowEditUserModal } = useGlobal();
+  const { setShowEditUserModal, setTitlePopup, setOpenPopUpNewRegister } =
+    useGlobal();
 
+  const handleEditUser = () => {
+    setTitlePopup("Usuário editado com sucesso!");
+    setShowEditUserModal(false);
+    setOpenPopUpNewRegister(true);
+  };
   return (
     <div className="overlay">
       <div className="edit-user-modal__container">
@@ -63,7 +69,13 @@ const EditUserModal = () => {
             />
           </section>
 
-          <button className="edit-user-modal__btn">Confirmar</button>
+          <button
+            className="edit-user-modal__btn"
+            type="button"
+            onClick={() => handleEditUser()}
+          >
+            Confirmar
+          </button>
         </form>
       </div>
     </div>

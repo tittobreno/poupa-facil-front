@@ -1,6 +1,6 @@
+import { HiOutlineX } from "react-icons/hi";
 import { useGlobal } from "../../context/GlobalContext";
 import "./styles.css";
-import { HiOutlineX } from "react-icons/hi";
 
 const RegisterModal = () => {
   const { setShowRegisterModal, typeModal, setOpenPopUpNewRegister } =
@@ -37,7 +37,7 @@ const RegisterModal = () => {
         </button>
 
         <h1 className="register-modal__title">
-          {typeModal ? "Adicionar Registro" : "Editar Registro"}
+          {typeModal + " " + "Registro"}
         </h1>
 
         <section className="register__types">
