@@ -1,5 +1,5 @@
 import Logo from "../../assets/logo-pf.png";
-import { useGlobal } from "../../context/GlobalContext";
+import { useGlobal } from "../../contexts/GlobalContext";
 import "./styles.css";
 import { HiUserCircle, HiOutlineLogout } from "react-icons/hi";
 const Header = () => {

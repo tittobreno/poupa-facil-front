@@ -1,6 +1,6 @@
 import { HiOutlinePencilSquare, HiOutlineTrash } from "react-icons/hi2";
 import "./styles.css";
-import { useGlobal } from "../../context/GlobalContext";
+import { useGlobal } from "../../contexts/GlobalContext";
 import DeleteRegister from "../Popups/DeleteRegister";
 const Register = () => {
   const {

@@ -1,7 +1,7 @@
 import "./styles.css";
 import { HiOutlineX, HiUserCircle } from "react-icons/hi";
 import { HiOutlinePencilSquare } from "react-icons/hi2";
-import { useGlobal } from "../../context/GlobalContext";
+import { useGlobal } from "../../contexts/GlobalContext";
 const EditUserModal = () => {
   const { setShowEditUserModal, setTitlePopup, setOpenPopUpNewRegister } =
     useGlobal();

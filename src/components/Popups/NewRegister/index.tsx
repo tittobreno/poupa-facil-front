@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import "./styles.css";
 import { HiOutlineX } from "react-icons/hi";
-import { useGlobal } from "../../../context/GlobalContext";
+import { useGlobal } from "../../../contexts/GlobalContext";
 
 interface NewRegisterPopUpProps {
   title: string;

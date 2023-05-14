@@ -1,6 +1,7 @@
-import "./styles.css";
-import Logo from "../../assets/logo-pf.png";
 import { Link } from "react-router-dom";
+import Logo from "../../assets/logo-pf.png";
+import { useGlobal } from "../../contexts/GlobalContext";
+import "./styles.css";
 
 const Register = () => {
   return (
@@ -16,6 +17,7 @@ const Register = () => {
               </label>
               <input
                 className="form__input"
+                name="name"
                 id="name"
                 type="text"
                 placeholder="Digite seu nome"
@@ -61,7 +63,9 @@ const Register = () => {
           </form>
           <div className="register__redirect-login">
             <span>Já tem cadastro? </span>
-            <Link className="redirect__link" to="/">Clique aqui!</Link>
+            <Link className="redirect__link" to="/">
+              Clique aqui!
+            </Link>
           </div>
         </section>
       </main>

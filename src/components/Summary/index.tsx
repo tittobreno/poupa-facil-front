@@ -1,4 +1,4 @@
-import { useGlobal } from "../../context/GlobalContext";
+import { useGlobal } from "../../contexts/GlobalContext";
 import "./styles.css";
 
 const Summary = () => {

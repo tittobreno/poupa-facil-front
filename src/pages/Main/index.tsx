@@ -5,7 +5,7 @@ import Summary from "../../components/Summary";
 import Dashboard from "../../components/Dashboard";
 import { useState } from "react";
 import RegisterModal from "../../components/RegisterModal";
-import { useGlobal } from "../../context/GlobalContext";
+import { useGlobal } from "../../contexts/GlobalContext";
 import NewRegisterPopUp from "../../components/Popups/NewRegister";
 import EditUserModal from "../../components/EditUserModal";
 const Main = () => {
