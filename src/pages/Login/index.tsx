@@ -1,11 +1,19 @@
-import { useState } from "react";
+import { FormEvent, useState } from "react";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import Logo from "../../assets/logo-pf.png";
 import "./styles.css";
-import { Link } from "react-router-dom";
-function Login() {
+import { Link, useNavigate } from "react-router-dom";
+import { useUser } from "../../contexts/UserContext";
+import api from "../../services/api";
+import { AxiosError } from "axios";
+
+const Login = () => {
+  const { form, handleChangeForm } = useUser();
   const [showPassword, setShowPassword] = useState(false);
   const [isFocused, setIsFocused] = useState(false);
+  const Navigate = useNavigate();
+  console.log(form);
+
   const handleTogglePassword = () => {
     setShowPassword(!showPassword);
   };
@@ -17,6 +25,27 @@ function Login() {
   const handleBlur = () => {
     setIsFocused(false);
   };
+
+  const handleLogin = async (event: FormEvent) => {
+    event.preventDefault();
+
+    if (!form.email || !form.password) {
+      return alert("Todos os campos são obrigatórios");
+    }
+
+    try {
+      const { data } = await api.post("/entrar", { ...form });
+      console.log(data);
+      Navigate("/home");
+    } catch (error: any) {
+      if (error instanceof AxiosError) {
+        console.log(error.response?.data);
+        return;
+      }
+      console.log(error);
+    }
+  };
+
   return (
     <div className="container__login">
       <img className="login__logo" src={Logo} alt="Logo da página!" />
@@ -37,7 +66,7 @@ function Login() {
           <div className="login__card">
             <h1 className="login__card-title">Seja bem vindo(a)!</h1>
 
-            <form className="login__form">
+            <form onSubmit={handleLogin} className="login__form">
               <div className="login__section-input">
                 <label className="login__label" htmlFor="email">
                   E-mail
@@ -45,8 +74,11 @@ function Login() {
                 <input
                   className="login__input"
                   id="email"
+                  name="email"
+                  value={form.email}
                   type="text"
                   placeholder="Digite seu e-email"
+                  onChange={(event) => handleChangeForm(event)}
                 />
               </div>
 
@@ -67,10 +99,13 @@ function Login() {
                   <input
                     className="input-password"
                     id="password"
+                    name="password"
+                    value={form.password}
                     type={showPassword ? "text" : "password"}
                     placeholder="Digite sua senha"
                     onFocus={handleFocus}
                     onBlur={handleBlur}
+                    onChange={handleChangeForm}
                   />
                   <button
                     className="login__input-eye"
@@ -86,13 +121,15 @@ function Login() {
                 </div>
               </div>
 
-              <button className="login__btn--submit">Entrar</button>
+              <button type="submit" className="login__btn--submit">
+                Entrar
+              </button>
             </form>
           </div>
         </section>
       </main>
     </div>
   );
-}
+};
 
 export default Login;

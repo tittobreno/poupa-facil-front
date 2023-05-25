@@ -1,4 +1,4 @@
-import { createContext, useContext, useState } from "react";
+import { ChangeEvent, createContext, useContext, useState } from "react";
 
 interface User {
   name: string;
@@ -10,6 +10,7 @@ interface User {
 type UserContextType = {
   form: User;
   setForm: (newState: User) => void;
+  handleChangeForm: (event: ChangeEvent<HTMLInputElement>) => void;
 };
 
 const userInitialValue = {
@@ -20,14 +21,23 @@ const userInitialValue = {
     passwordConfirmation: "",
   },
   setForm: () => {},
+  handleChangeForm: () => {},
 };
 const UserContext = createContext<UserContextType>(userInitialValue);
 
-export const GlobalProvider = ({ children }: any) => {
-  const [form, setForm] = useState(userInitialValue.form);
+export const UserProvider = ({ children }: any) => {
+  const [form, setForm] = useState<User>(userInitialValue.form);
+
+  const handleChangeForm = (event: ChangeEvent<HTMLInputElement>): void => {
+    const { name, value } = event.target;
+    setForm((prevForm: User) => ({
+      ...prevForm,
+      [name]: value,
+    }));
+  };
 
   return (
-    <UserContext.Provider value={{ form, setForm }}>
+    <UserContext.Provider value={{ form, setForm, handleChangeForm }}>
       {children}
     </UserContext.Provider>
   );
