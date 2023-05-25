@@ -1,4 +1,4 @@
-import { FormEvent, useState } from "react";
+import { FormEvent, useEffect, useState } from "react";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import Logo from "../../assets/logo-pf.png";
 import "./styles.css";
@@ -6,13 +6,14 @@ import { Link, useNavigate } from "react-router-dom";
 import { useUser } from "../../contexts/UserContext";
 import api from "../../services/api";
 import { AxiosError } from "axios";
+import { getItem, removeItem, setItem } from "../../utils/storage";
+import { isTokenExpired } from "../../utils/auth";
 
 const Login = () => {
   const { form, handleChangeForm } = useUser();
   const [showPassword, setShowPassword] = useState(false);
   const [isFocused, setIsFocused] = useState(false);
-  const Navigate = useNavigate();
-  console.log(form);
+  const navigate = useNavigate();
 
   const handleTogglePassword = () => {
     setShowPassword(!showPassword);
@@ -35,8 +36,8 @@ const Login = () => {
 
     try {
       const { data } = await api.post("/entrar", { ...form });
-      console.log(data);
-      Navigate("/home");
+      setItem("token", data.token);
+      navigate("/home");
     } catch (error: any) {
       if (error instanceof AxiosError) {
         console.log(error.response?.data);
@@ -45,6 +46,18 @@ const Login = () => {
       console.log(error);
     }
   };
+
+  useEffect(() => {
+    const token = getItem("token");
+
+    if (token) {
+      if (isTokenExpired(token)) {
+        removeItem("token");
+      } else {
+        navigate("/home");
+      }
+    }
+  }, []);
 
   return (
     <div className="container__login">
