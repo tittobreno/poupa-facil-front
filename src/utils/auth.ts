@@ -1,5 +1,4 @@
 import jwtDecode from "jwt-decode";
-import api from "../services/api";
 
 interface JwtPayload {
   exp: number;
