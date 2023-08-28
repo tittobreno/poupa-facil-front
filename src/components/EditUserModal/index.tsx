@@ -2,11 +2,12 @@ import "./styles.css";
 import { HiOutlineX, HiUserCircle } from "react-icons/hi";
 import { HiOutlinePencilSquare } from "react-icons/hi2";
 import { useGlobal } from "../../contexts/GlobalContext";
+import api from "../../services/api";
 const EditUserModal = () => {
   const { setIsOpenUserModal, setMessageNotification, setIsOpenNotification } =
     useGlobal();
 
-  const handleEditUser = () => {
+  const handleEditUser = async () => {
     setMessageNotification("Usuário editado com sucesso!");
     setIsOpenUserModal(false);
     setIsOpenNotification(true);

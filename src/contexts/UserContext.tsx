@@ -7,10 +7,17 @@ interface User {
   passwordConfirmation: string;
 }
 
+interface DataUser {
+  name: string;
+  email: string;
+}
+
 type UserContextType = {
   form: User;
   setForm: (newState: User) => void;
   handleChangeForm: (event: ChangeEvent<HTMLInputElement>) => void;
+  dataUser: DataUser;
+  setDataUser: (newState: DataUser) => void;
 };
 
 const userInitialValue = {
@@ -22,12 +29,18 @@ const userInitialValue = {
   },
   setForm: () => {},
   handleChangeForm: () => {},
+  dataUser: {
+    name: "",
+    email: "",
+  },
+  setDataUser: () => {},
 };
+
 const UserContext = createContext<UserContextType>(userInitialValue);
 
 export const UserProvider = ({ children }: any) => {
   const [form, setForm] = useState<User>(userInitialValue.form);
-
+  const [dataUser, setDataUser] = useState<DataUser>(userInitialValue.dataUser);
   const handleChangeForm = (event: ChangeEvent<HTMLInputElement>): void => {
     const { name, value } = event.target;
     setForm((prevForm: User) => ({
@@ -37,7 +50,9 @@ export const UserProvider = ({ children }: any) => {
   };
 
   return (
-    <UserContext.Provider value={{ form, setForm, handleChangeForm }}>
+    <UserContext.Provider
+      value={{ form, setForm, handleChangeForm, dataUser, setDataUser }}
+    >
       {children}
     </UserContext.Provider>
   );
