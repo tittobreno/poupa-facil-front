@@ -2,14 +2,15 @@ import { useEffect, useState } from "react";
 import Logo from "../../assets/logo-pf.png";
 import { useGlobal } from "../../contexts/GlobalContext";
 import api from "../../services/api";
-import { getItem, setItem } from "../../utils/storage";
+import { clearLocalStorage, getItem, setItem } from "../../utils/storage";
 import "./styles.css";
 import { HiUserCircle, HiOutlineLogout } from "react-icons/hi";
 import { useUser } from "../../contexts/UserContext";
+import { useNavigate } from "react-router-dom";
 const Header = () => {
   const { setIsOpenUserModal } = useGlobal();
   const { dataUser, setDataUser } = useUser();
-
+  const Navigate = useNavigate();
   const [userName, setUserName] = useState("");
 
   useEffect(() => {
@@ -27,6 +28,11 @@ const Header = () => {
     fetchData();
   }, []);
 
+  const handleLogOut = () => {
+    clearLocalStorage();
+    Navigate("/");
+  };
+
   return (
     <header className="header">
       <img className="header__logo" src={Logo} alt="" />
@@ -42,7 +48,11 @@ const Header = () => {
           <span className="header__nav-username">{userName}</span>
         </div>
 
-        <button className="header__nav-icon" aria-label="Sair da aplicação">
+        <button
+          onClick={() => handleLogOut()}
+          className="header__nav-icon"
+          aria-label="Sair da aplicação"
+        >
           <HiOutlineLogout size={38} />
         </button>
       </nav>
