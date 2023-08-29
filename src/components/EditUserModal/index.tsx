@@ -3,9 +3,14 @@ import { HiOutlineX, HiUserCircle } from "react-icons/hi";
 import { HiOutlinePencilSquare } from "react-icons/hi2";
 import { useGlobal } from "../../contexts/GlobalContext";
 import api from "../../services/api";
+import { useEffect } from "react";
+import { useUser } from "../../contexts/UserContext";
+import { getItem } from "../../utils/storage";
 const EditUserModal = () => {
   const { setIsOpenUserModal, setMessageNotification, setIsOpenNotification } =
     useGlobal();
+
+  const { setDataUser, dataUser } = useUser();
 
   const handleEditUser = async () => {
     setMessageNotification("Usuário editado com sucesso!");

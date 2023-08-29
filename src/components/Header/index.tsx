@@ -10,6 +10,8 @@ const Header = () => {
   const { setIsOpenUserModal } = useGlobal();
   const { dataUser, setDataUser } = useUser();
 
+  const [userName, setUserName] = useState("");
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -17,8 +19,7 @@ const Header = () => {
           headers: { Authorization: `Bearer ${getItem("token")}` },
         });
         setDataUser({ name: data.name, email: data.email });
-        console.log(dataUser);
-        console.log(data);
+        setUserName(data.name);
       } catch (error: any) {
         console.log(error.message);
       }
@@ -26,6 +27,7 @@ const Header = () => {
 
     fetchData();
   }, []);
+  console.log(dataUser, "aqui");
 
   return (
     <header className="header">
@@ -39,7 +41,7 @@ const Header = () => {
           >
             <HiUserCircle size={44} />
           </button>
-          <span className="header__nav-username">Breno</span>
+          <span className="header__nav-username">{userName}</span>
         </div>
 
         <button className="header__nav-icon" aria-label="Sair da aplicação">
