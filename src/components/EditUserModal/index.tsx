@@ -10,13 +10,28 @@ const EditUserModal = () => {
   const { setIsOpenUserModal, setMessageNotification, setIsOpenNotification } =
     useGlobal();
 
-  const { setDataUser, dataUser } = useUser();
+  const { setDataUser, dataUser, handleChangeFormEditUser } = useUser();
 
   const handleEditUser = async () => {
     setMessageNotification("Usuário editado com sucesso!");
     setIsOpenUserModal(false);
     setIsOpenNotification(true);
   };
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const { data } = await api.get("/detalhar", {
+          headers: { Authorization: `Bearer ${getItem("token")}` },
+        });
+        setDataUser({ name: data.name, email: data.email });
+      } catch (error: any) {
+        console.log(error.message);
+      }
+    };
+
+    fetchData();
+  }, []);
   return (
     <div className="overlay">
       <div className="edit-user-modal__container">
@@ -40,14 +55,28 @@ const EditUserModal = () => {
             <label htmlFor="name" className="edit-user-modal__label">
               Nome
             </label>
-            <input type="text" id="name" className="edit-user-modal__input" />
+            <input
+              name="name"
+              value={dataUser.name}
+              type="text"
+              id="name"
+              className="edit-user-modal__input"
+              onChange={(event) => handleChangeFormEditUser(event)}
+            />
           </section>
 
           <section className="edit-user-modal__form-section">
             <label htmlFor="email" className="edit-user-modal__label">
               Email
             </label>
-            <input type="text" id="email" className="edit-user-modal__input" />
+            <input
+              name="email"
+              value={dataUser.email}
+              type="text"
+              id="email"
+              className="edit-user-modal__input"
+              onChange={(event) => handleChangeFormEditUser(event)}
+            />
           </section>
 
           <section className="edit-user-modal__form-section">
