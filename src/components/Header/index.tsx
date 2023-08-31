@@ -9,7 +9,7 @@ import { useUser } from "../../contexts/UserContext";
 import { useNavigate } from "react-router-dom";
 const Header = () => {
   const { setIsOpenUserModal } = useGlobal();
-  const { dataUser, setDataUser } = useUser();
+  const { setForm } = useUser();
   const Navigate = useNavigate();
   const [userName, setUserName] = useState("");
 
@@ -30,6 +30,7 @@ const Header = () => {
 
   const handleLogOut = () => {
     clearLocalStorage();
+    setForm({ email: "", password: "" });
     Navigate("/");
   };
 

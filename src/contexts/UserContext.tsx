@@ -1,10 +1,10 @@
 import { ChangeEvent, createContext, useContext, useState } from "react";
 
 interface User {
-  name: string;
-  email: string;
-  password: string;
-  passwordConfirmation: string;
+  name?: string;
+  email?: string;
+  password?: string;
+  passwordConfirmation?: string;
 }
 
 interface DataUser {
