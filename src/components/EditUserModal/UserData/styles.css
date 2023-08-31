@@ -1,0 +1,21 @@
+.edit-user-modal__user-data-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding-bottom: 1rem;
+    border-bottom: 0.1rem solid #b8b8b8;
+}
+
+.edit-user-modal__user-data-section {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .edit-user-modal__user-data-label {
+    font-weight: 500;
+    font-size: 1.8rem;
+    color: #b8b8b8;
+    margin-bottom: 0.6rem;
+  }

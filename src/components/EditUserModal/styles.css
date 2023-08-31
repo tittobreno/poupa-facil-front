@@ -54,16 +54,15 @@
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  border: 1px solid var(--violet-700);
   border-radius: 1rem;
-  padding: 1rem 1.4rem;
+  padding: 1rem;
   cursor: pointer;
   background-color: var(--violet-100);
   transition: all 0.2s ease-in-out;
 }
 
 .section-avatar__btn:hover {
-  background-color: var(--violet-700);
+  background-color: var(--violet-500);
   color: #fff;
 }
 
@@ -116,4 +115,55 @@
 
 .edit-user-modal__btn:active {
   transform: scale(0.98);
+}
+
+.edit-user-modal__back {
+  all: unset;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  width: 8rem;
+  border-radius: 0.8rem;
+  cursor: pointer;
+  color: #000;
+  background-color: var(--violet-100);
+  font-size: 1.4rem;
+}
+
+.edit-user-modal__back:hover {
+  background-color: var(--violet-500);
+  color: #FFF;
+}
+
+.edit-user-modal-question-password {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.question-password-button {
+  all: unset;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  border-radius: 0.8rem;
+  padding: 1rem;
+  cursor: pointer;
+  color: #000;
+  background-color: var(--violet-100);
+  font-size: 1.6rem;
+  transition: all 0.2s ease-in-out;
+}
+
+.question-password-button-label {
+  color: #b8b8b8;
+  font-weight: 500;
+  font-size: 1.8rem;
+}
+
+
+.question-password-button:hover {
+  background-color: var(--violet-500);
+  color: #FFF;
 }
