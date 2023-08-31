@@ -126,9 +126,9 @@ const Login = () => {
                     onClick={handleTogglePassword}
                   >
                     {showPassword ? (
-                      <FaEye title="Mostrar senha" />
+                      <FaEye title="Ocultar senha" />
                     ) : (
-                      <FaEyeSlash title="Ocultar senha" />
+                      <FaEyeSlash title="Mostrar senha" />
                     )}
                   </button>
                 </div>
