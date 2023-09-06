@@ -56,20 +56,22 @@ const EditUserModal = () => {
         <form className="edit-user-modal__form">
           {editData && (
             <>
-              <button
-                onClick={() => setEditData(false)}
-                className="edit-user-modal__back"
-              >
-                <HiOutlineArrowSmLeft size={30} />
-                Voltar
-              </button>
-              <section className="edit-user-modal__section-avatar">
-                <HiUserCircle size={70} className="section-avatar__img" />
-                <button className="section-avatar__btn">
-                  Escolher imagem
-                  <HiOutlinePencilSquare size={18} />
+              <div className="testes">
+                <button
+                  onClick={() => setEditData(false)}
+                  className="edit-user-modal__back teste-btn"
+                >
+                  <HiOutlineArrowSmLeft size={30} />
+                  Voltar
                 </button>
-              </section>
+                <section className="edit-user-modal__section-avatar">
+                  <HiUserCircle size={80} className="section-avatar__img" />
+                  <button className="section-avatar__btn">
+                    Escolher imagem
+                    <HiOutlinePencilSquare size={18} />
+                  </button>
+                </section>
+              </div>
 
               <section className="edit-user-modal__form-section">
                 <label htmlFor="name" className="edit-user-modal__label">
