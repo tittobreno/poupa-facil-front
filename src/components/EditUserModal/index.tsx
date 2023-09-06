@@ -116,9 +116,13 @@ const EditUserModal = () => {
                 />
               )}
               <div className="edit-user-modal-question-password">
-                <strong className="question-password-button-label">
-                  Senha de acesso
-                </strong>
+                {editPassword ? (
+                  ""
+                ) : (
+                  <strong className="question-password-button-label">
+                    Senha de acesso
+                  </strong>
+                )}
 
                 {editPassword ? (
                   <button
