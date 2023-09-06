@@ -3,7 +3,7 @@ import { HiOutlineArrowSmLeft, HiOutlineX, HiUserCircle } from "react-icons/hi";
 import { HiOutlinePencilSquare } from "react-icons/hi2";
 import { useGlobal } from "../../contexts/GlobalContext";
 import api from "../../services/api";
-import { MouseEvent, useEffect, useState } from "react";
+import { ChangeEvent, MouseEvent, useEffect, useState } from "react";
 import { useUser } from "../../contexts/UserContext";
 import { getItem } from "../../utils/storage";
 import UserData from "./UserData";
@@ -43,6 +43,22 @@ const EditUserModal = () => {
     setEditPassword(!editPassword);
   };
 
+  const [image, setImage] = useState<string | null>(null);
+  const handleImageChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const selectedImage = e.target.files?.[0];
+
+    if (selectedImage) {
+      const reader = new FileReader();
+      reader.onload = (event) => {
+        const result = event.target?.result as string | null;
+        if (result) {
+          setImage(result);
+        }
+      };
+      reader.readAsDataURL(selectedImage);
+    }
+  };
+
   return (
     <div className="overlay">
       <div className="edit-user-modal__container">
@@ -58,18 +74,40 @@ const EditUserModal = () => {
             <>
               <div className="testes">
                 <button
-                  onClick={() => setEditData(false)}
+                  onClick={() => {
+                    setEditData(false);
+                    setImage(null);
+                  }}
                   className="edit-user-modal__back teste-btn"
                 >
                   <HiOutlineArrowSmLeft size={30} />
                   Voltar
                 </button>
                 <section className="edit-user-modal__section-avatar">
-                  <HiUserCircle size={100} className="section-avatar__img" />
-                  <button className="section-avatar__btn">
-                    Escolher imagem
-                    <HiOutlinePencilSquare size={18} />
-                  </button>
+                  {image ? (
+                    <img
+                      src={image}
+                      alt="Preview"
+                      className="custom-img-preview"
+                    />
+                  ) : (
+                    <HiUserCircle size={100} className="section-avatar__img" />
+                  )}
+
+                  <div>
+                    <input
+                      type="file"
+                      accept="image/*"
+                      id="fileInput"
+                      style={{ display: "none" }}
+                      onChange={(e) => handleImageChange(e)}
+                      className="section-avatar__input"
+                    />
+                    <label htmlFor="fileInput" className="custom-file-button">
+                      Escolher imagem
+                      <HiOutlinePencilSquare size={18} />
+                    </label>
+                  </div>
                 </section>
               </div>
 

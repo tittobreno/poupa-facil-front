@@ -48,6 +48,10 @@
   gap: 1rem;
 }
 
+.section-avatar__input {
+  all: unset;
+}
+
 .section-avatar__btn {
   all: unset;
   box-sizing: border-box;
@@ -67,8 +71,8 @@
 }
 
 .section-avatar__img {
-
-  color: var(--violet-700);
+ 
+ color: var(--violet-700);
   
 }
 
@@ -181,4 +185,28 @@
   position: absolute;
   top: 0;
   left: 0;
+}
+
+.custom-file-button {
+  all: unset;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  border-radius: 1rem;
+  padding: 1rem;
+  cursor: pointer;
+  background-color: var(--violet-100);
+  transition: all 0.2s ease-in-out;
+}
+
+.custom-file-button:hover {
+  background-color: var(--violet-500);
+  color: #fff;
+}
+
+.custom-img-preview {
+  width: 10rem;
+  height: 10rem;
+  border-radius: 50px;
 }
