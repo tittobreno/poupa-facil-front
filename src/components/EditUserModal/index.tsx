@@ -3,12 +3,14 @@ import { HiOutlineArrowSmLeft, HiOutlineX, HiUserCircle } from "react-icons/hi";
 import { HiOutlinePencilSquare } from "react-icons/hi2";
 import { useGlobal } from "../../contexts/GlobalContext";
 import api from "../../services/api";
-import { useEffect, useState } from "react";
+import { MouseEvent, useEffect, useState } from "react";
 import { useUser } from "../../contexts/UserContext";
 import { getItem } from "../../utils/storage";
 import UserData from "./UserData";
+import UserPassword from "./UserPassword";
 const EditUserModal = () => {
   const [editData, setEditData] = useState(false);
+  const [editPassword, setEditPassword] = useState(false);
   const { setIsOpenUserModal, setMessageNotification, setIsOpenNotification } =
     useGlobal();
 
@@ -35,6 +37,12 @@ const EditUserModal = () => {
 
     fetchData();
   }, []);
+
+  const handleFormParssord = (event: MouseEvent) => {
+    event.preventDefault();
+    setEditPassword(!editPassword);
+  };
+
   return (
     <div className="overlay">
       <div className="edit-user-modal__container">
@@ -46,7 +54,7 @@ const EditUserModal = () => {
         <h1 className="edit-user-modal__title">Dados do usuário</h1>
 
         <form className="edit-user-modal__form">
-          {editData ? (
+          {editData && (
             <>
               <button
                 onClick={() => setEditData(false)}
@@ -91,57 +99,59 @@ const EditUserModal = () => {
                 />
               </section>
             </>
-          ) : (
-            <UserData setEditData={setEditData} />
           )}
 
           {editData ? (
             ""
           ) : (
             <>
-              {/* <section className="edit-user-modal__form-section">
-                <label htmlFor="password" className="edit-user-modal__label">
-                  Senha
-                </label>
-                <input
-                  type="text"
-                  id="password"
-                  className="edit-user-modal__input"
+              {editPassword ? (
+                ""
+              ) : (
+                <UserData
+                  setEditPassword={setEditPassword}
+                  setEditData={setEditData}
                 />
-              </section>
-
-              <section className="edit-user-modal__form-section">
-                <label
-                  htmlFor="password-confirmation"
-                  className="edit-user-modal__label"
-                >
-                  Confirme sua senha
-                </label>
-                <input
-                  type="text"
-                  id="password-confirmation"
-                  className="edit-user-modal__input"
-                />
-              </section> */}
+              )}
               <div className="edit-user-modal-question-password">
                 <strong className="question-password-button-label">
                   Senha de acesso
                 </strong>
-                <button className="question-password-button">
-                  Alterar
-                  <HiOutlinePencilSquare size={18} />
-                </button>
+
+                {editPassword ? (
+                  <button
+                    onClick={(event) => {
+                      event.preventDefault();
+
+                      setEditPassword(false);
+                    }}
+                    className="edit-user-modal__back"
+                  >
+                    <HiOutlineArrowSmLeft size={30} />
+                    Voltar
+                  </button>
+                ) : (
+                  <button
+                    onClick={(event) => handleFormParssord(event)}
+                    className="question-password-button"
+                  >
+                    Alterar
+                    <HiOutlinePencilSquare size={18} />
+                  </button>
+                )}
               </div>
+
+              {editPassword && <UserPassword />}
             </>
           )}
 
-          {editData ? (
+          {editData || editPassword ? (
             <button
               className="edit-user-modal__btn"
               type="button"
               onClick={() => handleEditUser()}
             >
-              Confirmar
+              Alterar
             </button>
           ) : (
             ""
