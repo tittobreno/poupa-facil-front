@@ -21,7 +21,7 @@ const UserData = ({ setEditData, setEditPassword }: UserDataProps) => {
   return (
     <div className="edit-user-modal__user-data-container">
       <section className="edit-user-modal__section-avatar">
-        <HiUserCircle size={80} className="section-avatar__img" />
+        <HiUserCircle size={100} className="section-avatar__img" />
         <button
           onClick={(event) => handleEdit(event)}
           className="section-avatar__btn"

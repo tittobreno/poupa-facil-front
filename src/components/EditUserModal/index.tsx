@@ -65,7 +65,7 @@ const EditUserModal = () => {
                   Voltar
                 </button>
                 <section className="edit-user-modal__section-avatar">
-                  <HiUserCircle size={80} className="section-avatar__img" />
+                  <HiUserCircle size={100} className="section-avatar__img" />
                   <button className="section-avatar__btn">
                     Escolher imagem
                     <HiOutlinePencilSquare size={18} />
