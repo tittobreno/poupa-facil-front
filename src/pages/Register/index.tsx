@@ -2,15 +2,44 @@ import { Link } from "react-router-dom";
 import Logo from "../../assets/logo-pf.png";
 import { useGlobal } from "../../contexts/GlobalContext";
 import "./styles.css";
+import { FormEvent, FormEventHandler } from "react";
+import { useUser } from "../../contexts/UserContext";
 
 const Register = () => {
+  const { handleChangeForm, form, setForm } = useUser();
+
+  const handleRegister = (e: FormEvent) => {
+    e.preventDefault();
+
+    if (!form.name) {
+      return alert("O campo nome é obrigatório");
+    }
+
+    if (!form.email) {
+      return alert("O campo email é obrigatório");
+    }
+
+    if (!form.password) {
+      return alert("O campo senha é obrigatório");
+    }
+
+    if (!form.passwordConfirmation) {
+      return alert("O campo confirmar senha é obrigatório");
+    }
+
+    if (form.password != form.passwordConfirmation) {
+      return alert("As senhas devem ser iguais");
+    }
+  };
+  console.log(form);
+
   return (
     <div className="container__register">
       <img className="login__logo" src={Logo} alt="Logo da página!" />
       <main className="register__main">
         <section className="register__card">
           <h1 className="register__title">Crie sua conta grátis</h1>
-          <form className="register__form">
+          <form onSubmit={handleRegister} className="register__form">
             <div className="form__box-field">
               <label htmlFor="name" className="form__label">
                 Nome
@@ -21,6 +50,8 @@ const Register = () => {
                 id="name"
                 type="text"
                 placeholder="Digite seu nome"
+                value={form.name}
+                onChange={(e) => setForm({ ...form, name: e.target.value })}
               />
             </div>
             <div className="form__box-field">
@@ -32,6 +63,8 @@ const Register = () => {
                 id="email"
                 type="text"
                 placeholder="Digite seu email"
+                value={form.email}
+                onChange={(e) => setForm({ ...form, email: e.target.value })}
               />
             </div>
             <div className="form__box-field">
@@ -43,6 +76,8 @@ const Register = () => {
                 id="password"
                 type="password"
                 placeholder="Digite sua senha"
+                value={form.password}
+                onChange={(e) => setForm({ ...form, password: e.target.value })}
               />
             </div>
             <div className="form__box-field">
@@ -54,6 +89,10 @@ const Register = () => {
                 id="password-confirmation"
                 type="password"
                 placeholder="Confirme sua senha"
+                value={form.passwordConfirmation}
+                onChange={(e) =>
+                  setForm({ ...form, passwordConfirmation: e.target.value })
+                }
               />
             </div>
 
