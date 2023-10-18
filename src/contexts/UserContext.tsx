@@ -3,8 +3,10 @@ import { ChangeEvent, createContext, useContext, useState } from "react";
 interface User {
   name?: string;
   email?: string;
+  currentPassword?: string;
   password?: string;
   passwordConfirmation?: string;
+  avatar?: string;
 }
 
 interface DataUser {
@@ -25,8 +27,10 @@ const userInitialValue = {
   form: {
     name: "",
     email: "",
+    currentPassword: "",
     password: "",
     passwordConfirmation: "",
+    avatar: "",
   },
   setForm: () => {},
   handleChangeForm: () => {},

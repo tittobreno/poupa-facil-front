@@ -10,7 +10,7 @@ interface UserDataProps {
 }
 
 const UserData = ({ setEditData, setEditPassword }: UserDataProps) => {
-  const { dataUser } = useUser();
+  const { dataUser, form } = useUser();
 
   const handleEdit = (event: MouseEvent) => {
     event.preventDefault();
@@ -33,12 +33,12 @@ const UserData = ({ setEditData, setEditPassword }: UserDataProps) => {
 
       <section className="edit-user-modal__user-data-section">
         <strong className="edit-user-modal__user-data-label">Nome</strong>
-        <span>{dataUser.name}</span>
+        <span>{form.name}</span>
       </section>
 
       <section className="edit-user-modal__user-data-section">
         <strong className="edit-user-modal__user-data-label">Email</strong>
-        <span>{dataUser.email}</span>
+        <span>{form.email}</span>
       </section>
     </div>
   );

@@ -14,13 +14,27 @@ const EditUserModal = () => {
   const { setIsOpenUserModal, setMessageNotification, setIsOpenNotification } =
     useGlobal();
 
-  const { setDataUser, dataUser, handleChangeForm, handleChangeFormEditUser } =
-    useUser();
+  const {
+    setDataUser,
+    dataUser,
+    handleChangeForm,
+    handleChangeFormEditUser,
+    form,
+    setForm,
+  } = useUser();
 
   const handleEditUser = async () => {
     setMessageNotification("Usuário editado com sucesso!");
     setIsOpenUserModal(false);
     setIsOpenNotification(true);
+    setForm({
+      name: "",
+      email: "",
+      currentPassword: "",
+      password: "",
+      passwordConfirmation: "",
+      avatar: "",
+    });
   };
 
   useEffect(() => {
@@ -29,7 +43,7 @@ const EditUserModal = () => {
         const { data } = await api.get("/detalhar", {
           headers: { Authorization: `Bearer ${getItem("token")}` },
         });
-        setDataUser({ name: data.name, email: data.email });
+        setForm({ name: data.name, email: data.email });
       } catch (error: any) {
         console.log(error.message);
       }
@@ -53,6 +67,7 @@ const EditUserModal = () => {
         const result = event.target?.result as string | null;
         if (result) {
           setImage(result);
+          setForm({ ...form, avatar: result });
         }
       };
       reader.readAsDataURL(selectedImage);
@@ -65,7 +80,17 @@ const EditUserModal = () => {
         <HiOutlineX
           size={25}
           className="edit-user-modal__close"
-          onClick={() => setIsOpenUserModal(false)}
+          onClick={() => {
+            setIsOpenUserModal(false);
+            setForm({
+              name: "",
+              email: "",
+              currentPassword: "",
+              password: "",
+              passwordConfirmation: "",
+              avatar: "",
+            });
+          }}
         />
         <h1 className="edit-user-modal__title">Dados do usuário</h1>
 
@@ -117,11 +142,13 @@ const EditUserModal = () => {
                 </label>
                 <input
                   name="name"
-                  value={dataUser.name}
+                  value={form.name}
                   type="text"
                   id="name"
                   className="edit-user-modal__input"
-                  onChange={(event) => handleChangeFormEditUser(event)}
+                  onChange={(event) =>
+                    setForm({ ...form, name: event.target.value })
+                  }
                 />
               </section>
 
@@ -131,11 +158,13 @@ const EditUserModal = () => {
                 </label>
                 <input
                   name="email"
-                  value={dataUser.email}
+                  value={form.email}
                   type="text"
                   id="email"
                   className="edit-user-modal__input"
-                  onChange={(event) => handleChangeFormEditUser(event)}
+                  onChange={(event) =>
+                    setForm({ ...form, email: event.target.value })
+                  }
                 />
               </section>
             </>
@@ -168,6 +197,12 @@ const EditUserModal = () => {
                       event.preventDefault();
 
                       setEditPassword(false);
+                      setForm({
+                        ...form,
+                        currentPassword: "",
+                        password: "",
+                        passwordConfirmation: "",
+                      });
                     }}
                     className="edit-user-modal__back"
                   >
@@ -176,7 +211,9 @@ const EditUserModal = () => {
                   </button>
                 ) : (
                   <button
-                    onClick={(event) => handleFormParssord(event)}
+                    onClick={(event) => {
+                      handleFormParssord(event);
+                    }}
                     className="question-password-button"
                   >
                     Alterar
