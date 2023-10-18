@@ -1,14 +1,16 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Logo from "../../assets/logo-pf.png";
 import { useGlobal } from "../../contexts/GlobalContext";
 import "./styles.css";
 import { FormEvent, FormEventHandler } from "react";
 import { useUser } from "../../contexts/UserContext";
+import api from "../../services/api";
 
 const Register = () => {
   const { handleChangeForm, form, setForm } = useUser();
+  const Navigate = useNavigate();
 
-  const handleRegister = (e: FormEvent) => {
+  const handleRegister = async (e: FormEvent) => {
     e.preventDefault();
 
     if (!form.name) {
@@ -30,8 +32,16 @@ const Register = () => {
     if (form.password != form.passwordConfirmation) {
       return alert("As senhas devem ser iguais");
     }
+
+    try {
+      await api.post("/cadastrar", { ...form });
+      setForm({ name: "", email: "", password: "", passwordConfirmation: "" });
+      alert("Cadastro criado com sucesso!");
+      Navigate("/");
+    } catch (error: any) {
+      console.log(error.message);
+    }
   };
-  console.log(form);
 
   return (
     <div className="container__register">
