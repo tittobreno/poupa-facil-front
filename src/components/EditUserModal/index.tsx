@@ -3,7 +3,7 @@ import { HiOutlineArrowSmLeft, HiOutlineX, HiUserCircle } from "react-icons/hi";
 import { HiOutlinePencilSquare } from "react-icons/hi2";
 import { useGlobal } from "../../contexts/GlobalContext";
 import api from "../../services/api";
-import { ChangeEvent, MouseEvent, useEffect, useState } from "react";
+import { ChangeEvent, FormEvent, MouseEvent, useEffect, useState } from "react";
 import { useUser } from "../../contexts/UserContext";
 import { getItem } from "../../utils/storage";
 import UserData from "./UserData";
@@ -23,18 +23,22 @@ const EditUserModal = () => {
     setForm,
   } = useUser();
 
-  const handleEditUser = async () => {
-    setMessageNotification("Usuário editado com sucesso!");
-    setIsOpenUserModal(false);
-    setIsOpenNotification(true);
-    setForm({
-      name: "",
-      email: "",
-      currentPassword: "",
-      password: "",
-      passwordConfirmation: "",
-      avatar: "",
-    });
+  const handleEditUser = async (event: FormEvent) => {
+    event.preventDefault();
+
+    try {
+      setMessageNotification("Usuário editado com sucesso!");
+      setIsOpenUserModal(false);
+      setIsOpenNotification(true);
+      setForm({
+        name: "",
+        email: "",
+        currentPassword: "",
+        password: "",
+        passwordConfirmation: "",
+        avatar: "",
+      });
+    } catch (error) {}
   };
 
   useEffect(() => {
@@ -94,7 +98,7 @@ const EditUserModal = () => {
         />
         <h1 className="edit-user-modal__title">Dados do usuário</h1>
 
-        <form className="edit-user-modal__form">
+        <form onSubmit={handleEditUser} className="edit-user-modal__form">
           {editData && (
             <>
               <div className="testes">
@@ -230,7 +234,7 @@ const EditUserModal = () => {
             <button
               className="edit-user-modal__btn"
               type="button"
-              onClick={() => handleEditUser()}
+              onClick={(e) => handleEditUser(e)}
             >
               Alterar
             </button>
