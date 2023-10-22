@@ -9,7 +9,7 @@
   flex-direction: column;
   padding: 3.5rem 5.6rem;
   border-radius: 1rem;
-  background-color: #fff;
+  background-color: #ebebeb;
 
   font-family: "Runik", sans-serif;
 }
@@ -42,10 +42,12 @@
 }
 
 .edit-user-modal__section-avatar {
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 1rem;
+  margin-bottom: 2rem;
 }
 
 .section-avatar__input {
@@ -145,6 +147,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+  margin-top: 2rem;
 }
 
 .question-password-button {
@@ -157,7 +160,7 @@
   padding: 1rem;
   cursor: pointer;
   color: #000;
-  background-color: var(--violet-100);
+  background-color: var(--violet-300);
   font-size: 1.6rem;
   transition: all 0.2s ease-in-out;
 }
@@ -194,10 +197,15 @@
   align-items: center;
   gap: 0.5rem;
   border-radius: 1rem;
-  padding: 1rem;
+  padding: 0.7rem;
   cursor: pointer;
-  background-color: var(--violet-100);
+  background-color: #ebebeb;
   transition: all 0.2s ease-in-out;
+  border: solid 1px var(--violet-700);
+
+  position: absolute;
+  top: 65%;
+  left: 55%;
 }
 
 .custom-file-button:hover {
@@ -206,7 +214,8 @@
 }
 
 .custom-img-preview {
-  width: 10rem;
-  height: 10rem;
-  border-radius: 50px;
+  width: 15rem;
+  height: 15rem;
+  border-radius: 50%;
+  border: solid 2px var(--violet-700);
 }

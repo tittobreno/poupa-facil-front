@@ -1,10 +1,30 @@
 import { HiOutlinePencilSquare } from "react-icons/hi2";
 import { useUser } from "../../../contexts/UserContext";
+import { HiOutlineArrowSmLeft } from "react-icons/hi";
 
-const UserPassword = () => {
+interface UserPasswordProps {
+  setEditPassword: (newState: boolean) => void;
+}
+
+const UserPassword = ({ setEditPassword }: UserPasswordProps) => {
   const { form, setForm } = useUser();
   return (
     <>
+      <button
+        onClick={(event) => {
+          setEditPassword(false);
+          setForm({
+            ...form,
+            currentPassword: "",
+            password: "",
+            passwordConfirmation: "",
+          });
+        }}
+        className="edit-user-modal__back"
+      >
+        <HiOutlineArrowSmLeft size={30} />
+        Voltar
+      </button>
       <section className="edit-user-modal__form-section">
         <label htmlFor="current-password" className="edit-user-modal__label">
           Senha atual
@@ -52,6 +72,7 @@ const UserPassword = () => {
           }
         />
       </section>
+      <button className="edit-user-modal__btn">Confirmar</button>
     </>
   );
 };

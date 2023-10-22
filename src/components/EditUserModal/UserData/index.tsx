@@ -20,17 +20,6 @@ const UserData = ({ setEditData, setEditPassword }: UserDataProps) => {
 
   return (
     <div className="edit-user-modal__user-data-container">
-      <section className="edit-user-modal__section-avatar">
-        <HiUserCircle size={100} className="section-avatar__img" />
-        <button
-          onClick={(event) => handleEdit(event)}
-          className="section-avatar__btn"
-        >
-          Editar
-          <HiOutlinePencilSquare size={18} />
-        </button>
-      </section>
-
       <section className="edit-user-modal__user-data-section">
         <strong className="edit-user-modal__user-data-label">Nome</strong>
         <span>{form.name}</span>
@@ -39,6 +28,16 @@ const UserData = ({ setEditData, setEditPassword }: UserDataProps) => {
       <section className="edit-user-modal__user-data-section">
         <strong className="edit-user-modal__user-data-label">Email</strong>
         <span>{form.email}</span>
+      </section>
+
+      <section className="edit-user-modal__user-container-btn">
+        <button
+          onClick={(event) => handleEdit(event)}
+          className="edit-user-model__user-data-btn"
+        >
+          Alterar dados
+          <HiOutlinePencilSquare size={18} />
+        </button>
       </section>
     </div>
   );
