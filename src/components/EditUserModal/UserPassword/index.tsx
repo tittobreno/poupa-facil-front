@@ -7,16 +7,17 @@ interface UserPasswordProps {
 }
 
 const UserPassword = ({ setEditPassword }: UserPasswordProps) => {
-  const { form, setForm } = useUser();
+  const { form, setForm, handleEditUser } = useUser();
   return (
     <>
       <button
         onClick={(event) => {
           setEditPassword(false);
           setForm({
-            ...form,
+            name: "",
+            email: "",
             currentPassword: "",
-            password: "",
+            newPassword: "",
             passwordConfirmation: "",
           });
         }}
@@ -48,9 +49,9 @@ const UserPassword = ({ setEditPassword }: UserPasswordProps) => {
           type="text"
           id="password"
           className="edit-user-modal__input"
-          value={form.password}
+          value={form.newPassword}
           onChange={(event) =>
-            setForm({ ...form, password: event.target.value })
+            setForm({ ...form, newPassword: event.target.value })
           }
         />
       </section>
@@ -72,7 +73,13 @@ const UserPassword = ({ setEditPassword }: UserPasswordProps) => {
           }
         />
       </section>
-      <button className="edit-user-modal__btn">Confirmar</button>
+      <button
+        onClick={() => handleEditUser(form)}
+        type="button"
+        className="edit-user-modal__btn"
+      >
+        Confirmar
+      </button>
     </>
   );
 };

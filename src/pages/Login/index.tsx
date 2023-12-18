@@ -30,7 +30,7 @@ const Login = () => {
   const handleLogin = async (event: FormEvent) => {
     event.preventDefault();
 
-    if (!form.email || !form.password) {
+    if (!form.email || !form.currentPassword) {
       return alert("Todos os campos são obrigatórios");
     }
 
@@ -112,13 +112,13 @@ const Login = () => {
                   <input
                     className="input-password"
                     id="password"
-                    name="password"
-                    value={form.password}
+                    name="currentPassword"
+                    value={form.currentPassword}
                     type={showPassword ? "text" : "password"}
                     placeholder="Digite sua senha"
                     onFocus={handleFocus}
                     onBlur={handleBlur}
-                    onChange={handleChangeForm}
+                    onChange={(event) => handleChangeForm(event)}
                   />
                   <button
                     className="login__input-eye"

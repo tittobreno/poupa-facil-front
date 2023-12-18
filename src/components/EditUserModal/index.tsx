@@ -26,38 +26,23 @@ const EditUserModal = () => {
     setForm,
   } = useUser();
 
-  const handleEditUser = async (event: FormEvent) => {
-    event.preventDefault();
+  // const handleEditUser = async (event: FormEvent) => {
+  //   event.preventDefault();
 
-    try {
-      setMessageNotification("Usuário editado com sucesso!");
-      setIsOpenUserModal(false);
-      setIsOpenNotification(true);
-      setForm({
-        name: "",
-        email: "",
-        currentPassword: "",
-        password: "",
-        passwordConfirmation: "",
-        avatar: "",
-      });
-    } catch (error) {}
-  };
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const { data } = await api.get("/detalhar", {
-          headers: { Authorization: `Bearer ${getItem("token")}` },
-        });
-        setForm({ name: data.name, email: data.email });
-      } catch (error: any) {
-        console.log(error.message);
-      }
-    };
-
-    fetchData();
-  }, []);
+  //   try {
+  //     setMessageNotification("Usuário editado com sucesso!");
+  //     setIsOpenUserModal(false);
+  //     setIsOpenNotification(true);
+  //     setForm({
+  //       name: "",
+  //       email: "",
+  //       currentPassword: "",
+  //       newPassword: "",
+  //       passwordConfirmation: "",
+  //       avatar: "",
+  //     });
+  //   } catch (error) {}
+  // };
 
   const [image, setImage] = useState<string | null>(null);
   const handleImageChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -88,7 +73,7 @@ const EditUserModal = () => {
               name: "",
               email: "",
               currentPassword: "",
-              password: "",
+              newPassword: "",
               passwordConfirmation: "",
               avatar: "",
             });
@@ -96,7 +81,7 @@ const EditUserModal = () => {
         />
         <h1 className="edit-user-modal__title">Dados do usuário</h1>
 
-        <form onSubmit={handleEditUser} className="edit-user-modal__form">
+        <form className="edit-user-modal__form">
           {editData || editPassword ? (
             ""
           ) : (

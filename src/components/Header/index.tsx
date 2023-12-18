@@ -16,7 +16,7 @@ const Header = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const { data } = await api.get("/detalhar", {
+        const { data } = await api.get("/usuario/detalhar", {
           headers: { Authorization: `Bearer ${getItem("token")}` },
         });
         setUserName(data.name);
@@ -30,7 +30,7 @@ const Header = () => {
 
   const handleLogOut = () => {
     clearLocalStorage();
-    setForm({ email: "", password: "" });
+    setForm({ email: "", currentPassword: "" });
     Navigate("/");
   };
 

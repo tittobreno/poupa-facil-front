@@ -2,7 +2,9 @@ import { HiUserCircle } from "react-icons/hi";
 import "./styles.css";
 import { HiOutlinePencilSquare } from "react-icons/hi2";
 import { useUser } from "../../../contexts/UserContext";
-import { MouseEvent } from "react";
+import { MouseEvent, useEffect, useState } from "react";
+import api from "../../../services/api";
+import { getItem } from "../../../utils/storage";
 
 interface UserDataProps {
   setEditData: (newState: boolean) => void;
@@ -10,6 +12,10 @@ interface UserDataProps {
 }
 
 const UserData = ({ setEditData, setEditPassword }: UserDataProps) => {
+  const [localUser, setLocalUser] = useState({
+    name: "",
+    email: "",
+  });
   const { dataUser, form } = useUser();
 
   const handleEdit = (event: MouseEvent) => {
@@ -18,16 +24,34 @@ const UserData = ({ setEditData, setEditPassword }: UserDataProps) => {
     setEditPassword(false);
   };
 
+  useEffect(() => {
+    const setData = async () => {
+      try {
+        const { data } = await api.get("/usuario/detalhar", {
+          headers: { Authorization: `Bearer ${getItem("token")}` },
+        });
+        setLocalUser({
+          name: data.name,
+          email: data.email,
+        });
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    setData();
+  }, []);
+
   return (
     <div className="edit-user-modal__user-data-container">
       <section className="edit-user-modal__user-data-section">
         <strong className="edit-user-modal__user-data-label">Nome</strong>
-        <span>{form.name}</span>
+        <span>{localUser.name}</span>
       </section>
 
       <section className="edit-user-modal__user-data-section">
         <strong className="edit-user-modal__user-data-label">Email</strong>
-        <span>{form.email}</span>
+        <span>{localUser.email}</span>
       </section>
 
       <section className="edit-user-modal__user-container-btn">

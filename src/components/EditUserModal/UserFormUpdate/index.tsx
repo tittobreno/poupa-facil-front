@@ -6,22 +6,27 @@ interface UserFormUpdateProps {
 }
 
 const UserFormUpdate = ({ setEditData }: UserFormUpdateProps) => {
-  const { form, setForm } = useUser();
+  const { form, setForm, handleEditUser } = useUser();
+  console.log(form);
 
   return (
     <>
-      <div className="testes">
-        <button
-          onClick={() => {
-            setEditData(false);
-            // setImage(null);
-          }}
-          className="edit-user-modal__back teste-btn"
-        >
-          <HiOutlineArrowSmLeft size={30} />
-          Voltar
-        </button>
-      </div>
+      <button
+        onClick={() => {
+          setEditData(false);
+          setForm({
+            name: "",
+            email: "",
+            currentPassword: "",
+            newPassword: "",
+            passwordConfirmation: "",
+          });
+        }}
+        className="edit-user-modal__back"
+      >
+        <HiOutlineArrowSmLeft size={30} />
+        Voltar
+      </button>
 
       <section className="edit-user-modal__form-section">
         <label htmlFor="name" className="edit-user-modal__label">
@@ -53,7 +58,7 @@ const UserFormUpdate = ({ setEditData }: UserFormUpdateProps) => {
       <button
         className="edit-user-modal__btn"
         type="button"
-        // onClick={(e) => handleEditUser(e)}
+        onClick={() => handleEditUser(form)}
       >
         Alterar
       </button>
