@@ -5,30 +5,21 @@ import { useUser } from "../../../contexts/UserContext";
 import { MouseEvent, useEffect, useState } from "react";
 import api from "../../../services/api";
 import { getItem } from "../../../utils/storage";
-import { User } from "../../../types";
 
 interface UserDataProps {
   setEditData: (newState: boolean) => void;
   setEditPassword: (newState: boolean) => void;
-  handleEditUser: (user: User) => void;
 }
 
-const UserData = ({
-  setEditData,
-  setEditPassword,
-  handleEditUser,
-}: UserDataProps) => {
-  const { form } = useUser();
+const UserData = ({ setEditData, setEditPassword }: UserDataProps) => {
   const [localUser, setLocalUser] = useState({
     name: "",
     email: "",
   });
 
-  const handleEdit = (e: MouseEvent) => {
-    e.preventDefault();
+  const handleEdit = () => {
     setEditData(true);
     setEditPassword(false);
-    handleEditUser(form);
   };
 
   useEffect(() => {
@@ -63,7 +54,7 @@ const UserData = ({
 
       <section className="edit-user-modal__user-container-btn">
         <button
-          onClick={(e) => handleEdit(e)}
+          onClick={() => handleEdit()}
           className="edit-user-model__user-data-btn"
         >
           Alterar dados

@@ -51,6 +51,7 @@ const EditUserModal = () => {
           },
         }
       );
+      console.log("here");
 
       handleShowToast("Usuário editado com sucesso!");
       setIsOpenUserModal(false);
@@ -113,7 +114,6 @@ const EditUserModal = () => {
 
               <section>
                 <UserData
-                  handleEditUser={handleEditUser}
                   setEditPassword={setEditPassword}
                   setEditData={setEditData}
                 />
