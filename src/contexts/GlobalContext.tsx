@@ -15,10 +15,13 @@ type GlobalContextType = {
   setTypeRegisterModal: (newstate: string) => void;
   isOpenDeleteRegister: boolean;
   setIsOpenDeleteRegister: (newstate: boolean) => void;
-  isOpenNotification: boolean;
-  setIsOpenNotification: (newstate: boolean) => void;
-  messageNotification: string;
-  setMessageNotification: (newState: string) => void;
+  showToast: boolean;
+  setShowToast: (newstate: boolean) => void;
+  messageToast: string;
+  setMessageToast: (newState: string) => void;
+  handleShowToast: (message: string) => void;
+  handleCloseToast: () => void;
+  handleSubmitRegister: () => void;
 };
 
 const initialGlobalValue = {
@@ -30,10 +33,13 @@ const initialGlobalValue = {
   setTypeRegisterModal: () => {},
   isOpenDeleteRegister: false,
   setIsOpenDeleteRegister: () => {},
-  isOpenNotification: false,
-  setIsOpenNotification: () => {},
-  messageNotification: "null",
-  setMessageNotification: () => {},
+  showToast: false,
+  setShowToast: () => {},
+  messageToast: "",
+  setMessageToast: () => {},
+  handleShowToast: () => {},
+  handleCloseToast: () => {},
+  handleSubmitRegister: () => {},
 };
 const GlobalContext = createContext<GlobalContextType>(initialGlobalValue);
 
@@ -50,12 +56,29 @@ export const GlobalProvider = ({ children }: any) => {
   const [isOpenDeleteRegister, setIsOpenDeleteRegister] = useState(
     initialGlobalValue.isOpenDeleteRegister
   );
-  const [isOpenNotification, setIsOpenNotification] = useState(
-    initialGlobalValue.isOpenNotification
+  const [showToast, setShowToast] = useState(initialGlobalValue.showToast);
+  const [messageToast, setMessageToast] = useState(
+    initialGlobalValue.messageToast
   );
-  const [messageNotification, setMessageNotification] = useState(
-    initialGlobalValue.messageNotification
-  );
+
+  const handleShowToast = (message: string) => {
+    setMessageToast(message);
+    setShowToast(true);
+  };
+
+  const handleCloseToast = () => {
+    setShowToast(false);
+  };
+
+  const handleSubmitRegister = () => {
+    setIsOpenRegisterModal(false);
+
+    if (typeRegisterModal === "Editar") {
+      handleShowToast("Registro editado com sucesso!");
+    } else {
+      handleShowToast("Registro adicionado com sucesso!");
+    }
+  };
 
   return (
     <GlobalContext.Provider
@@ -68,10 +91,13 @@ export const GlobalProvider = ({ children }: any) => {
         setTypeRegisterModal,
         isOpenDeleteRegister,
         setIsOpenDeleteRegister,
-        isOpenNotification,
-        setIsOpenNotification,
-        messageNotification,
-        setMessageNotification,
+        showToast,
+        setShowToast,
+        messageToast,
+        setMessageToast,
+        handleShowToast,
+        handleCloseToast,
+        handleSubmitRegister,
       }}
     >
       {children}

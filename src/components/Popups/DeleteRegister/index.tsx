@@ -2,16 +2,11 @@ import { useGlobal } from "../../../contexts/GlobalContext";
 import "./styles.css";
 
 const DeleteRegister = () => {
-  const {
-    setIsOpenDeleteRegister,
-    setMessageNotification,
-    setIsOpenNotification,
-  } = useGlobal();
+  const { setIsOpenDeleteRegister, handleShowToast } = useGlobal();
 
   const handleDeleteRegister = () => {
-    setMessageNotification("Registro deletado com sucesso!");
+    handleShowToast("Registro deletado com sucesso!");
     setIsOpenDeleteRegister(false);
-    setIsOpenNotification(true);
   };
 
   return (

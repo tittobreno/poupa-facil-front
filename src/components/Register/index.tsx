@@ -8,11 +8,10 @@ const Register = () => {
     setTypeRegisterModal,
     isOpenDeleteRegister,
     setIsOpenDeleteRegister,
-    setMessageNotification,
+    handleShowToast,
   } = useGlobal();
 
   const handleOpenEditModal = () => {
-    setMessageNotification("Registro editado com sucesso!");
     setTypeRegisterModal("Editar");
     setIsOpenRegisterModal(true);
   };

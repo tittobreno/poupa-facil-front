@@ -1,13 +1,17 @@
 import { HiOutlineArrowSmLeft } from "react-icons/hi";
 import { useUser } from "../../../contexts/UserContext";
+import { User } from "../../../types";
 
 interface UserFormUpdateProps {
   setEditData: (newState: boolean) => void;
+  handleEditUser: (user: User) => void;
 }
 
-const UserFormUpdate = ({ setEditData }: UserFormUpdateProps) => {
-  const { form, setForm, handleEditUser } = useUser();
-  console.log(form);
+const UserFormUpdate = ({
+  setEditData,
+  handleEditUser,
+}: UserFormUpdateProps) => {
+  const { form, setForm } = useUser();
 
   return (
     <>

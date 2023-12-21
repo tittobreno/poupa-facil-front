@@ -1,15 +1,8 @@
 import { ChangeEvent, createContext, useContext, useState } from "react";
 import api from "../services/api";
 import { getItem } from "../utils/storage";
-
-interface User {
-  name?: string;
-  email?: string;
-  currentPassword?: string;
-  newPassword?: string;
-  passwordConfirmation?: string;
-  avatar?: string;
-}
+import { useGlobal } from "./GlobalContext";
+import { User } from "../types";
 
 interface DataUser {
   name: string;
@@ -23,7 +16,6 @@ type UserContextType = {
   dataUser: DataUser;
   setDataUser: (newState: DataUser) => void;
   handleChangeFormEditUser: (event: ChangeEvent<HTMLInputElement>) => void;
-  handleEditUser: (user: User) => void;
 };
 
 const userInitialValue = {
@@ -43,7 +35,6 @@ const userInitialValue = {
   },
   setDataUser: () => {},
   handleChangeFormEditUser: () => {},
-  handleEditUser: () => {},
 };
 
 const UserContext = createContext<UserContextType>(userInitialValue);
@@ -70,26 +61,6 @@ export const UserProvider = ({ children }: any) => {
     }));
   };
 
-  const handleEditUser = async (user: User) => {
-    const filteredUser = Object.fromEntries(
-      Object.entries(user).filter(([key, value]) => value !== "")
-    );
-
-    try {
-      await api.patch(
-        "/usuario/editar",
-        { ...filteredUser },
-        {
-          headers: {
-            Authorization: `Bearer ${getItem("token")}`,
-          },
-        }
-      );
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
   return (
     <UserContext.Provider
       value={{
@@ -99,7 +70,6 @@ export const UserProvider = ({ children }: any) => {
         dataUser,
         setDataUser,
         handleChangeFormEditUser,
-        handleEditUser,
       }}
     >
       {children}

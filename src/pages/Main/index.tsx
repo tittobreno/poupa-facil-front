@@ -6,14 +6,14 @@ import Dashboard from "../../components/Dashboard";
 import RegisterModal from "../../components/RegisterModal";
 import { useGlobal } from "../../contexts/GlobalContext";
 import EditUserModal from "../../components/EditUserModal";
-import Notification from "../../components/Popups/Notification";
+import Notification from "../../components/Popups/Toast";
 import { useEffect } from "react";
 import { getItem, removeItem } from "../../utils/storage";
 import { isTokenExpired } from "../../utils/auth";
 import { useNavigate } from "react-router-dom";
+import Toast from "../../components/Popups/Toast";
 const Main = () => {
-  const { isOpenRegisterModal, isOpenNotification, isOpenUserModal } =
-    useGlobal();
+  const { isOpenRegisterModal, showToast, isOpenUserModal } = useGlobal();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -41,7 +41,7 @@ const Main = () => {
         {isOpenRegisterModal && <RegisterModal />}
         {isOpenUserModal && <EditUserModal />}
       </main>
-      {isOpenNotification && <Notification />}
+      {showToast && <Toast />}
     </div>
   );
 };

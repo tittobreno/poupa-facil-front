@@ -3,8 +3,12 @@ import { useGlobal } from "../../contexts/GlobalContext";
 import "./styles.css";
 
 const RegisterModal = () => {
-  const { setIsOpenRegisterModal, typeRegisterModal, setIsOpenNotification } =
-    useGlobal();
+  const {
+    setIsOpenRegisterModal,
+    typeRegisterModal,
+    handleShowToast,
+    handleSubmitRegister,
+  } = useGlobal();
 
   const handleChangeType = (type: string): void => {
     const input = document.querySelector(".types__input") as HTMLButtonElement;
@@ -22,8 +26,7 @@ const RegisterModal = () => {
   };
 
   const handleConfirm = () => {
-    setIsOpenNotification(true);
-    setIsOpenRegisterModal(false);
+    handleSubmitRegister();
   };
 
   return (

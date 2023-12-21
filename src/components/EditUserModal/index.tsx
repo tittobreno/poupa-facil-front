@@ -9,40 +9,15 @@ import { getItem } from "../../utils/storage";
 import UserData from "./UserData";
 import UserPassword from "./UserPassword";
 import UserFormUpdate from "./UserFormUpdate";
+import { User } from "../../types";
+
 const EditUserModal = () => {
   const [editData, setEditData] = useState(false);
   const [editPassword, setEditPassword] = useState(false);
   const [editAvatar, setEditAvatar] = useState(false);
+  const { setIsOpenUserModal, handleShowToast } = useGlobal();
 
-  const { setIsOpenUserModal, setMessageNotification, setIsOpenNotification } =
-    useGlobal();
-
-  const {
-    setDataUser,
-    dataUser,
-    handleChangeForm,
-    handleChangeFormEditUser,
-    form,
-    setForm,
-  } = useUser();
-
-  // const handleEditUser = async (event: FormEvent) => {
-  //   event.preventDefault();
-
-  //   try {
-  //     setMessageNotification("Usuário editado com sucesso!");
-  //     setIsOpenUserModal(false);
-  //     setIsOpenNotification(true);
-  //     setForm({
-  //       name: "",
-  //       email: "",
-  //       currentPassword: "",
-  //       newPassword: "",
-  //       passwordConfirmation: "",
-  //       avatar: "",
-  //     });
-  //   } catch (error) {}
-  // };
+  const { form, setForm } = useUser();
 
   const [image, setImage] = useState<string | null>(null);
   const handleImageChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -58,6 +33,29 @@ const EditUserModal = () => {
         }
       };
       reader.readAsDataURL(selectedImage);
+    }
+  };
+
+  const handleEditUser = async (user: User) => {
+    const filteredUser = Object.fromEntries(
+      Object.entries(user).filter(([key, value]) => value !== "")
+    );
+
+    try {
+      await api.patch(
+        "/usuario/editar",
+        { ...filteredUser },
+        {
+          headers: {
+            Authorization: `Bearer ${getItem("token")}`,
+          },
+        }
+      );
+
+      handleShowToast("Usuário editado com sucesso!");
+      setIsOpenUserModal(false);
+    } catch (error) {
+      console.log(error);
     }
   };
 
@@ -115,6 +113,7 @@ const EditUserModal = () => {
 
               <section>
                 <UserData
+                  handleEditUser={handleEditUser}
                   setEditPassword={setEditPassword}
                   setEditData={setEditData}
                 />
@@ -135,9 +134,19 @@ const EditUserModal = () => {
             </section>
           )}
 
-          {editPassword && <UserPassword setEditPassword={setEditPassword} />}
+          {editPassword && (
+            <UserPassword
+              handleEditUser={handleEditUser}
+              setEditPassword={setEditPassword}
+            />
+          )}
 
-          {editData && <UserFormUpdate setEditData={setEditData} />}
+          {editData && (
+            <UserFormUpdate
+              handleEditUser={handleEditUser}
+              setEditData={setEditData}
+            />
+          )}
         </form>
       </div>
     </div>
