@@ -51,7 +51,6 @@ const EditUserModal = () => {
           },
         }
       );
-      console.log("here");
 
       handleShowToast("Usuário editado com sucesso!");
       setIsOpenUserModal(false);

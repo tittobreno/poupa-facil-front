@@ -6,3 +6,11 @@ export interface User {
   passwordConfirmation?: string;
   avatar?: string;
 }
+
+export interface Transaction {
+  description: string;
+  value: string;
+  type: string;
+  date: string;
+  category_id: string;
+}

@@ -21,7 +21,6 @@ type GlobalContextType = {
   setMessageToast: (newState: string) => void;
   handleShowToast: (message: string) => void;
   handleCloseToast: () => void;
-  handleSubmitRegister: () => void;
 };
 
 const initialGlobalValue = {
@@ -70,16 +69,6 @@ export const GlobalProvider = ({ children }: any) => {
     setShowToast(false);
   };
 
-  const handleSubmitRegister = () => {
-    setIsOpenRegisterModal(false);
-
-    if (typeRegisterModal === "Editar") {
-      handleShowToast("Registro editado com sucesso!");
-    } else {
-      handleShowToast("Registro adicionado com sucesso!");
-    }
-  };
-
   return (
     <GlobalContext.Provider
       value={{
@@ -97,7 +86,6 @@ export const GlobalProvider = ({ children }: any) => {
         setMessageToast,
         handleShowToast,
         handleCloseToast,
-        handleSubmitRegister,
       }}
     >
       {children}

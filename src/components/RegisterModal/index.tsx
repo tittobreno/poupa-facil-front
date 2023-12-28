@@ -1,14 +1,22 @@
 import { HiOutlineX } from "react-icons/hi";
 import { useGlobal } from "../../contexts/GlobalContext";
 import "./styles.css";
+import api from "../../services/api";
+import { getItem } from "../../utils/storage";
+import { ChangeEvent, FormEvent, useState } from "react";
+import { Transaction } from "../../types";
 
 const RegisterModal = () => {
-  const {
-    setIsOpenRegisterModal,
-    typeRegisterModal,
-    handleShowToast,
-    handleSubmitRegister,
-  } = useGlobal();
+  const [form, setForm] = useState<Transaction>({
+    description: "",
+    value: "",
+    type: "entry",
+    date: "",
+    category_id: "",
+  });
+
+  const { setIsOpenRegisterModal, typeRegisterModal, handleShowToast } =
+    useGlobal();
 
   const handleChangeType = (type: string): void => {
     const input = document.querySelector(".types__input") as HTMLButtonElement;
@@ -17,16 +25,45 @@ const RegisterModal = () => {
     ) as HTMLButtonElement;
 
     if (type === "input") {
+      setForm({ ...form, type: "entry" });
       input.style.backgroundColor = "#6d28d9";
       output.style.backgroundColor = "#9ca3af";
     } else {
+      setForm({ ...form, type: "output" });
+
       input.style.backgroundColor = "#9ca3af";
       output.style.backgroundColor = "#fa8c10";
     }
   };
+  console.log(form);
 
-  const handleConfirm = () => {
-    handleSubmitRegister();
+  const handleSubmitRegister = async (event: FormEvent) => {
+    event.preventDefault();
+    setIsOpenRegisterModal(false);
+
+    if (typeRegisterModal === "Editar") {
+      handleShowToast("Registro editado com sucesso!");
+    } else {
+      handleShowToast("Registro adicionado com sucesso!");
+    }
+
+    try {
+      const response = await api.post(
+        "/transacao/cadastrar",
+        {
+          ...form,
+          value: Number(form.value) * 100,
+          category_id: Number(form.category_id),
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${getItem("token")}`,
+          },
+        }
+      );
+    } catch (error) {
+      console.log();
+    }
   };
 
   return (
@@ -59,24 +96,39 @@ const RegisterModal = () => {
           </button>
         </section>
 
-        <form className="register__form">
+        <form onSubmit={handleSubmitRegister} className="register__form">
           <section className="form__section">
             <label className="register__form-label" htmlFor="value">
               Valor
             </label>
             <input
-              name="valor"
+              name="value"
               className="register-modal__input"
               id="value"
-              type="text"
+              type="number"
+              value={form.value}
+              onChange={(event) =>
+                setForm({ ...form, value: event.target.value })
+              }
             />
           </section>
 
           <section className="form__section">
             <label className="register__form-label">Categoria</label>
-            <select name="categoria_id" className="register-modal__input">
+            <select
+              name="category_id"
+              className="register-modal__input"
+              value={form.category_id}
+              onChange={(event) =>
+                setForm({
+                  ...form,
+                  category_id: event.target.value,
+                })
+              }
+            >
               <option>Selecione uma categoria</option>
-              <option>Categoria1</option>
+              <option>1</option>
+              <option>2</option>
             </select>
           </section>
 
@@ -89,6 +141,10 @@ const RegisterModal = () => {
               className="register-modal__input"
               id="date"
               type="date"
+              value={form.date}
+              onChange={(event) =>
+                setForm({ ...form, date: event.target.value })
+              }
             />
           </section>
 
@@ -101,14 +157,14 @@ const RegisterModal = () => {
               className="register-modal__input"
               id="description"
               type="text"
+              value={form.description}
+              onChange={(event) =>
+                setForm({ ...form, description: event.target.value })
+              }
             />
           </section>
 
-          <button
-            onClick={() => handleConfirm()}
-            type="button"
-            className="form__btn"
-          >
+          <button type="submit" className="form__btn">
             Confirmar
           </button>
         </form>
