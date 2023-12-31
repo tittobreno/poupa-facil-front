@@ -2,8 +2,7 @@ import { useGlobal } from "../../contexts/GlobalContext";
 import "./styles.css";
 
 const Summary = () => {
-  const { setIsOpenRegisterModal, setTypeRegisterModal, handleShowToast } =
-    useGlobal();
+  const { setIsOpenRegisterModal, setTypeRegisterModal } = useGlobal();
 
   const handleAddRegister = () => {
     setIsOpenRegisterModal(true);

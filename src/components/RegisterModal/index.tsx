@@ -15,8 +15,12 @@ const RegisterModal = () => {
     category_id: "",
   });
 
-  const { setIsOpenRegisterModal, typeRegisterModal, handleShowToast } =
-    useGlobal();
+  const {
+    setIsOpenRegisterModal,
+    typeRegisterModal,
+    handleShowToast,
+    handleGetRegisters,
+  } = useGlobal();
 
   const handleChangeType = (type: string): void => {
     const input = document.querySelector(".types__input") as HTMLButtonElement;
@@ -35,7 +39,6 @@ const RegisterModal = () => {
       output.style.backgroundColor = "#fa8c10";
     }
   };
-  console.log(form);
 
   const handleSubmitRegister = async (event: FormEvent) => {
     event.preventDefault();
@@ -48,7 +51,7 @@ const RegisterModal = () => {
     }
 
     try {
-      const response = await api.post(
+      await api.post(
         "/transacao/cadastrar",
         {
           ...form,
@@ -61,6 +64,8 @@ const RegisterModal = () => {
           },
         }
       );
+
+      handleGetRegisters();
     } catch (error) {
       console.log();
     }
