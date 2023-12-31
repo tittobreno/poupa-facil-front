@@ -4,30 +4,13 @@ import { HiChevronDoubleDown } from "react-icons/hi";
 import Register from "../Register";
 import api from "../../services/api";
 import { getItem } from "../../utils/storage";
-type Transaction = {
-  description: string;
-  value: number;
-  date: string;
-  id: number;
-  type: string;
-  user_id: number;
-  category_name: string;
-  category_id: number;
-};
+import { useGlobal } from "../../contexts/GlobalContext";
 
 const Dashboard = () => {
   const [order, setOrder] = useState(false);
-  const [transactions, setTransactions] = useState<Transaction[]>([]);
+  const { handleGetRegisters, transactions } = useGlobal();
 
   useEffect(() => {
-    const handleGetRegisters = async () => {
-      const { data } = await api.get("/transacao/listar", {
-        headers: {
-          Authorization: `Bearer ${getItem("token")}`,
-        },
-      });
-      setTransactions(data);
-    };
     handleGetRegisters();
   }, []);
   return (

@@ -5,6 +5,19 @@ import {
   SetStateAction,
   Dispatch,
 } from "react";
+import { getItem } from "../utils/storage";
+import api from "../services/api";
+
+type Transaction = {
+  description: string;
+  value: number;
+  date: string;
+  id: number;
+  type: string;
+  user_id: number;
+  category_name: string;
+  category_id: number;
+};
 
 type GlobalContextType = {
   isOpenRegisterModal: boolean;
@@ -21,6 +34,9 @@ type GlobalContextType = {
   setMessageToast: (newState: string) => void;
   handleShowToast: (message: string) => void;
   handleCloseToast: () => void;
+  transactions: Transaction[];
+  setTransactions: Dispatch<SetStateAction<Transaction[]>>;
+  handleGetRegisters: () => void;
 };
 
 const initialGlobalValue = {
@@ -39,6 +55,9 @@ const initialGlobalValue = {
   handleShowToast: () => {},
   handleCloseToast: () => {},
   handleSubmitRegister: () => {},
+  transactions: [],
+  setTransactions: () => {},
+  handleGetRegisters: () => {},
 };
 const GlobalContext = createContext<GlobalContextType>(initialGlobalValue);
 
@@ -59,6 +78,9 @@ export const GlobalProvider = ({ children }: any) => {
   const [messageToast, setMessageToast] = useState(
     initialGlobalValue.messageToast
   );
+  const [transactions, setTransactions] = useState<Transaction[]>(
+    initialGlobalValue.transactions
+  );
 
   const handleShowToast = (message: string) => {
     setMessageToast(message);
@@ -67,6 +89,15 @@ export const GlobalProvider = ({ children }: any) => {
 
   const handleCloseToast = () => {
     setShowToast(false);
+  };
+
+  const handleGetRegisters = async () => {
+    const { data } = await api.get("/transacao/listar", {
+      headers: {
+        Authorization: `Bearer ${getItem("token")}`,
+      },
+    });
+    setTransactions(data);
   };
 
   return (
@@ -86,6 +117,9 @@ export const GlobalProvider = ({ children }: any) => {
         setMessageToast,
         handleShowToast,
         handleCloseToast,
+        transactions,
+        setTransactions,
+        handleGetRegisters,
       }}
     >
       {children}

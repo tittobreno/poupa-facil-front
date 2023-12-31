@@ -1,6 +1,8 @@
 import { useEffect, useRef, useState } from "react";
 import { useGlobal } from "../../../contexts/GlobalContext";
 import "./styles.css";
+import api from "../../../services/api";
+import { getItem } from "../../../utils/storage";
 
 type DeleteRegisterProps = {
   registerId: number;
@@ -14,12 +16,8 @@ const DeleteRegister = ({
   showPopUp,
 }: DeleteRegisterProps) => {
   const refDeleteRegister = useRef<HTMLDivElement>(null);
-  const { setIsOpenDeleteRegister, handleShowToast } = useGlobal();
+  const { handleShowToast, handleGetRegisters } = useGlobal();
   const [isPopupOpened, setIsPopupOpened] = useState(false);
-  const handleDeleteRegister = () => {
-    handleShowToast("Registro deletado com sucesso!");
-    setShowPopUp(false);
-  };
 
   const handleClickOutside = (event: MouseEvent) => {
     if (
@@ -44,13 +42,29 @@ const DeleteRegister = ({
     };
   }, [isPopupOpened]);
 
+  const handleDelete = async (id: number) => {
+    try {
+      await api.delete(`/transacao/deletar/${id}`, {
+        headers: {
+          Authorization: `Bearer ${getItem("token")}`,
+        },
+      });
+
+      handleShowToast("Registro deletado com sucesso!");
+      setShowPopUp(false);
+      handleGetRegisters();
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <div ref={refDeleteRegister} className="delete-register__container">
       <span className="delete-register__title">Apagar item?</span>
       <section className="delete-register__buttons">
         <button
           className="delete-register__buttons-btn delete-register__buttons-yes"
-          onClick={() => handleDeleteRegister()}
+          onClick={() => handleDelete(registerId)}
         >
           Sim
         </button>
