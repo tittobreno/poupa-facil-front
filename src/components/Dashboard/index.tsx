@@ -50,7 +50,9 @@ const Dashboard = () => {
       </section>
 
       <ul className="dashboard__registers">
-        <Register transactions={transactions} />
+        {transactions.map((transaction) => (
+          <Register key={transaction.id} transaction={transaction} />
+        ))}
       </ul>
     </div>
   );
