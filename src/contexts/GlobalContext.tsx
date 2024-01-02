@@ -10,13 +10,13 @@ import api from "../services/api";
 
 type Transaction = {
   description: string;
-  value: number;
+  value: number | string;
   date: string;
-  id: number;
+  id?: number;
   type: string;
-  user_id: number;
+  user_id: number | undefined;
   category_name: string;
-  category_id: number;
+  category_id: number | undefined;
 };
 
 type GlobalContextType = {
@@ -37,6 +37,8 @@ type GlobalContextType = {
   transactions: Transaction[];
   setTransactions: Dispatch<SetStateAction<Transaction[]>>;
   handleGetRegisters: () => void;
+  formRegister: Transaction;
+  setFormRegister: Dispatch<SetStateAction<Transaction>>;
 };
 
 const initialGlobalValue = {
@@ -58,6 +60,17 @@ const initialGlobalValue = {
   transactions: [],
   setTransactions: () => {},
   handleGetRegisters: () => {},
+  formRegister: {
+    description: "",
+    value: "",
+    date: "",
+    id: undefined,
+    type: "entry",
+    user_id: undefined,
+    category_name: "",
+    category_id: undefined,
+  },
+  setFormRegister: () => {},
 };
 const GlobalContext = createContext<GlobalContextType>(initialGlobalValue);
 
@@ -80,6 +93,10 @@ export const GlobalProvider = ({ children }: any) => {
   );
   const [transactions, setTransactions] = useState<Transaction[]>(
     initialGlobalValue.transactions
+  );
+
+  const [formRegister, setFormRegister] = useState<Transaction>(
+    initialGlobalValue.formRegister
   );
 
   const handleShowToast = (message: string) => {
@@ -120,6 +137,8 @@ export const GlobalProvider = ({ children }: any) => {
         transactions,
         setTransactions,
         handleGetRegisters,
+        formRegister,
+        setFormRegister,
       }}
     >
       {children}

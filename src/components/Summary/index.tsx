@@ -2,11 +2,18 @@ import { useGlobal } from "../../contexts/GlobalContext";
 import "./styles.css";
 
 const Summary = () => {
-  const { setIsOpenRegisterModal, setTypeRegisterModal } = useGlobal();
+  const {
+    setIsOpenRegisterModal,
+    setTypeRegisterModal,
+    formRegister,
+    setFormRegister,
+  } = useGlobal();
 
   const handleAddRegister = () => {
+    // setFormRegister({ ...formRegister, type: "entry" });
     setIsOpenRegisterModal(true);
     setTypeRegisterModal("Adicionar");
+    console.log(formRegister);
   };
   return (
     <aside className="summary__main">

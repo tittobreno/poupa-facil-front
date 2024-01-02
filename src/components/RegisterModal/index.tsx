@@ -3,37 +3,37 @@ import { useGlobal } from "../../contexts/GlobalContext";
 import "./styles.css";
 import api from "../../services/api";
 import { getItem } from "../../utils/storage";
-import { ChangeEvent, FormEvent, useState } from "react";
+import { ChangeEvent, FormEvent, useEffect, useState } from "react";
 import { Transaction } from "../../types";
 
 const RegisterModal = () => {
-  const [form, setForm] = useState<Transaction>({
-    description: "",
-    value: "",
-    type: "entry",
-    date: "",
-    category_id: "",
-  });
-
   const {
     setIsOpenRegisterModal,
     typeRegisterModal,
     handleShowToast,
     handleGetRegisters,
+    formRegister,
+    setFormRegister,
   } = useGlobal();
 
   const handleChangeType = (type: string): void => {
+    console.log("enter change color");
+
     const input = document.querySelector(".types__input") as HTMLButtonElement;
     const output = document.querySelector(
       ".types__output"
     ) as HTMLButtonElement;
 
     if (type === "input") {
-      setForm({ ...form, type: "entry" });
+      console.log("entrou input");
+
+      setFormRegister({ ...formRegister, type: "entry" });
       input.style.backgroundColor = "#6d28d9";
       output.style.backgroundColor = "#9ca3af";
-    } else {
-      setForm({ ...form, type: "output" });
+    } else if (type === "output") {
+      console.log("entrou output");
+
+      setFormRegister({ ...formRegister, type: "output" });
 
       input.style.backgroundColor = "#9ca3af";
       output.style.backgroundColor = "#fa8c10";
@@ -44,32 +44,53 @@ const RegisterModal = () => {
     event.preventDefault();
     setIsOpenRegisterModal(false);
 
-    if (typeRegisterModal === "Editar") {
-      handleShowToast("Registro editado com sucesso!");
-    } else {
-      handleShowToast("Registro adicionado com sucesso!");
-    }
-
     try {
-      await api.post(
-        "/transacao/cadastrar",
-        {
-          ...form,
-          value: Number(form.value) * 100,
-          category_id: Number(form.category_id),
-        },
-        {
-          headers: {
-            Authorization: `Bearer ${getItem("token")}`,
-          },
-        }
-      );
+      if (typeRegisterModal === "Editar") {
+        // await api.put(
+        //   `/transacao/editar/${id}`,
+        //   {
+        //     ...formRegister,
+        //     value: Number(formRegister.value) * 100,
+        //     category_id: Number(formRegister.category_id),
+        //   },
+        //   {
+        //     headers: {
+        //       Authorization: `Bearer ${getItem("token")}`,
+        //     },
+        //   }
+        // );
+        handleShowToast("Registro editado com sucesso!");
+        handleGetRegisters();
+        return;
+      }
 
-      handleGetRegisters();
+      if (typeRegisterModal === "Adicionar") {
+        await api.post(
+          "/transacao/cadastrar",
+          {
+            ...formRegister,
+            value: Number(formRegister.value) * 100,
+            category_id: Number(formRegister.category_id),
+          },
+          {
+            headers: {
+              Authorization: `Bearer ${getItem("token")}`,
+            },
+          }
+        );
+        handleShowToast("Registro adicionado com sucesso!");
+        handleGetRegisters();
+        return;
+      }
     } catch (error) {
-      console.log();
+      console.log(error);
     }
   };
+
+  useEffect(() => {
+    // handleChangeType(formRegister.type);
+    console.log(formRegister.type);
+  }, []);
 
   return (
     <div className="overlay">
@@ -111,9 +132,12 @@ const RegisterModal = () => {
               className="register-modal__input"
               id="value"
               type="number"
-              value={form.value}
+              value={formRegister.value}
               onChange={(event) =>
-                setForm({ ...form, value: event.target.value })
+                setFormRegister({
+                  ...formRegister,
+                  value: event.target.value,
+                })
               }
             />
           </section>
@@ -123,11 +147,11 @@ const RegisterModal = () => {
             <select
               name="category_id"
               className="register-modal__input"
-              value={form.category_id}
+              value={formRegister.category_id}
               onChange={(event) =>
-                setForm({
-                  ...form,
-                  category_id: event.target.value,
+                setFormRegister({
+                  ...formRegister,
+                  category_id: Number(event.target.value),
                 })
               }
             >
@@ -146,9 +170,9 @@ const RegisterModal = () => {
               className="register-modal__input"
               id="date"
               type="date"
-              value={form.date}
+              value={formRegister.date}
               onChange={(event) =>
-                setForm({ ...form, date: event.target.value })
+                setFormRegister({ ...formRegister, date: event.target.value })
               }
             />
           </section>
@@ -162,9 +186,12 @@ const RegisterModal = () => {
               className="register-modal__input"
               id="description"
               type="text"
-              value={form.description}
+              value={formRegister.description}
               onChange={(event) =>
-                setForm({ ...form, description: event.target.value })
+                setFormRegister({
+                  ...formRegister,
+                  description: event.target.value,
+                })
               }
             />
           </section>

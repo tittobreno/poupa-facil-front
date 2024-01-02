@@ -4,13 +4,14 @@ import { useGlobal } from "../../contexts/GlobalContext";
 import DeleteRegister from "../Popups/DeleteRegister";
 import { useEffect, useState } from "react";
 import api from "../../services/api";
+import { Transaction } from "../../types";
 
 type PropsRegister = {
   transaction: {
     description: string;
-    value: number;
+    value: number | string;
     date: string;
-    id: number;
+    id: number | undefined;
     type: string;
     user_id: number;
     category_name: string;
@@ -23,12 +24,24 @@ const Register = ({ transaction }: PropsRegister) => {
   const {
     setIsOpenRegisterModal,
     setTypeRegisterModal,
-    isOpenDeleteRegister,
-    setIsOpenDeleteRegister,
-    handleShowToast,
+    formRegister,
+    setFormRegister,
   } = useGlobal();
 
   const handleOpenEditModal = () => {
+    console.log("enteeer");
+
+    setFormRegister({
+      description: transaction.description,
+      value: transaction.value,
+      category_id: transaction.category_id,
+      category_name: transaction.category_name,
+      date: transaction.date,
+      type: transaction.type,
+      user_id: transaction.user_id,
+    });
+    console.log(formRegister, "form Register");
+
     setTypeRegisterModal("Editar");
     setIsOpenRegisterModal(true);
   };
