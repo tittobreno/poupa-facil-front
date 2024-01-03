@@ -9,8 +9,11 @@ export interface User {
 
 export interface Transaction {
   description: string;
-  value: string;
-  type: string;
+  value: number | string;
   date: string;
-  category_id: string;
+  id?: number;
+  type: string;
+  user_id: number | undefined;
+  category_name: string;
+  category_id: number | undefined;
 }

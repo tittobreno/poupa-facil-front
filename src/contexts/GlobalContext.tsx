@@ -7,17 +7,7 @@ import {
 } from "react";
 import { getItem } from "../utils/storage";
 import api from "../services/api";
-
-type Transaction = {
-  description: string;
-  value: number | string;
-  date: string;
-  id?: number;
-  type: string;
-  user_id: number | undefined;
-  category_name: string;
-  category_id: number | undefined;
-};
+import { Transaction } from "../types";
 
 type GlobalContextType = {
   isOpenRegisterModal: boolean;
@@ -39,6 +29,7 @@ type GlobalContextType = {
   handleGetRegisters: () => void;
   formRegister: Transaction;
   setFormRegister: Dispatch<SetStateAction<Transaction>>;
+  handleClear: () => void;
 };
 
 const initialGlobalValue = {
@@ -71,6 +62,7 @@ const initialGlobalValue = {
     category_id: undefined,
   },
   setFormRegister: () => {},
+  handleClear: () => {},
 };
 const GlobalContext = createContext<GlobalContextType>(initialGlobalValue);
 
@@ -116,6 +108,18 @@ export const GlobalProvider = ({ children }: any) => {
     });
     setTransactions(data);
   };
+  const handleClear = () => {
+    setFormRegister({
+      description: "",
+      value: "",
+      date: "",
+      id: undefined,
+      type: "entry",
+      user_id: undefined,
+      category_name: "",
+      category_id: undefined,
+    });
+  };
 
   return (
     <GlobalContext.Provider
@@ -139,6 +143,7 @@ export const GlobalProvider = ({ children }: any) => {
         handleGetRegisters,
         formRegister,
         setFormRegister,
+        handleClear,
       }}
     >
       {children}

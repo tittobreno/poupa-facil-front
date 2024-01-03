@@ -7,10 +7,12 @@ const Summary = () => {
     setTypeRegisterModal,
     formRegister,
     setFormRegister,
+    handleClear,
   } = useGlobal();
 
   const handleAddRegister = () => {
     // setFormRegister({ ...formRegister, type: "entry" });
+    handleClear();
     setIsOpenRegisterModal(true);
     setTypeRegisterModal("Adicionar");
     console.log(formRegister);

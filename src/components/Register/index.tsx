@@ -7,16 +7,7 @@ import api from "../../services/api";
 import { Transaction } from "../../types";
 
 type PropsRegister = {
-  transaction: {
-    description: string;
-    value: number | string;
-    date: string;
-    id: number | undefined;
-    type: string;
-    user_id: number;
-    category_name: string;
-    category_id: number;
-  };
+  transaction: Transaction;
 };
 const Register = ({ transaction }: PropsRegister) => {
   const [showPopUp, setShowPopUp] = useState(false);
@@ -26,10 +17,11 @@ const Register = ({ transaction }: PropsRegister) => {
     setTypeRegisterModal,
     formRegister,
     setFormRegister,
+    handleClear,
   } = useGlobal();
 
   const handleOpenEditModal = () => {
-    console.log("enteeer");
+    handleClear();
 
     setFormRegister({
       description: transaction.description,
@@ -41,6 +33,7 @@ const Register = ({ transaction }: PropsRegister) => {
       user_id: transaction.user_id,
     });
     console.log(formRegister, "form Register");
+    console.log(transaction, "form Register");
 
     setTypeRegisterModal("Editar");
     setIsOpenRegisterModal(true);
@@ -81,7 +74,7 @@ const Register = ({ transaction }: PropsRegister) => {
           <DeleteRegister
             showPopUp={showPopUp}
             setShowPopUp={setShowPopUp}
-            registerId={transaction.id}
+            registerId={Number(transaction.id)}
           />
         )}
       </li>
