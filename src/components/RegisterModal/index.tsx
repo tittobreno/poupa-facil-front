@@ -16,30 +16,6 @@ const RegisterModal = () => {
     setFormRegister,
   } = useGlobal();
 
-  const handleChangeType = (type: string): void => {
-    console.log("enter change color");
-
-    const input = document.querySelector(".types__input") as HTMLButtonElement;
-    const output = document.querySelector(
-      ".types__output"
-    ) as HTMLButtonElement;
-
-    if (type === "input") {
-      console.log("entrou input");
-
-      setFormRegister({ ...formRegister, type: "entry" });
-      input.style.backgroundColor = "#6d28d9";
-      output.style.backgroundColor = "#9ca3af";
-    } else if (type === "output") {
-      console.log("entrou output");
-
-      setFormRegister({ ...formRegister, type: "output" });
-
-      input.style.backgroundColor = "#9ca3af";
-      output.style.backgroundColor = "#fa8c10";
-    }
-  };
-
   const handleSubmitRegister = async (event: FormEvent) => {
     event.preventDefault();
     setIsOpenRegisterModal(false);
@@ -87,10 +63,31 @@ const RegisterModal = () => {
     }
   };
 
+  const handleChangeType = (type: string): void => {
+    setFormRegister({
+      ...formRegister,
+      type: type === "input" ? "entry" : "output",
+    });
+  };
+
+  const handleChangeColor = (): void => {
+    const input = document.querySelector(".types__input") as HTMLButtonElement;
+    const output = document.querySelector(
+      ".types__output"
+    ) as HTMLButtonElement;
+
+    if (formRegister.type === "entry") {
+      input.style.backgroundColor = "#6d28d9";
+      output.style.backgroundColor = "#9ca3af";
+    } else if (formRegister.type === "output") {
+      input.style.backgroundColor = "#9ca3af";
+      output.style.backgroundColor = "#fa8c10";
+    }
+  };
+
   useEffect(() => {
-    // handleChangeType(formRegister.type);
-    console.log(formRegister.type);
-  }, []);
+    handleChangeColor();
+  }, [formRegister.type]);
 
   return (
     <div className="overlay">
