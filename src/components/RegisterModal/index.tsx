@@ -46,19 +46,19 @@ const RegisterModal = () => {
 
     try {
       if (typeRegisterModal === "Editar") {
-        // await api.put(
-        //   `/transacao/editar/${id}`,
-        //   {
-        //     ...formRegister,
-        //     value: Number(formRegister.value) * 100,
-        //     category_id: Number(formRegister.category_id),
-        //   },
-        //   {
-        //     headers: {
-        //       Authorization: `Bearer ${getItem("token")}`,
-        //     },
-        //   }
-        // );
+        await api.put(
+          `/transacao/editar/${formRegister.id}`,
+          {
+            ...formRegister,
+            value: Number(formRegister.value) * 100,
+            category_id: Number(formRegister.category_id),
+          },
+          {
+            headers: {
+              Authorization: `Bearer ${getItem("token")}`,
+            },
+          }
+        );
         handleShowToast("Registro editado com sucesso!");
         handleGetRegisters();
         return;

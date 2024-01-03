@@ -11,11 +11,9 @@ const Summary = () => {
   } = useGlobal();
 
   const handleAddRegister = () => {
-    // setFormRegister({ ...formRegister, type: "entry" });
     handleClear();
     setIsOpenRegisterModal(true);
     setTypeRegisterModal("Adicionar");
-    console.log(formRegister);
   };
   return (
     <aside className="summary__main">

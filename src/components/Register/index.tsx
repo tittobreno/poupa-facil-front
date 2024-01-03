@@ -31,6 +31,7 @@ const Register = ({ transaction }: PropsRegister) => {
       date: transaction.date,
       type: transaction.type,
       user_id: transaction.user_id,
+      id: transaction.id,
     });
     console.log(formRegister, "form Register");
     console.log(transaction, "form Register");
