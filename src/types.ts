@@ -15,5 +15,10 @@ export interface Transaction {
   type: string;
   user_id: number | undefined;
   category_name: string;
-  category_id: number | undefined;
+  category_id: string | number | undefined;
 }
+
+export type Category = {
+  id: number;
+  title: string;
+};

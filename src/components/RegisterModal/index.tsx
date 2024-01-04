@@ -4,9 +4,10 @@ import "./styles.css";
 import api from "../../services/api";
 import { getItem } from "../../utils/storage";
 import { ChangeEvent, FormEvent, useEffect, useState } from "react";
-import { Transaction } from "../../types";
+import { Category, Transaction } from "../../types";
 
 const RegisterModal = () => {
+  const [categories, setCategories] = useState<Category[]>([]);
   const {
     setIsOpenRegisterModal,
     typeRegisterModal,
@@ -89,6 +90,21 @@ const RegisterModal = () => {
     handleChangeColor();
   }, [formRegister.type]);
 
+  useEffect(() => {
+    const getCategories = async () => {
+      const response = await api.get("/categorias", {
+        headers: {
+          Authorization: `Bearer ${getItem("token")}`,
+        },
+      });
+      console.log(typeof response.data[0].id);
+
+      setCategories(response.data);
+    };
+    getCategories();
+    setFormRegister({ ...formRegister, category_id: "" });
+  }, []);
+
   return (
     <div className="overlay">
       <div className="register__container">
@@ -152,8 +168,14 @@ const RegisterModal = () => {
                 })
               }
             >
-              <option>Selecione uma categoria</option>
-              <option>1</option>
+              <option value="" disabled>
+                Selecione uma categoria
+              </option>
+              {categories.map((category) => (
+                <option key={category.id} value={category.id}>
+                  {category.title}
+                </option>
+              ))}
               <option>2</option>
             </select>
           </section>
