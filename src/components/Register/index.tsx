@@ -12,6 +12,15 @@ type PropsRegister = {
 };
 const Register = ({ transaction }: PropsRegister) => {
   const [showPopUp, setShowPopUp] = useState(false);
+  const weekDays = [
+    "Domingo",
+    "Segunda-Feira",
+    "Terça-Feira",
+    "Quarta-Feira",
+    "Quinta-Feira",
+    "Sexta-Feira",
+    "Sábado",
+  ];
 
   const {
     setIsOpenRegisterModal,
@@ -51,10 +60,10 @@ const Register = ({ transaction }: PropsRegister) => {
     <>
       <li className="register-component__container">
         <span className="register-component__item register-component__item--date">
-          {transaction.date}
+          {new Date(transaction.date).toLocaleDateString()}
         </span>
         <span className="register-component__item register-component__item--day">
-          {transaction.date}
+          {weekDays[new Date(transaction.date).getDay()]}
         </span>
         <span className="register-component__item register-component__item--description">
           {transaction.description}
