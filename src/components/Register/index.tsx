@@ -33,13 +33,17 @@ const Register = ({ transaction }: PropsRegister) => {
       user_id: transaction.user_id,
       id: transaction.id,
     });
-    console.log(formRegister, "form Register");
-    console.log(transaction, "form Register");
 
     setTypeRegisterModal("Editar");
     setIsOpenRegisterModal(true);
   };
-
+  const convertToCurrency = (cents: number) => {
+    const value = cents / 100;
+    return value.toLocaleString("pt-BR", {
+      style: "currency",
+      currency: "BRL",
+    });
+  };
   return (
     <>
       <li className="register-component__container">
@@ -56,7 +60,7 @@ const Register = ({ transaction }: PropsRegister) => {
           {transaction.category_name}
         </span>
         <span className="register-component__item register-component__item--cash">
-          {transaction.value}
+          {convertToCurrency(Number(transaction.value))}
         </span>
         <div className="register-component__item register-component__icons-container">
           <HiOutlinePencilSquare
