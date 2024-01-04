@@ -5,6 +5,7 @@ import DeleteRegister from "../Popups/DeleteRegister";
 import { useEffect, useState } from "react";
 import api from "../../services/api";
 import { Transaction } from "../../types";
+import { convertToCurrency } from "../../utils/utilities";
 
 type PropsRegister = {
   transaction: Transaction;
@@ -37,13 +38,15 @@ const Register = ({ transaction }: PropsRegister) => {
     setTypeRegisterModal("Editar");
     setIsOpenRegisterModal(true);
   };
-  const convertToCurrency = (cents: number) => {
-    const value = cents / 100;
-    return value.toLocaleString("pt-BR", {
-      style: "currency",
-      currency: "BRL",
-    });
+
+  const setClass = (type: string) => {
+    return type === "entry"
+      ? "input-class"
+      : type === "output"
+      ? "output-class"
+      : "";
   };
+
   return (
     <>
       <li className="register-component__container">
@@ -59,7 +62,11 @@ const Register = ({ transaction }: PropsRegister) => {
         <span className="register-component__item register-component__item--category">
           {transaction.category_name}
         </span>
-        <span className="register-component__item register-component__item--cash">
+        <span
+          className={`register-component__item register-component__item--cash ${setClass(
+            transaction.type
+          )}`}
+        >
           {convertToCurrency(Number(transaction.value))}
         </span>
         <div className="register-component__item register-component__icons-container">

@@ -55,6 +55,14 @@
   color: #fa8c10;
 }
 
+.input-class {
+  color: var(--violet-500)
+}
+
+.output-class {
+  color: #fa8c10;
+}
+
 .popup-arrow {
   position: absolute;
   width: 0;
