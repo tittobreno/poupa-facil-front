@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import api from "../../services/api";
 import { Transaction } from "../../types";
 import { convertToCurrency } from "../../utils/utilities";
+import { getItem } from "../../utils/storage";
 
 type PropsRegister = {
   transaction: Transaction;
@@ -30,22 +31,32 @@ const Register = ({ transaction }: PropsRegister) => {
     handleClear,
   } = useGlobal();
 
-  const handleOpenEditModal = () => {
+  const handleOpenEditModal = async () => {
     handleClear();
-
-    setFormRegister({
-      description: transaction.description,
-      value: convertToCurrency(transaction.value),
-      category_id: transaction.category_id,
-      category_name: transaction.category_name,
-      date: transaction.date,
-      type: transaction.type,
-      user_id: transaction.user_id,
-      id: transaction.id,
-    });
-
     setTypeRegisterModal("Editar");
     setIsOpenRegisterModal(true);
+
+    try {
+      const { data: register } = await api.get(
+        `transacao/detalhar/${transaction.id}`,
+        {
+          headers: { Authorization: `Bearer ${getItem("token")}` },
+        }
+      );
+
+      setFormRegister({
+        description: register.description,
+        value: register.value,
+        category_id: register.category_id,
+        category_name: register.category_name,
+        date: register.date,
+        type: register.type,
+        user_id: register.user_id,
+        id: register.id,
+      });
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const setClass = (type: string) => {

@@ -97,7 +97,6 @@ const RegisterModal = () => {
           Authorization: `Bearer ${getItem("token")}`,
         },
       });
-      console.log(typeof response.data[0].id);
 
       setCategories(response.data);
     };
