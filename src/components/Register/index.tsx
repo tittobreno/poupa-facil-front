@@ -4,7 +4,7 @@ import { useGlobal } from "../../contexts/GlobalContext";
 import DeleteRegister from "../Popups/DeleteRegister";
 import { useEffect, useState } from "react";
 import api from "../../services/api";
-import { Transaction } from "../../types";
+import { Category, Transaction } from "../../types";
 import { convertToCurrency } from "../../utils/utilities";
 import { getItem } from "../../utils/storage";
 
@@ -44,11 +44,24 @@ const Register = ({ transaction }: PropsRegister) => {
         }
       );
 
+      if (register.category_id) {
+        const { data } = await api.get(`categorias`, {
+          headers: { Authorization: `Bearer ${getItem("token")}` },
+        });
+
+        const category = data.find(
+          (item: Category) => item.id === register.category_id
+        );
+        console.log(category);
+
+        setFormRegister({ ...formRegister, category_name: category.title });
+      }
+
       setFormRegister({
+        ...formRegister,
         description: register.description,
         value: register.value,
         category_id: register.category_id,
-        category_name: register.category_name,
         date: register.date,
         type: register.type,
         user_id: register.user_id,
