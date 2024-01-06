@@ -35,7 +35,7 @@ const Register = ({ transaction }: PropsRegister) => {
 
     setFormRegister({
       description: transaction.description,
-      value: transaction.value,
+      value: convertToCurrency(transaction.value),
       category_id: transaction.category_id,
       category_name: transaction.category_name,
       date: transaction.date,
