@@ -34,7 +34,6 @@ const Summary = () => {
       });
 
       setSummary(response.data);
-      console.log(summary, "summary");
     } catch (error) {
       console.log(error);
     }
