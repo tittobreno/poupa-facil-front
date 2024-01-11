@@ -22,3 +22,9 @@ export type Category = {
   id: number;
   title: string;
 };
+
+export type SummaryValues = {
+  earnings: number;
+  expenses: number;
+  balance: number;
+};
