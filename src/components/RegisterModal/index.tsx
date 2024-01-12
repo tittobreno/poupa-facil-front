@@ -7,7 +7,6 @@ import { ChangeEvent, FormEvent, useEffect, useState } from "react";
 import { Category, Transaction } from "../../types";
 
 const RegisterModal = () => {
-  const [categories, setCategories] = useState<Category[]>([]);
   const {
     setIsOpenRegisterModal,
     typeRegisterModal,
@@ -15,6 +14,8 @@ const RegisterModal = () => {
     handleGetRegisters,
     formRegister,
     setFormRegister,
+    getCategories,
+    categories,
   } = useGlobal();
 
   const handleSubmitRegister = async (event: FormEvent) => {
@@ -91,15 +92,6 @@ const RegisterModal = () => {
   }, [formRegister.type]);
 
   useEffect(() => {
-    const getCategories = async () => {
-      const response = await api.get("/categorias", {
-        headers: {
-          Authorization: `Bearer ${getItem("token")}`,
-        },
-      });
-
-      setCategories(response.data);
-    };
     getCategories();
     setFormRegister({ ...formRegister, category_id: "" });
   }, []);

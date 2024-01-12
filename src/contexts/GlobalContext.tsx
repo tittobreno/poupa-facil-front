@@ -7,7 +7,7 @@ import {
 } from "react";
 import { getItem } from "../utils/storage";
 import api from "../services/api";
-import { Transaction } from "../types";
+import { Category, Transaction } from "../types";
 
 type GlobalContextType = {
   isOpenRegisterModal: boolean;
@@ -30,6 +30,9 @@ type GlobalContextType = {
   formRegister: Transaction;
   setFormRegister: Dispatch<SetStateAction<Transaction>>;
   handleClear: () => void;
+  getCategories: () => void;
+  categories: Category[];
+  setCategories: Dispatch<SetStateAction<Category[]>>;
 };
 
 const initialGlobalValue = {
@@ -63,6 +66,9 @@ const initialGlobalValue = {
   },
   setFormRegister: () => {},
   handleClear: () => {},
+  getCategories: () => {},
+  categories: [],
+  setCategories: () => {},
 };
 const GlobalContext = createContext<GlobalContextType>(initialGlobalValue);
 
@@ -90,6 +96,8 @@ export const GlobalProvider = ({ children }: any) => {
   const [formRegister, setFormRegister] = useState<Transaction>(
     initialGlobalValue.formRegister
   );
+
+  const [categories, setCategories] = useState<Category[]>([]);
 
   const handleShowToast = (message: string) => {
     setMessageToast(message);
@@ -121,6 +129,16 @@ export const GlobalProvider = ({ children }: any) => {
     });
   };
 
+  const getCategories = async () => {
+    const response = await api.get("/categorias", {
+      headers: {
+        Authorization: `Bearer ${getItem("token")}`,
+      },
+    });
+
+    setCategories(response.data);
+  };
+
   return (
     <GlobalContext.Provider
       value={{
@@ -144,6 +162,9 @@ export const GlobalProvider = ({ children }: any) => {
         formRegister,
         setFormRegister,
         handleClear,
+        getCategories,
+        categories,
+        setCategories,
       }}
     >
       {children}
