@@ -36,6 +36,13 @@ const Dashboard = () => {
         {transactions.map((transaction) => (
           <Register key={transaction.id} transaction={transaction} />
         ))}
+        {transactions.length === 0 ? (
+          <div className="register__not-found">
+            <strong>Ops! Parece que ainda não há registros aqui.</strong>
+          </div>
+        ) : (
+          ""
+        )}
       </ul>
     </div>
   );

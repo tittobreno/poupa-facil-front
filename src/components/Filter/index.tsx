@@ -1,28 +1,18 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { HiFilter, HiPlusSm } from "react-icons/hi";
 import "./styles.css";
+import { useGlobal } from "../../contexts/GlobalContext";
+import { Category } from "../../types";
 const Filter = () => {
   const [openFilter, setOpenFilter] = useState(false);
-  const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
-  const categories = [
-    { id: 1, description: "Category1" },
-    { id: 2, description: "Category2" },
-    { id: 3, description: "Category3" },
-    { id: 4, description: "Category4" },
-    { id: 6, description: "Category5" },
-    { id: 7, description: "Category6" },
-    { id: 8, description: "Category7" },
-    { id: 9, description: "Category8" },
-    { id: 10, description: "Category9" },
-    { id: 11, description: "Category10" },
-    { id: 12, description: "Category11" },
-    { id: 13, description: "Category12" },
-    { id: 14, description: "Category13" },
-    { id: 15, description: "Category14" },
-    { id: 16, description: "Category15" },
-    { id: 17, description: "Category16" },
-    { id: 17, description: "Category17" },
-  ];
+  const [selectedCategories, setSelectedCategories] = useState<Category[]>([]);
+  const {
+    handleGetRegisters,
+    transactions,
+    setTransactions,
+    categories,
+    getCategories,
+  } = useGlobal();
 
   const handleOpenFilter = (status: boolean) => {
     if (!status) {
@@ -34,7 +24,7 @@ const Filter = () => {
     }
   };
 
-  const handleCategoryClick = (category: string) => {
+  const handleCategoryClick = (category: Category) => {
     if (selectedCategories.includes(category)) {
       setSelectedCategories(selectedCategories.filter((c) => c !== category));
     } else {
@@ -44,7 +34,24 @@ const Filter = () => {
 
   const handleCleanFilter = () => {
     setSelectedCategories([]);
+    handleGetRegisters();
   };
+
+  const handleApplyFilter = () => {
+    const listFilteredTransactions = transactions.filter((transaction) =>
+      selectedCategories.some(
+        (selected) => selected.id === transaction.category_id
+      )
+    );
+
+    listFilteredTransactions.length
+      ? setTransactions(listFilteredTransactions)
+      : handleGetRegisters();
+  };
+
+  useEffect(() => {
+    getCategories();
+  }, []);
   return (
     <div className="filter__container">
       <button
@@ -64,15 +71,15 @@ const Filter = () => {
           <section className="filter__main-list-categories">
             {categories.map((category) => (
               <button
-                onClick={() => handleCategoryClick(category.description)}
+                onClick={() => handleCategoryClick(category)}
                 key={category.id}
                 className={
-                  selectedCategories.includes(category.description)
+                  selectedCategories.includes(category)
                     ? "category__item--selected"
                     : "filter__main-category-item"
                 }
               >
-                {category.description}
+                {category.title}
                 <HiPlusSm />
               </button>
             ))}
@@ -85,7 +92,10 @@ const Filter = () => {
             >
               Limpar Filtros
             </button>
-            <button className="filter__control control__apply">
+            <button
+              onClick={() => handleApplyFilter()}
+              className="filter__control control__apply"
+            >
               Aplicar Filtros
             </button>
           </section>

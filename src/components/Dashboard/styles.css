@@ -52,3 +52,12 @@
 .dashboard__registers {
   width: 100%;
 }
+
+.register__not-found {
+text-align: center;
+padding: 2rem;
+margin-top: 1rem;
+color: var(--violet-700);
+background-color: var(--violet-100);
+border-radius: 1rem;
+}
