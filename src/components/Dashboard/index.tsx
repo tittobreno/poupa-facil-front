@@ -38,7 +38,7 @@ const Dashboard = () => {
         ))}
         {transactions.length === 0 ? (
           <div className="register__not-found">
-            <strong>Ops! Parece que ainda não há registros aqui.</strong>
+            <strong>Ops! Ainda não há registros aqui.</strong>
           </div>
         ) : (
           ""

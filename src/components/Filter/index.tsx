@@ -36,7 +36,6 @@ const Filter = () => {
     setSelectedCategories([]);
     handleGetRegisters();
   };
-
   const handleApplyFilter = () => {
     const listFilteredTransactions = transactions.filter((transaction) =>
       selectedCategories.some(
@@ -44,14 +43,18 @@ const Filter = () => {
       )
     );
 
-    listFilteredTransactions.length
-      ? setTransactions(listFilteredTransactions)
-      : handleGetRegisters();
+    if (listFilteredTransactions.length) {
+      setTransactions(listFilteredTransactions);
+    } else {
+      handleGetRegisters();
+    }
+    setSelectedCategories([]);
   };
 
   useEffect(() => {
     getCategories();
   }, []);
+
   return (
     <div className="filter__container">
       <button
