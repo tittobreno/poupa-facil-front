@@ -22,13 +22,21 @@ const RegisterModal = () => {
     event.preventDefault();
     setIsOpenRegisterModal(false);
 
+    // Remove os caracteres de moeda e formatação
+    const numericValue = String(formRegister.value);
+    const newValue = numericValue.replace(/[R$\.,]/g, "").replace(",", ".");
+
+    // Converte para número e multiplica por 100 para converter em centavos
+    const valueInCents = parseFloat(newValue) * 100;
+    console.log(valueInCents);
+
     try {
       if (typeRegisterModal === "Editar") {
         await api.put(
           `/transacao/editar/${formRegister.id}`,
           {
             ...formRegister,
-            value: Number(formRegister.value) * 100,
+            value: valueInCents,
             category_id: Number(formRegister.category_id),
           },
           {
@@ -43,11 +51,13 @@ const RegisterModal = () => {
       }
 
       if (typeRegisterModal === "Adicionar") {
+        console.log();
+
         await api.post(
           "/transacao/cadastrar",
           {
             ...formRegister,
-            value: Number(formRegister.value) * 100,
+            value: valueInCents,
             category_id: Number(formRegister.category_id),
           },
           {
@@ -85,6 +95,23 @@ const RegisterModal = () => {
       input.style.backgroundColor = "#9ca3af";
       output.style.backgroundColor = "#fa8c10";
     }
+  };
+
+  const handleChangeMask = (event: ChangeEvent<HTMLInputElement>) => {
+    let inputValue = event.target.value;
+
+    // Remove tudo que não é dígito
+    inputValue = inputValue.replace(/\D/g, "");
+
+    // Adiciona a máscara
+    const numericValue = parseInt(inputValue) / 100; // Converte para número e divide por 100
+    const formattedValue = new Intl.NumberFormat("pt-BR", {
+      style: "currency",
+      currency: "BRL",
+    }).format(numericValue);
+    console.log(formRegister.value);
+
+    setFormRegister({ ...formRegister, value: formattedValue });
   };
 
   useEffect(() => {
@@ -135,14 +162,10 @@ const RegisterModal = () => {
               name="value"
               className="register-modal__input"
               id="value"
-              type="number"
+              type="text"
               value={formRegister.value}
-              onChange={(event) =>
-                setFormRegister({
-                  ...formRegister,
-                  value: event.target.value,
-                })
-              }
+              placeholder="R$ 0,00"
+              onChange={(event) => handleChangeMask(event)}
             />
           </section>
 
