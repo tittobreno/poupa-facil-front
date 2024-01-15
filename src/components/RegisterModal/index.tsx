@@ -22,13 +22,13 @@ const RegisterModal = () => {
     event.preventDefault();
     setIsOpenRegisterModal(false);
 
-    // Remove os caracteres de moeda e formatação
     const numericValue = String(formRegister.value);
-    const newValue = numericValue.replace(/[R$\.,]/g, "").replace(",", ".");
 
-    // Converte para número e multiplica por 100 para converter em centavos
-    const valueInCents = parseFloat(newValue) * 100;
-    console.log(valueInCents);
+    const newValue = numericValue
+      .replace(/[R$\.,]/g, "")
+      .replace(/(\d+)\.(\d{2})/, "$1.$2");
+
+    const valueInCents = parseInt(newValue, 10);
 
     try {
       if (typeRegisterModal === "Editar") {
