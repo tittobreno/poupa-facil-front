@@ -77,16 +77,13 @@ const RegisterModal = () => {
   const handleChangeMask = (event: ChangeEvent<HTMLInputElement>) => {
     let inputValue = event.target.value;
 
-    // Remove tudo que não é dígito
     inputValue = inputValue.replace(/\D/g, "");
 
-    // Adiciona a máscara
-    const numericValue = parseInt(inputValue) / 100; // Converte para número e divide por 100
+    const numericValue = parseInt(inputValue) / 100;
     const formattedValue = new Intl.NumberFormat("pt-BR", {
       style: "currency",
       currency: "BRL",
     }).format(numericValue);
-    console.log(formRegister.value);
 
     setFormRegister({ ...formRegister, value: formattedValue });
   };
