@@ -10,23 +10,29 @@ const Toast = () => {
     const progress = document.querySelector(
       ".toast__progress-bar"
     ) as HTMLElement;
+    if (!progress) return;
 
-    let width = 100;
-    const intervalId = setInterval(() => {
-      width--;
+    let start: number | null = null;
+    const duration = 3000;
+
+    const step = (timestamp: number) => {
+      if (!start) start = timestamp;
+
+      const elapsed = timestamp - start;
+      const width = Math.max(0, 100 - (elapsed / duration) * 100);
       progress.style.width = `${width}%`;
-      if (width === 0) {
-        clearInterval(intervalId);
-      }
-    }, 28);
 
-    const timeoutId = setTimeout(() => {
-      handleCloseToast();
-    }, 3000);
+      if (elapsed < duration) {
+        requestAnimationFrame(step);
+      } else {
+        handleCloseToast();
+      }
+    };
+
+    requestAnimationFrame(step);
 
     return () => {
-      clearInterval(intervalId);
-      clearTimeout(timeoutId);
+      progress.style.width = "100%";
     };
   }, []);
 
