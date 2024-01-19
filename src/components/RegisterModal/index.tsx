@@ -4,8 +4,7 @@ import "./styles.css";
 import api from "../../services/api";
 import { getItem } from "../../utils/storage";
 import { ChangeEvent, FormEvent, useEffect, useState } from "react";
-import { Category, Transaction } from "../../types";
-
+import { convertToCents } from "../../utils/utilities";
 const RegisterModal = () => {
   const {
     setIsOpenRegisterModal,
@@ -22,56 +21,34 @@ const RegisterModal = () => {
     event.preventDefault();
     setIsOpenRegisterModal(false);
 
-    const numericValue = String(formRegister.value);
-
-    const newValue = numericValue
-      .replace(/[R$\.,]/g, "")
-      .replace(/(\d+)\.(\d{2})/, "$1.$2");
-
-    const valueInCents = parseInt(newValue, 10);
+    const valueInCents = convertToCents(String(formRegister.value));
 
     try {
+      const commonData = {
+        ...formRegister,
+        value: valueInCents,
+        category_id: Number(formRegister.category_id),
+      };
+
+      const config = {
+        headers: { Authorization: `Bearer ${getItem("token")}` },
+      };
+
       if (typeRegisterModal === "Editar") {
         await api.put(
           `/transacao/editar/${formRegister.id}`,
-          {
-            ...formRegister,
-            value: valueInCents,
-            category_id: Number(formRegister.category_id),
-          },
-          {
-            headers: {
-              Authorization: `Bearer ${getItem("token")}`,
-            },
-          }
+          commonData,
+          config
         );
         handleShowToast("Registro editado com sucesso!");
-        handleGetRegisters();
-        return;
-      }
-
-      if (typeRegisterModal === "Adicionar") {
-        console.log();
-
-        await api.post(
-          "/transacao/cadastrar",
-          {
-            ...formRegister,
-            value: valueInCents,
-            category_id: Number(formRegister.category_id),
-          },
-          {
-            headers: {
-              Authorization: `Bearer ${getItem("token")}`,
-            },
-          }
-        );
+      } else if (typeRegisterModal === "Adicionar") {
+        await api.post("/transacao/cadastrar", commonData, config);
         handleShowToast("Registro adicionado com sucesso!");
-        handleGetRegisters();
-        return;
       }
+
+      handleGetRegisters();
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
   };
 
