@@ -32,33 +32,31 @@ const Register = ({ transaction }: PropsRegister) => {
   } = useGlobal();
 
   const handleOpenEditModal = async () => {
-    handleClear();
-    setTypeRegisterModal("Editar");
-    setIsOpenRegisterModal(true);
-
     try {
+      handleClear();
+      setTypeRegisterModal("Editar");
+      setIsOpenRegisterModal(true);
+
+      const token = getItem("token");
+      const headers = { Authorization: `Bearer ${token}` };
+
       const { data: register } = await api.get(
         `transacao/detalhar/${transaction.id}`,
-        {
-          headers: { Authorization: `Bearer ${getItem("token")}` },
-        }
+        { headers }
       );
 
       if (register.category_id) {
-        const { data } = await api.get(`categorias`, {
-          headers: { Authorization: `Bearer ${getItem("token")}` },
-        });
-
-        const category = data.find(
+        const { data: categories } = await api.get(`categorias`, { headers });
+        const category = categories.find(
           (item: Category) => item.id === register.category_id
         );
-        console.log(category);
-
-        setFormRegister({ ...formRegister, category_name: category.title });
+        setFormRegister((prevForm) => ({
+          ...prevForm,
+          category_name: category.title,
+        }));
       }
 
-      setFormRegister({
-        ...formRegister,
+      const updatedForm = {
         description: register.description,
         value: register.value,
         category_id: register.category_id,
@@ -66,9 +64,11 @@ const Register = ({ transaction }: PropsRegister) => {
         type: register.type,
         user_id: register.user_id,
         id: register.id,
-      });
+      };
+
+      setFormRegister((prevForm) => ({ ...prevForm, ...updatedForm }));
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
   };
 
