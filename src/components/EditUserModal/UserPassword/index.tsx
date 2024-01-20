@@ -2,7 +2,7 @@ import { HiOutlinePencilSquare } from "react-icons/hi2";
 import { useUser } from "../../../contexts/UserContext";
 import { HiOutlineArrowSmLeft } from "react-icons/hi";
 import { User } from "../../../types";
-
+import "./styles.css";
 interface UserPasswordProps {
   setEditPassword: (newState: boolean) => void;
   handleEditUser: (user: User) => void;
@@ -14,7 +14,7 @@ const UserPassword = ({
 }: UserPasswordProps) => {
   const { form, setForm } = useUser();
   return (
-    <>
+    <main className="edit-password__container">
       <button
         onClick={(event) => {
           setEditPassword(false);
@@ -46,38 +46,41 @@ const UserPassword = ({
         />
       </section>
 
-      <section className="edit-user-modal__form-section">
-        <label htmlFor="password" className="edit-user-modal__label">
-          Nova senha
-        </label>
-        <input
-          type="text"
-          id="password"
-          className="edit-user-modal__input"
-          value={form.newPassword}
-          onChange={(event) =>
-            setForm({ ...form, newPassword: event.target.value })
-          }
-        />
+      <section className="edit-user-modal__form-compare-password">
+        <section>
+          <label htmlFor="password" className="edit-user-modal__label">
+            Nova senha
+          </label>
+          <input
+            type="text"
+            id="password"
+            className="edit-user-modal__input"
+            value={form.newPassword}
+            onChange={(event) =>
+              setForm({ ...form, newPassword: event.target.value })
+            }
+          />
+        </section>
+
+        <section>
+          <label
+            htmlFor="password-confirmation"
+            className="edit-user-modal__label"
+          >
+            Confirmar senha
+          </label>
+          <input
+            type="text"
+            id="password-confirmation"
+            className="edit-user-modal__input"
+            value={form.passwordConfirmation}
+            onChange={(event) =>
+              setForm({ ...form, passwordConfirmation: event.target.value })
+            }
+          />
+        </section>
       </section>
 
-      <section className="edit-user-modal__form-section">
-        <label
-          htmlFor="password-confirmation"
-          className="edit-user-modal__label"
-        >
-          Confirme sua senha
-        </label>
-        <input
-          type="text"
-          id="password-confirmation"
-          className="edit-user-modal__input"
-          value={form.passwordConfirmation}
-          onChange={(event) =>
-            setForm({ ...form, passwordConfirmation: event.target.value })
-          }
-        />
-      </section>
       <button
         onClick={() => handleEditUser(form)}
         type="button"
@@ -85,7 +88,7 @@ const UserPassword = ({
       >
         Confirmar
       </button>
-    </>
+    </main>
   );
 };
 

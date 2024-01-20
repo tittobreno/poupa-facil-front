@@ -6,7 +6,9 @@
   justify-content: center;
   width: 100vw;
   height: 100vh;
-  background: rgba(61, 61, 61, 0.48);
+  background: rgba(219, 222, 255, 0.48);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
 
   position: fixed;
   top: 0;
@@ -27,11 +29,12 @@
   background-color: #ffffff;
 
   font-family: "Rubik", sans-serif;
+  z-index: 999;
 }
 
 .register-modal__title {
-  font-weight: 700;
-  font-size: 3rem;
+  font-weight: 500;
+  font-size: 2rem;
   color: #000000;
   margin-bottom: 3rem;
 }
@@ -102,8 +105,8 @@
 }
 
 .register__form-label {
-  font-weight: 500;
-  font-size: 2rem;
+  font-weight: 400;
+  font-size: 1.5rem;
   color: #484848;
 }
 
@@ -113,12 +116,12 @@
   width: 100%;
   padding: 1rem 1.4rem;
   border: 1px solid var(--violet-500);
-  border-radius: 1rem;
+  border-radius: 0.6rem;
 }
 
 .register-modal__input:focus {
   outline: none;
-  box-shadow: 0 0 0 0.2rem var(--violet-500);
+  box-shadow: 0 0 0 0.1rem var(--violet-500);
 }
 
 .form__btn {
