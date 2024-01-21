@@ -23,7 +23,6 @@
   flex-direction: column;
 
   width: 48rem;
-  height: 60rem;
   padding: 3.5rem 5.6rem;
   border-radius: 1rem;
   background-color: #ffffff;
@@ -51,11 +50,7 @@
 }
 
 .register__close:hover {
-  transform: scale(1.1);
-}
-
-.register__close:active {
-  transform: scale(0.9);
+color: rgb(197, 27, 18);
 }
 
 .register__types {
@@ -117,6 +112,13 @@
   padding: 1rem 1.4rem;
   border: 1px solid var(--violet-500);
   border-radius: 0.6rem;
+
+  font-size: 1.4rem;
+
+
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .register-modal__input:focus {
@@ -129,3 +131,12 @@
   background-color: var(--violet-500);
   border-radius: 1rem;
 }
+
+.form__section-content-wrapper {
+  width: 100%;
+  display:flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+

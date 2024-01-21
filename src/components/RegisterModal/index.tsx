@@ -143,45 +143,47 @@ const RegisterModal = () => {
             />
           </section>
 
-          <section className="form__section">
-            <label className="register__form-label">Categoria</label>
-            <select
-              name="category_id"
-              className="register-modal__input"
-              value={formRegister.category_id}
-              onChange={(event) =>
-                setFormRegister({
-                  ...formRegister,
-                  category_id: Number(event.target.value),
-                })
-              }
-            >
-              <option value="" disabled>
-                Selecione uma categoria
-              </option>
-              {categories.map((category) => (
-                <option key={category.id} value={category.id}>
-                  {category.title}
+          <section className="form__section-content-wrapper">
+            <section className="form__section">
+              <label className="register__form-label">Categoria</label>
+              <select
+                name="category_id"
+                className="register-modal__input"
+                value={formRegister.category_id}
+                placeholder="asdasdas"
+                onChange={(event) =>
+                  setFormRegister({
+                    ...formRegister,
+                    category_id: Number(event.target.value),
+                  })
+                }
+              >
+                <option value="" disabled hidden>
+                  Selecionar categoria
                 </option>
-              ))}
-              <option>2</option>
-            </select>
-          </section>
+                {categories.map((category) => (
+                  <option key={category.id} value={category.id}>
+                    {category.title}
+                  </option>
+                ))}
+              </select>
+            </section>
 
-          <section className="form__section">
-            <label className="register__form-label" htmlFor="date">
-              Data
-            </label>
-            <input
-              name="data"
-              className="register-modal__input"
-              id="date"
-              type="date"
-              value={formRegister.date}
-              onChange={(event) =>
-                setFormRegister({ ...formRegister, date: event.target.value })
-              }
-            />
+            <section className="form__section">
+              <label className="register__form-label" htmlFor="date">
+                Data
+              </label>
+              <input
+                name="data"
+                className="register-modal__input"
+                id="date"
+                type="date"
+                value={formRegister.date}
+                onChange={(event) =>
+                  setFormRegister({ ...formRegister, date: event.target.value })
+                }
+              />
+            </section>
           </section>
 
           <section className="form__section">
