@@ -35,24 +35,26 @@ const Main = () => {
       <main className="main">
         <section className="main__filter">
           <div className="wrapper-summary">
-            <Filter />
+            {/* <Filter /> */}
 
             <div className="financial__summary">
               <section className="financial__summary-card">
-                <h3>Receitas</h3>
-                <p>R$ 1,000,00</p>
+                <h3 className="financial__summary-title">Receitas</h3>
+                <p className="revenue-value">R$ 1,000,00</p>
               </section>
 
-              <section className="financial__summary-card">
-                <h3>Despesas</h3>
-                <p>R$ 500,00</p>
+              <section className="financial__summary-card ">
+                <h3 className="financial__summary-title">Despesas</h3>
+                <p className="expense-value">R$ 500,00</p>
               </section>
 
-              <section className="financial__summary-card">
-                <h3>Saldo</h3>
-                <p>R$ 500,00</p>
+              <section className="financial__summary-card ">
+                <h3 className="financial__summary-title">Saldo</h3>
+                <p className="balance-value">R$ 500,00</p>
               </section>
             </div>
+
+            {/* <button>BOTÃO ADICIONAR REGISTRO</button> */}
           </div>
           <Summary />
         </section>
