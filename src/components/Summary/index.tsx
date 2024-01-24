@@ -18,10 +18,13 @@ const Summary = () => {
     setTypeRegisterModal,
     handleClear,
     transactions,
+    setFormRegister,
+    formRegister,
   } = useGlobal();
 
-  const handleAddRegister = () => {
-    handleClear();
+  const handleAddRegister = (type: string) => {
+    setFormRegister((prevState) => ({ ...prevState, type: type }));
+
     setIsOpenRegisterModal(true);
     setTypeRegisterModal("Adicionar");
   };
@@ -59,13 +62,13 @@ const Summary = () => {
         <p className="balance-value">{convertToCurrency(summary.balance)}</p>
       </section>
       <button
-        onClick={() => handleAddRegister()}
+        onClick={() => handleAddRegister("entry")}
         className="financial__summary-btn-revenue"
       >
         <HiOutlinePlus size={30} />
       </button>
       <button
-        onClick={() => handleAddRegister()}
+        onClick={() => handleAddRegister("output")}
         className="financial__summary-btn-expense"
       >
         <HiMinus size={30} />

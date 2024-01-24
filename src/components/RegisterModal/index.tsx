@@ -15,6 +15,7 @@ const RegisterModal = () => {
     setFormRegister,
     getCategories,
     categories,
+    handleClear,
   } = useGlobal();
 
   const handleSubmitRegister = async (event: FormEvent) => {
@@ -46,31 +47,10 @@ const RegisterModal = () => {
         handleShowToast("Registro adicionado com sucesso!");
       }
 
+      handleClear();
       handleGetRegisters();
     } catch (error) {
       console.error(error);
-    }
-  };
-
-  const handleChangeType = (type: string): void => {
-    setFormRegister({
-      ...formRegister,
-      type: type === "input" ? "entry" : "output",
-    });
-  };
-
-  const handleChangeColor = (): void => {
-    const input = document.querySelector(".types__input") as HTMLButtonElement;
-    const output = document.querySelector(
-      ".types__output"
-    ) as HTMLButtonElement;
-
-    if (formRegister.type === "entry") {
-      input.style.backgroundColor = "#6d28d9";
-      output.style.backgroundColor = "#9ca3af";
-    } else if (formRegister.type === "output") {
-      input.style.backgroundColor = "#9ca3af";
-      output.style.backgroundColor = "#fa8c10";
     }
   };
 
@@ -89,10 +69,6 @@ const RegisterModal = () => {
   };
 
   useEffect(() => {
-    handleChangeColor();
-  }, [formRegister.type]);
-
-  useEffect(() => {
     getCategories();
     setFormRegister({ ...formRegister, category_id: "" });
   }, []);
@@ -102,7 +78,10 @@ const RegisterModal = () => {
       <div className="register__container">
         <button
           className="register__close"
-          onClick={() => setIsOpenRegisterModal(false)}
+          onClick={() => {
+            setIsOpenRegisterModal(false);
+            handleClear();
+          }}
         >
           <HiOutlineX size={30} />
         </button>
@@ -110,22 +89,6 @@ const RegisterModal = () => {
         <h1 className="register-modal__title">
           {typeRegisterModal + " " + "Registro"}
         </h1>
-
-        <section className="register__types">
-          <button
-            className="types__input"
-            onClick={() => handleChangeType("input")}
-          >
-            Entrada
-          </button>
-
-          <button
-            className="types__output"
-            onClick={() => handleChangeType("output")}
-          >
-            Saída
-          </button>
-        </section>
 
         <form onSubmit={handleSubmitRegister} className="register__form">
           <section className="form__section">

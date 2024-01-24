@@ -26,72 +26,72 @@
   justify-content: space-between;
 }
 
-.summary__deposit {
-  margin-top: 2.2rem;
-  margin-bottom: 1.4rem;
-  font-weight: 500;
-  font-size: 1.5rem;
+.financial__summary {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  gap: 2rem;
+  font-family: "Rubik", sans-serif;
 }
 
-.deposit__title,
-.cash-out__title {
-  color: #4d4d4d;
+.financial__summary-card {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.2rem;
+  padding: 1rem 0.6rem ;
+  border-radius: 0.8rem;
+  background-color: var(--violet-100);
+  box-shadow: 0px 1px 6px rgba(0, 0, 0, 0.3);
 }
 
-.deposit__value {
+.financial__summary-title {
+  color: #737373;
+  font-size: 1.4rem;
+  font-weight: 400;
+}
+
+.revenue-value {
   color: var(--violet-500);
-}
-
-.summary__cash-out {
-  font-weight: 500;
-  font-size: 1.5rem;
-  padding-bottom: 1.6rem;
-  border-bottom: 2px solid var(--violet-300);
-}
-
-.cash-out__value {
-  color: #fa8c10;
-}
-
-.summary__balance {
-  margin-top: 1.6rem;
-  font-weight: 700;
-  font-size: 1.8rem;
-}
-
-.balance__title {
-  color: #4d4d4d;
-}
-
-.balance__value {
-  color: #4ade80;
-}
-
-.summary__button {
-  all: unset;
-  width: 28rem;
-  box-sizing: border-box;
-  padding: 1.4rem 2rem;
-  color: #fff;
-  background-color: var(--violet-500);
-  border-radius: 1rem;
-  text-align: center;
-  cursor: pointer;
-  transition: background-color 0.2s ease-in-out;
   font-weight: 500;
   font-size: 1.6rem;
-  box-shadow: 0px 0px 0px 1px var(--violet-500);
-  position: absolute;
-  top: 27rem;
-  right: 0;
 }
 
-.summary__button:hover {
+.expense-value {
+  color: #fa8c10;
+  font-weight: 500;
+  font-size: 1.6rem;
+}
+
+.balance-value {
+  color: #4ade80;
+  font-weight: 500;
+  font-size: 1.6rem;
+}
+
+.financial__summary-btn-revenue {
+  all: unset;
+  padding: 1.2rem 2rem;
+  border-radius: 1rem;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
   background-color: var(--violet-700);
-  box-shadow: 0px 0px 0px 1px var(--violet-700);
+  color: #fff;
+  box-shadow: 0px 1px 6px rgba(0, 0, 0, 0.3);
 }
 
-.summary__button:active {
-  background-color: var(--violet-800);
-  transform: scale(0.98);
+.financial__summary-btn-expense {
+  all: unset;
+  padding: 1.2rem 2rem;
+  border-radius: 1rem;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  background-color: #fa8c10;
+  color: #fff;
+  box-shadow: 0px 1px 6px rgba(0, 0, 0, 0.3);
+}
+
+.financial__summary-btn-revenue:hover {
+  opacity: 0.9;
 }
