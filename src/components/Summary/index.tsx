@@ -5,6 +5,7 @@ import { getItem } from "../../utils/storage";
 import "./styles.css";
 import { SummaryValues } from "../../types";
 import { convertToCurrency } from "../../utils/utilities";
+import { HiMinus, HiOutlinePlus } from "react-icons/hi";
 
 const Summary = () => {
   const [summary, setSummary] = useState<SummaryValues>({
@@ -27,7 +28,7 @@ const Summary = () => {
 
   const handleGetSummary = async () => {
     try {
-      const response = await api.get("/sumario", {
+      const response = await api.get("/resumo", {
         headers: {
           Authorization: `Bearer ${getItem("token")}`,
         },
@@ -42,34 +43,34 @@ const Summary = () => {
   useEffect(() => {
     handleGetSummary();
   }, [transactions]);
+
   return (
-    <aside className="summary__main">
-      <h3 className="summary__title">Resumo</h3>
-      <section className="summary__deposit summary__section">
-        <span className="deposit__title">Entradas</span>
-        <span className="deposit__value">
-          {convertToCurrency(summary.earnings)}
-        </span>
+    <div className="financial__summary">
+      <section className="financial__summary-card">
+        <h3 className="financial__summary-title">Receitas</h3>
+        <p className="revenue-value">{convertToCurrency(summary.earnings)}</p>
       </section>
-
-      <section className="summary__cash-out summary__section">
-        <span className="cash-out__title">Saídas</span>
-        <span className="cash-out__value">
-          {convertToCurrency(summary.expenses)}
-        </span>
+      <section className="financial__summary-card ">
+        <h3 className="financial__summary-title">Despesas</h3>
+        <p className="expense-value">{convertToCurrency(summary.expenses)}</p>
       </section>
-
-      <section className="summary__balance summary__section">
-        <span className="balance__title">Saldo</span>
-        <span className="balance__value">
-          {convertToCurrency(summary.balance)}
-        </span>
+      <section className="financial__summary-card ">
+        <h3 className="financial__summary-title">Saldo</h3>
+        <p className="balance-value">{convertToCurrency(summary.balance)}</p>
       </section>
-
-      <button onClick={() => handleAddRegister()} className="summary__button">
-        Adicionar Registro
+      <button
+        onClick={() => handleAddRegister()}
+        className="financial__summary-btn-revenue"
+      >
+        <HiOutlinePlus size={30} />
       </button>
-    </aside>
+      <button
+        onClick={() => handleAddRegister()}
+        className="financial__summary-btn-expense"
+      >
+        <HiMinus size={30} />
+      </button>
+    </div>
   );
 };
 

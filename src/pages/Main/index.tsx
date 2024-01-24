@@ -6,12 +6,13 @@ import Dashboard from "../../components/Dashboard";
 import RegisterModal from "../../components/RegisterModal";
 import { useGlobal } from "../../contexts/GlobalContext";
 import EditUserModal from "../../components/EditUserModal";
-import Notification from "../../components/Popups/Toast";
 import { useEffect } from "react";
 import { getItem, removeItem } from "../../utils/storage";
 import { isTokenExpired } from "../../utils/auth";
 import { useNavigate } from "react-router-dom";
 import Toast from "../../components/Popups/Toast";
+import { HiOutlinePlus, HiOutlinePlusSmall } from "react-icons/hi2";
+import { HiMinus } from "react-icons/hi";
 const Main = () => {
   const { isOpenRegisterModal, showToast, isOpenUserModal } = useGlobal();
   const navigate = useNavigate();
@@ -37,26 +38,8 @@ const Main = () => {
           <div className="wrapper-summary">
             {/* <Filter /> */}
 
-            <div className="financial__summary">
-              <section className="financial__summary-card">
-                <h3 className="financial__summary-title">Receitas</h3>
-                <p className="revenue-value">R$ 1,000,00</p>
-              </section>
-
-              <section className="financial__summary-card ">
-                <h3 className="financial__summary-title">Despesas</h3>
-                <p className="expense-value">R$ 500,00</p>
-              </section>
-
-              <section className="financial__summary-card ">
-                <h3 className="financial__summary-title">Saldo</h3>
-                <p className="balance-value">R$ 500,00</p>
-              </section>
-            </div>
-
-            {/* <button>BOTÃO ADICIONAR REGISTRO</button> */}
+            <Summary />
           </div>
-          <Summary />
         </section>
         <Dashboard />
         {isOpenRegisterModal && <RegisterModal />}

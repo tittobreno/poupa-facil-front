@@ -95,6 +95,9 @@ const Register = ({ transaction }: PropsRegister) => {
         <span className="register-component__item register-component__item--category">
           {transaction.category_name}
         </span>
+        <span className="register-component__item register-component__item--category">
+          {transaction.type}
+        </span>
         <span
           className={`register-component__item register-component__item--cash ${setClass(
             transaction.type
