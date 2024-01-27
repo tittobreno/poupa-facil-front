@@ -16,6 +16,7 @@ const RegisterModal = () => {
     getCategories,
     categories,
     handleClear,
+    typeTransaction,
   } = useGlobal();
 
   const handleSubmitRegister = async (event: FormEvent) => {
@@ -87,7 +88,7 @@ const RegisterModal = () => {
         </button>
 
         <h1 className="register-modal__title">
-          {typeRegisterModal + " " + "Registro"}
+          {`Adicionar nova ${typeTransaction}`}
         </h1>
 
         <form onSubmit={handleSubmitRegister} className="register__form">

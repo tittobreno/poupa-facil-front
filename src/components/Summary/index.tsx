@@ -16,13 +16,18 @@ const Summary = () => {
   const {
     setIsOpenRegisterModal,
     setTypeRegisterModal,
-    handleClear,
     transactions,
     setFormRegister,
-    formRegister,
+    setTypeTransaction,
   } = useGlobal();
 
   const handleAddRegister = (type: string) => {
+    if (type === "entry") {
+      setTypeTransaction("receita");
+    } else {
+      setTypeTransaction("despesa");
+    }
+
     setFormRegister((prevState) => ({ ...prevState, type: type }));
 
     setIsOpenRegisterModal(true);

@@ -33,6 +33,8 @@ type GlobalContextType = {
   getCategories: () => void;
   categories: Category[];
   setCategories: Dispatch<SetStateAction<Category[]>>;
+  typeTransaction: string;
+  setTypeTransaction: Dispatch<SetStateAction<string>>;
 };
 
 const initialGlobalValue = {
@@ -67,8 +69,10 @@ const initialGlobalValue = {
   setFormRegister: () => {},
   handleClear: () => {},
   getCategories: () => {},
-  categories: [],
   setCategories: () => {},
+  categories: [],
+  typeTransaction: "",
+  setTypeTransaction: () => {},
 };
 const GlobalContext = createContext<GlobalContextType>(initialGlobalValue);
 
@@ -97,7 +101,13 @@ export const GlobalProvider = ({ children }: any) => {
     initialGlobalValue.formRegister
   );
 
-  const [categories, setCategories] = useState<Category[]>([]);
+  const [categories, setCategories] = useState<Category[]>(
+    initialGlobalValue.categories
+  );
+
+  const [typeTransaction, setTypeTransaction] = useState(
+    initialGlobalValue.typeTransaction
+  );
 
   const handleShowToast = (message: string) => {
     setMessageToast(message);
@@ -165,6 +175,8 @@ export const GlobalProvider = ({ children }: any) => {
         getCategories,
         categories,
         setCategories,
+        typeTransaction,
+        setTypeTransaction,
       }}
     >
       {children}
