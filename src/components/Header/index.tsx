@@ -39,6 +39,8 @@ const Header = () => {
       <img className="header__logo" src={Logo} alt="" />
       <nav className="header__nav">
         <div className="header__profile">
+          <span className="header__nav-username">{userName}</span>
+
           <button
             className="header__nav-icon profile"
             aria-label="Perfil de usuário"
@@ -46,7 +48,6 @@ const Header = () => {
           >
             <HiUserCircle size={44} />
           </button>
-          <span className="header__nav-username">{userName}</span>
         </div>
 
         <button

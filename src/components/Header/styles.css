@@ -6,9 +6,9 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background-color: var(--violet-300);
+  background: rgb(196,181,253);
+background: linear-gradient(117deg, rgba(196,181,253,1) 0%, rgba(109,40,217,1) 100%);
   font-family: "Rubik", sans-serif;
-  border-bottom: 2px solid var(--violet-500);
 }
 
 .header__logo {
@@ -29,13 +29,14 @@
 
 .header__nav-icon {
   all: unset;
-  color: var(--purple-950);
+  color: var(--violet-300);
   cursor: pointer;
   transition: transform 0.2s ease-in-out;
 }
 
 .header__nav-username {
   font-size: 1.6rem;
+  color: #FFF;
 }
 
 .header__nav-icon:hover {
