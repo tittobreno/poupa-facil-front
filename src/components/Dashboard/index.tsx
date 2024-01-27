@@ -7,6 +7,7 @@ import { getItem } from "../../utils/storage";
 import { useGlobal } from "../../contexts/GlobalContext";
 import { HiOutlinePlus } from "react-icons/hi2";
 import Summary from "../Summary";
+import Filter from "../Filter";
 
 const Dashboard = () => {
   const [order, setOrder] = useState(false);
@@ -17,7 +18,9 @@ const Dashboard = () => {
   }, []);
   return (
     <div className="dashboard__container">
-      <div className="teste">
+      <div className="dashboard__align">
+        <Filter />
+
         <section className="dashboard__columns">
           <div className="columns__item item__date">
             <span className="item__date-title" onClick={() => setOrder(!order)}>

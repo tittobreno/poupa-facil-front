@@ -77,6 +77,7 @@
   cursor: pointer;
   transition: background-color 0.2s ease-in-out;
   background-color: var(--violet-700);
+  transition: all 0.2s ease-in-out;
   color: #fff;
   box-shadow: 0px 1px 6px rgba(0, 0, 0, 0.3);
 }
@@ -94,4 +95,11 @@
 
 .financial__summary-btn-revenue:hover {
   opacity: 0.9;
+  scale: calc(1.05);
+}
+
+.financial__summary-btn-expense:hover {
+  opacity: 0.9; 
+  scale: calc(1.05);
+
 }

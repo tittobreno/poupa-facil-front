@@ -48,7 +48,6 @@ const Filter = () => {
     } else {
       handleGetRegisters();
     }
-    setSelectedCategories([]);
   };
 
   useEffect(() => {
@@ -57,13 +56,15 @@ const Filter = () => {
 
   return (
     <div className="filter__container">
-      <button
-        onClick={() => handleOpenFilter(openFilter)}
-        className="filter__btn"
-      >
-        <HiFilter className="filter__btn-icon" />
-        <h2 className="filter__btn-label">Filtrar</h2>
-      </button>
+      <div className="filter__section-button">
+        <button
+          onClick={() => handleOpenFilter(openFilter)}
+          className="filter__btn"
+        >
+          <HiFilter className="filter__btn-icon" />
+          <h2 className="filter__btn-label">Filtro</h2>
+        </button>
+      </div>
 
       {openFilter && (
         <div className={`filter__main descend-animation`}>
