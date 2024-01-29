@@ -16,6 +16,7 @@ const Dashboard = () => {
   useEffect(() => {
     handleGetRegisters();
   }, []);
+
   return (
     <div className="dashboard__container">
       <div className="dashboard__align">
@@ -39,7 +40,6 @@ const Dashboard = () => {
           <div className="columns__item"></div>
         </section>
       </div>
-
       <ul className="dashboard__registers">
         {transactions.map((transaction) => (
           <Register key={transaction.id} transaction={transaction} />

@@ -36,8 +36,6 @@ const Main = () => {
       <main className="main">
         <section className="main__filter">
           <div className="wrapper-summary">
-            {/* <Filter /> */}
-
             <Summary />
           </div>
         </section>

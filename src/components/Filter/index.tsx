@@ -6,6 +6,7 @@ import { Category } from "../../types";
 const Filter = () => {
   const [openFilter, setOpenFilter] = useState(false);
   const [selectedCategories, setSelectedCategories] = useState<Category[]>([]);
+  const [selectedTab, setSelectedTab] = useState(1);
   const {
     handleGetRegisters,
     transactions,
@@ -36,6 +37,7 @@ const Filter = () => {
     setSelectedCategories([]);
     handleGetRegisters();
   };
+
   const handleApplyFilter = () => {
     const listFilteredTransactions = transactions.filter((transaction) =>
       selectedCategories.some(
@@ -49,6 +51,8 @@ const Filter = () => {
       handleGetRegisters();
     }
   };
+
+  const handleToggleTab = () => {};
 
   useEffect(() => {
     getCategories();
@@ -68,27 +72,56 @@ const Filter = () => {
 
       {openFilter && (
         <div className={`filter__main descend-animation`}>
-          <section>
-            <h2 className="filter__main-title">Categoria</h2>
+          <section className="filter__tabs">
+            <button
+              onClick={() => setSelectedTab(1)}
+              className={
+                selectedTab === 1
+                  ? "filter__tab tab-left active-tab"
+                  : "filter__tab tab-left"
+              }
+            >
+              Categorias
+            </button>
+
+            <button
+              onClick={() => setSelectedTab(2)}
+              className={
+                selectedTab === 2
+                  ? "filter__tab tab-right active-tab"
+                  : "filter__tab tab-right"
+              }
+            >
+              Outros..
+            </button>
           </section>
 
-          <section className="filter__main-list-categories">
-            {categories.map((category) => (
-              <button
-                onClick={() => handleCategoryClick(category)}
-                key={category.id}
-                className={
-                  selectedCategories.includes(category)
-                    ? "category__item--selected"
-                    : "filter__main-category-item"
-                }
-              >
-                {category.title}
-                <HiPlusSm />
-              </button>
-            ))}
-          </section>
-
+          <div className="filter__content">
+            {selectedTab === 1 ? (
+              <div>
+                <section className="filter__main-list-categories">
+                  {categories.map((category) => (
+                    <button
+                      onClick={() => handleCategoryClick(category)}
+                      key={category.id}
+                      className={
+                        selectedCategories.includes(category)
+                          ? "category__item--selected"
+                          : "filter__main-category-item"
+                      }
+                    >
+                      {category.title}
+                      <HiPlusSm />
+                    </button>
+                  ))}
+                </section>
+              </div>
+            ) : (
+              <div>
+                <h1>Outros...</h1>
+              </div>
+            )}
+          </div>
           <section className="filter__controls">
             <button
               onClick={() => handleCleanFilter()}
