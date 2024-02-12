@@ -14,7 +14,6 @@ import { User } from "../../types";
 const EditUserModal = () => {
   const [editData, setEditData] = useState(false);
   const [editPassword, setEditPassword] = useState(false);
-  const [editAvatar, setEditAvatar] = useState(false);
   const { setIsOpenUserModal, handleShowToast } = useGlobal();
 
   const { form, setForm } = useUser();
@@ -28,12 +27,8 @@ const EditUserModal = () => {
       reader.onload = (event) => {
         const result = event.target?.result as string | null;
         if (result) {
-          console.log(result);
-
           setImage(result);
           const base64String = result.split(",")[1];
-
-          console.log(base64String);
 
           setForm({ ...form, avatar: base64String });
         }
