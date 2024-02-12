@@ -28,10 +28,17 @@ const EditUserModal = () => {
       reader.onload = (event) => {
         const result = event.target?.result as string | null;
         if (result) {
+          console.log(result);
+
           setImage(result);
-          setForm({ ...form, avatar: result });
+          const base64String = result.split(",")[1];
+
+          console.log(base64String);
+
+          setForm({ ...form, avatar: base64String });
         }
       };
+
       reader.readAsDataURL(selectedImage);
     }
   };
@@ -104,10 +111,19 @@ const EditUserModal = () => {
                     onChange={(e) => handleImageChange(e)}
                     className="section-avatar__input"
                   />
-                  <label htmlFor="fileInput" className="custom-file-button">
-                    Alterar
-                    <HiOutlinePencilSquare size={18} />
-                  </label>
+                  {image ? (
+                    <button
+                      className="custom-file-button"
+                      onClick={() => handleEditUser(form)}
+                    >
+                      Confirmar
+                    </button>
+                  ) : (
+                    <label htmlFor="fileInput" className="custom-file-button">
+                      Selecionar imagem
+                      <HiOutlinePencilSquare size={18} />
+                    </label>
+                  )}
                 </div>
               </section>
 
