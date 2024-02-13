@@ -6,6 +6,8 @@ import api from "../../services/api";
 import { getItem } from "../../utils/storage";
 import { useGlobal } from "../../contexts/GlobalContext";
 import { HiOutlinePlus } from "react-icons/hi2";
+import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
+
 import Summary from "../Summary";
 import Filter from "../Filter";
 
@@ -52,6 +54,12 @@ const Dashboard = () => {
           ""
         )}
       </ul>
+      <div className="pagination">
+        <IoIosArrowBack className="pagination-item" />
+        <span className="pagination-item">1</span>
+        <span className="pagination-item">2</span>
+        <IoIosArrowForward className="pagination-item" />
+      </div>
     </div>
   );
 };

@@ -4,7 +4,7 @@
   align-items: center;
   justify-content: space-between;
   width: 100%;
-  padding: 1.8rem 2.2rem;
+  padding: 1.6rem 2.2rem;
   font-family: "Lato", sans-serif;
   border-bottom: 1px solid var(--violet-300);
   position: relative;
@@ -56,7 +56,7 @@
 }
 
 .input-class {
-  color: var(--violet-500)
+  color: var(--violet-500);
 }
 
 .output-class {
