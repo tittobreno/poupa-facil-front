@@ -6,8 +6,12 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background: rgb(196,181,253);
-background: linear-gradient(117deg, rgba(196,181,253,1) 0%, rgba(109,40,217,1) 100%);
+  background: rgb(196, 181, 253);
+  background: linear-gradient(
+    117deg,
+    rgba(196, 181, 253, 1) 0%,
+    rgba(109, 40, 217, 1) 100%
+  );
   font-family: "Rubik", sans-serif;
 }
 
@@ -36,9 +40,17 @@ background: linear-gradient(117deg, rgba(196,181,253,1) 0%, rgba(109,40,217,1) 1
 
 .header__nav-username {
   font-size: 1.6rem;
-  color: #FFF;
+  color: #fff;
 }
 
 .header__nav-icon:hover {
   transform: scale(1.1);
+}
+
+.profile {
+  width: 5rem;
+  height: 5rem;
+  border-radius: 50%;
+  border: 1px solid var(--violet-300);
+  margin: 5px;
 }

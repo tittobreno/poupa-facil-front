@@ -13,21 +13,28 @@ import { User } from "../../types";
 
 const EditUserModal = () => {
   const [editData, setEditData] = useState(false);
+  const [imageToChange, setImageToChange] = useState("");
   const [editPassword, setEditPassword] = useState(false);
-  const { setIsOpenUserModal, handleShowToast } = useGlobal();
+  const { setIsOpenUserModal, handleShowToast, imageUser, setImageUser } =
+    useGlobal();
 
   const { form, setForm } = useUser();
 
-  const [image, setImage] = useState<string | null>(null);
   const handleImageChange = (e: ChangeEvent<HTMLInputElement>) => {
     const selectedImage = e.target.files?.[0];
 
     if (selectedImage) {
+      const maxSizeInBytes = 512 * 512;
+
+      if (selectedImage.size > maxSizeInBytes) {
+        alert("O tamano máximo permitido da imagem é 720x720");
+        return;
+      }
       const reader = new FileReader();
       reader.onload = (event) => {
         const result = event.target?.result as string | null;
         if (result) {
-          setImage(result);
+          setImageToChange(result);
           const base64String = result.split(",")[1];
 
           setForm({ ...form, avatar: base64String });
@@ -42,7 +49,6 @@ const EditUserModal = () => {
     const filteredUser = Object.fromEntries(
       Object.entries(user).filter(([key, value]) => value !== "")
     );
-
     try {
       await api.patch(
         "/usuario/editar",
@@ -53,7 +59,6 @@ const EditUserModal = () => {
           },
         }
       );
-
       handleShowToast("Usuário editado com sucesso!");
       setIsOpenUserModal(false);
     } catch (error) {
@@ -87,9 +92,9 @@ const EditUserModal = () => {
           ) : (
             <section>
               <section className="edit-user-modal__section-avatar">
-                {image ? (
+                {imageUser ? (
                   <img
-                    src={image}
+                    src={imageToChange ?? imageUser}
                     alt="Preview"
                     className="custom-img-preview"
                   />
@@ -106,8 +111,9 @@ const EditUserModal = () => {
                     onChange={(e) => handleImageChange(e)}
                     className="section-avatar__input"
                   />
-                  {image ? (
+                  {imageToChange ? (
                     <button
+                      type="button"
                       className="custom-file-button"
                       onClick={() => handleEditUser(form)}
                     >
@@ -115,7 +121,7 @@ const EditUserModal = () => {
                     </button>
                   ) : (
                     <label htmlFor="fileInput" className="custom-file-button">
-                      Selecionar imagem
+                      Editar
                       <HiOutlinePencilSquare size={18} />
                     </label>
                   )}

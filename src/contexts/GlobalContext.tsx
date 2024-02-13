@@ -35,6 +35,8 @@ type GlobalContextType = {
   setCategories: Dispatch<SetStateAction<Category[]>>;
   typeTransaction: string;
   setTypeTransaction: Dispatch<SetStateAction<string>>;
+  imageUser: string;
+  setImageUser: Dispatch<SetStateAction<string>>;
 };
 
 const initialGlobalValue = {
@@ -73,6 +75,8 @@ const initialGlobalValue = {
   categories: [],
   typeTransaction: "",
   setTypeTransaction: () => {},
+  imageUser: "",
+  setImageUser: () => {},
 };
 const GlobalContext = createContext<GlobalContextType>(initialGlobalValue);
 
@@ -108,6 +112,8 @@ export const GlobalProvider = ({ children }: any) => {
   const [typeTransaction, setTypeTransaction] = useState(
     initialGlobalValue.typeTransaction
   );
+
+  const [imageUser, setImageUser] = useState(initialGlobalValue.imageUser);
 
   const handleShowToast = (message: string) => {
     setMessageToast(message);
@@ -177,6 +183,8 @@ export const GlobalProvider = ({ children }: any) => {
         setCategories,
         typeTransaction,
         setTypeTransaction,
+        imageUser,
+        setImageUser,
       }}
     >
       {children}

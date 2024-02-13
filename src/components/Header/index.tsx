@@ -8,7 +8,7 @@ import { HiUserCircle, HiOutlineLogout } from "react-icons/hi";
 import { useUser } from "../../contexts/UserContext";
 import { useNavigate } from "react-router-dom";
 const Header = () => {
-  const { setIsOpenUserModal } = useGlobal();
+  const { setIsOpenUserModal, imageUser, setImageUser } = useGlobal();
   const { setForm } = useUser();
   const Navigate = useNavigate();
   const [userName, setUserName] = useState("");
@@ -19,7 +19,22 @@ const Header = () => {
         const { data } = await api.get("/usuario/detalhar", {
           headers: { Authorization: `Bearer ${getItem("token")}` },
         });
+
+        const binaryData = atob(data.avatar);
+
+        const arrayBuffer = new ArrayBuffer(binaryData.length);
+        const view = new Uint8Array(arrayBuffer);
+
+        for (var i = 0; i < binaryData.length; i++) {
+          view[i] = binaryData.charCodeAt(i);
+        }
+
+        const blob = new Blob([arrayBuffer], { type: "image/png" });
+
+        const imageUrl = URL.createObjectURL(blob);
+
         setUserName(data.name);
+        setImageUser(imageUrl);
       } catch (error: any) {
         console.log(error.message);
       }
@@ -41,13 +56,12 @@ const Header = () => {
         <div className="header__profile">
           <span className="header__nav-username">{userName}</span>
 
-          <button
-            className="header__nav-icon profile"
+          <img
+            className=" profile "
             aria-label="Perfil de usuário"
             onClick={() => setIsOpenUserModal(true)}
-          >
-            <HiUserCircle size={44} />
-          </button>
+            src={imageUser ?? <HiUserCircle size={44} />}
+          />
         </div>
 
         <button

@@ -5,6 +5,7 @@ import { useUser } from "../../../contexts/UserContext";
 import { MouseEvent, useEffect, useState } from "react";
 import api from "../../../services/api";
 import { getItem } from "../../../utils/storage";
+import { useGlobal } from "../../../contexts/GlobalContext";
 
 interface UserDataProps {
   setEditData: (newState: boolean) => void;
@@ -12,6 +13,8 @@ interface UserDataProps {
 }
 
 const UserData = ({ setEditData, setEditPassword }: UserDataProps) => {
+  const { imageUser, setImageUser } = useGlobal();
+  const [image, setImage] = useState("");
   const [localUser, setLocalUser] = useState({
     name: "",
     email: "",
@@ -28,6 +31,21 @@ const UserData = ({ setEditData, setEditPassword }: UserDataProps) => {
         const { data } = await api.get("/usuario/detalhar", {
           headers: { Authorization: `Bearer ${getItem("token")}` },
         });
+
+        const binaryData = atob(data.avatar);
+
+        const arrayBuffer = new ArrayBuffer(binaryData.length);
+        const view = new Uint8Array(arrayBuffer);
+
+        for (var i = 0; i < binaryData.length; i++) {
+          view[i] = binaryData.charCodeAt(i);
+        }
+
+        const blob = new Blob([arrayBuffer], { type: "image/png" });
+
+        const imageUrl = URL.createObjectURL(blob);
+
+        setImageUser(imageUrl);
         setLocalUser({
           name: data.name,
           email: data.email,
@@ -42,6 +60,7 @@ const UserData = ({ setEditData, setEditPassword }: UserDataProps) => {
 
   return (
     <div className="edit-user-modal__user-data-container">
+      <img src={image} alt="" />
       <section className="edit-user-modal__user-data-section">
         <strong className="edit-user-modal__user-data-label">Nome</strong>
         <span>{localUser.name}</span>

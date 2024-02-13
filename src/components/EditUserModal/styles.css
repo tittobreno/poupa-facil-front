@@ -9,7 +9,7 @@
   padding: 3.5rem 5.6rem;
   border-radius: 1rem;
   background-color: #ffffff;
-  
+
   font-family: "Runik", sans-serif;
   z-index: 10;
 }
@@ -74,9 +74,7 @@
 }
 
 .section-avatar__img {
- 
- color: var(--violet-700);
-  
+  color: var(--violet-700);
 }
 
 .edit-user-modal__form-section {
@@ -142,7 +140,7 @@
 
 .edit-user-modal__back:hover {
   background-color: var(--violet-500);
-  color: #FFF;
+  color: #fff;
 }
 
 .edit-user-modal-question-password {
@@ -173,10 +171,9 @@
   font-size: 1.8rem;
 }
 
-
 .question-password-button:hover {
   background-color: var(--violet-500);
-  color: #FFF;
+  color: #fff;
 }
 
 .testes {
