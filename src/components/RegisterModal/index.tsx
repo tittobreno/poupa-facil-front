@@ -1,7 +1,7 @@
 import { HiOutlineX } from "react-icons/hi";
 import { useGlobal } from "../../contexts/GlobalContext";
 import "./styles.css";
-import api from "../../services/api";
+import api from "../../lib/api";
 import { getItem } from "../../utils/storage";
 import { ChangeEvent, FormEvent, useEffect, useState } from "react";
 import { convertToCents } from "../../utils/utilities";

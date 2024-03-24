@@ -1,23 +1,38 @@
 import { useEffect, useState } from "react";
-import "./styles.css";
-import { HiChevronDoubleDown, HiPlus } from "react-icons/hi";
-import Register from "../Register";
-import api from "../../services/api";
-import { getItem } from "../../utils/storage";
+import { HiChevronDoubleDown } from "react-icons/hi";
 import { useGlobal } from "../../contexts/GlobalContext";
-import { HiOutlinePlus } from "react-icons/hi2";
-import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
+import Register from "../Register";
+import "./styles.css";
 
-import Summary from "../Summary";
+import usePagination from "../../hooks/usePagination";
+import transactionsService from "../../services/transactions";
 import Filter from "../Filter";
+import Pagination from "../Pagination";
 
 const Dashboard = () => {
   const [order, setOrder] = useState(false);
-  const { handleGetRegisters, transactions } = useGlobal();
+  const { transactions, setTransactions } = useGlobal();
+  const {
+    currentPage,
+    totalPages,
+    setTotalItems,
+    nextPage,
+    prevPage,
+    goToPage,
+  } = usePagination();
 
   useEffect(() => {
-    handleGetRegisters();
-  }, []);
+    const skip = (currentPage - 1) * 10;
+    const take = 10;
+
+    const fetchData = async () => {
+      const data = await transactionsService.getAll({ skip, take });
+      setTransactions(data);
+      setTotalItems(data.total);
+    };
+
+    fetchData();
+  }, [currentPage, setTotalItems]);
 
   return (
     <div className="dashboard__container">
@@ -43,10 +58,10 @@ const Dashboard = () => {
         </section>
       </div>
       <ul className="dashboard__registers">
-        {transactions.map((transaction) => (
+        {transactions.listUserTransactions.map((transaction) => (
           <Register key={transaction.id} transaction={transaction} />
         ))}
-        {transactions.length === 0 ? (
+        {transactions.total === 0 ? (
           <div className="register__not-found">
             <strong>Ops! Ainda não há registros aqui.</strong>
           </div>
@@ -54,12 +69,13 @@ const Dashboard = () => {
           ""
         )}
       </ul>
-      <div className="pagination">
-        <IoIosArrowBack className="pagination-item" />
-        <span className="pagination-item">1</span>
-        <span className="pagination-item">2</span>
-        <IoIosArrowForward className="pagination-item" />
-      </div>
+      <Pagination
+        currentPage={currentPage}
+        totalPages={totalPages}
+        nextPage={nextPage}
+        prevPage={prevPage}
+        goToPage={goToPage}
+      />
     </div>
   );
 };

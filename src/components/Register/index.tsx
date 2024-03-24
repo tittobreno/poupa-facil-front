@@ -3,7 +3,7 @@ import "./styles.css";
 import { useGlobal } from "../../contexts/GlobalContext";
 import DeleteRegister from "../Popups/DeleteRegister";
 import { useEffect, useState } from "react";
-import api from "../../services/api";
+import api from "../../lib/api";
 import { Category, Transaction } from "../../types";
 import { convertToCurrency } from "../../utils/utilities";
 import { getItem } from "../../utils/storage";

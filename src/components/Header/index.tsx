@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import Logo from "../../assets/logo-pf.png";
 import { useGlobal } from "../../contexts/GlobalContext";
-import api from "../../services/api";
+import api from "../../lib/api";
 import { clearLocalStorage, getItem, setItem } from "../../utils/storage";
 import "./styles.css";
 import { HiUserCircle, HiOutlineLogout } from "react-icons/hi";

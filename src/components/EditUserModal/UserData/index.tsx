@@ -3,7 +3,7 @@ import "./styles.css";
 import { HiOutlinePencilSquare } from "react-icons/hi2";
 import { useUser } from "../../../contexts/UserContext";
 import { MouseEvent, useEffect, useState } from "react";
-import api from "../../../services/api";
+import api from "../../../lib/api";
 import { getItem } from "../../../utils/storage";
 import { useGlobal } from "../../../contexts/GlobalContext";
 

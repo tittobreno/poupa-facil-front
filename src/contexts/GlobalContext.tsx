@@ -1,13 +1,18 @@
 import {
+  Dispatch,
+  SetStateAction,
   createContext,
   useContext,
   useState,
-  SetStateAction,
-  Dispatch,
 } from "react";
-import { getItem } from "../utils/storage";
-import api from "../services/api";
+import api from "../lib/api";
 import { Category, Transaction } from "../types";
+import { getItem } from "../utils/storage";
+
+interface TransactionsType {
+  total: number;
+  listUserTransactions: Transaction[];
+}
 
 type GlobalContextType = {
   isOpenRegisterModal: boolean;
@@ -24,9 +29,8 @@ type GlobalContextType = {
   setMessageToast: (newState: string) => void;
   handleShowToast: (message: string) => void;
   handleCloseToast: () => void;
-  transactions: Transaction[];
-  setTransactions: Dispatch<SetStateAction<Transaction[]>>;
-  handleGetRegisters: () => void;
+  transactions: TransactionsType;
+  setTransactions: Dispatch<SetStateAction<TransactionsType>>;
   formRegister: Transaction;
   setFormRegister: Dispatch<SetStateAction<Transaction>>;
   handleClear: () => void;
@@ -55,9 +59,8 @@ const initialGlobalValue = {
   handleShowToast: () => {},
   handleCloseToast: () => {},
   handleSubmitRegister: () => {},
-  transactions: [],
+  transactions: { total: 0, listUserTransactions: [] },
   setTransactions: () => {},
-  handleGetRegisters: () => {},
   formRegister: {
     description: "",
     value: "",
@@ -97,7 +100,7 @@ export const GlobalProvider = ({ children }: any) => {
   const [messageToast, setMessageToast] = useState(
     initialGlobalValue.messageToast
   );
-  const [transactions, setTransactions] = useState<Transaction[]>(
+  const [transactions, setTransactions] = useState<TransactionsType>(
     initialGlobalValue.transactions
   );
 
@@ -124,14 +127,6 @@ export const GlobalProvider = ({ children }: any) => {
     setShowToast(false);
   };
 
-  const handleGetRegisters = async () => {
-    const { data } = await api.get("/transacao/listar", {
-      headers: {
-        Authorization: `Bearer ${getItem("token")}`,
-      },
-    });
-    setTransactions(data);
-  };
   const handleClear = () => {
     setFormRegister({
       description: "",
@@ -174,7 +169,6 @@ export const GlobalProvider = ({ children }: any) => {
         handleCloseToast,
         transactions,
         setTransactions,
-        handleGetRegisters,
         formRegister,
         setFormRegister,
         handleClear,

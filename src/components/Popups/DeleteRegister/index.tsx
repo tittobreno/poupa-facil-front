@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { useGlobal } from "../../../contexts/GlobalContext";
 import "./styles.css";
-import api from "../../../services/api";
+import api from "../../../lib/api";
 import { getItem } from "../../../utils/storage";
 
 type DeleteRegisterProps = {

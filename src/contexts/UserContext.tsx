@@ -1,5 +1,5 @@
 import { ChangeEvent, createContext, useContext, useState } from "react";
-import api from "../services/api";
+import api from "../lib/api";
 import { getItem } from "../utils/storage";
 import { useGlobal } from "./GlobalContext";
 import { User } from "../types";

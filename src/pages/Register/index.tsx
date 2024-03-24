@@ -4,7 +4,7 @@ import { useGlobal } from "../../contexts/GlobalContext";
 import "./styles.css";
 import { FormEvent, FormEventHandler } from "react";
 import { useUser } from "../../contexts/UserContext";
-import api from "../../services/api";
+import api from "../../lib/api";
 
 const Register = () => {
   const { handleChangeForm, form, setForm } = useUser();

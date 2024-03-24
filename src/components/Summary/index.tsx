@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useGlobal } from "../../contexts/GlobalContext";
-import api from "../../services/api";
+import api from "../../lib/api";
 import { getItem } from "../../utils/storage";
 import "./styles.css";
 import { SummaryValues } from "../../types";

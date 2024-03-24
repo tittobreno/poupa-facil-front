@@ -4,7 +4,7 @@ import Logo from "../../assets/logo-pf.png";
 import "./styles.css";
 import { Link, useNavigate } from "react-router-dom";
 import { useUser } from "../../contexts/UserContext";
-import api from "../../services/api";
+import api from "../../lib/api";
 import { AxiosError } from "axios";
 import { getItem, removeItem, setItem } from "../../utils/storage";
 import { isTokenExpired } from "../../utils/auth";
