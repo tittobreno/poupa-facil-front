@@ -1,12 +1,12 @@
+import { useState } from "react";
 import { HiOutlinePencilSquare, HiOutlineTrash } from "react-icons/hi2";
-import "./styles.css";
 import { useGlobal } from "../../contexts/GlobalContext";
-import DeleteRegister from "../Popups/DeleteRegister";
-import { useEffect, useState } from "react";
 import api from "../../lib/api";
 import { Category, Transaction } from "../../types";
-import { convertToCurrency } from "../../utils/utilities";
 import { getItem } from "../../utils/storage";
+import { convertToCurrency } from "../../utils/utilities";
+import DeleteRegister from "../Popups/DeleteRegister";
+import "./styles.css";
 
 type PropsRegister = {
   transaction: Transaction;
@@ -80,6 +80,16 @@ const Register = ({ transaction }: PropsRegister) => {
       : "";
   };
 
+  const setTypeTitle = (type: string) => {
+    if (type === "entry") {
+      return "Receita";
+    }
+
+    if (type === "output") {
+      return "Despesa";
+    }
+  };
+
   return (
     <>
       <li className="register-component__container">
@@ -96,7 +106,7 @@ const Register = ({ transaction }: PropsRegister) => {
           {transaction.category_name}
         </span>
         <span className="register-component__item register-component__item--category">
-          {transaction.type}
+          {setTypeTitle(transaction.type)}
         </span>
         <span
           className={`register-component__item register-component__item--cash ${setClass(
