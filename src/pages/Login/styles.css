@@ -2,7 +2,7 @@
 .container__login {
   width: 100vw;
   height: 100vh;
-  padding: 40px 100px;
+  padding: 4rem 18rem;
   display: flex;
   flex-direction: column;
   background: linear-gradient(
@@ -72,8 +72,7 @@
 }
 
 .login__card {
-  width: 40rem;
-  height: 40rem;
+  width: 46rem;
   padding: 6rem 4rem;
   border-radius: 0.4rem;
   display: flex;
@@ -112,7 +111,7 @@
 }
 
 .login__section-input--forgot-password {
-  font-size: 1.2rem;
+  font-size: 1.3rem;
   color: var(--violet-700);
 }
 

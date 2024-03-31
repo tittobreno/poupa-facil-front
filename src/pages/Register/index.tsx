@@ -48,7 +48,7 @@ const Register = () => {
       <img className="login__logo" src={Logo} alt="Logo da página!" />
       <main className="register__main">
         <section className="register__card">
-          <h1 className="register__title">Crie sua conta grátis</h1>
+          <h1 className="register__title">Crie sua conta</h1>
           <form onSubmit={handleRegister} className="register__form">
             <div className="form__box-field">
               <label htmlFor="name" className="form__label">
@@ -77,33 +77,37 @@ const Register = () => {
                 onChange={(e) => setForm({ ...form, email: e.target.value })}
               />
             </div>
-            <div className="form__box-field">
-              <label htmlFor="password" className="form__label">
-                Senha
-              </label>
-              <input
-                className="form__input"
-                id="password"
-                type="password"
-                placeholder="Digite sua senha"
-                value={form.password}
-                onChange={(e) => setForm({ ...form, password: e.target.value })}
-              />
-            </div>
-            <div className="form__box-field">
-              <label htmlFor="password-confirmation" className="form__label">
-                Confirmar senha
-              </label>
-              <input
-                className="form__input"
-                id="password-confirmation"
-                type="password"
-                placeholder="Confirme sua senha"
-                value={form.passwordConfirmation}
-                onChange={(e) =>
-                  setForm({ ...form, passwordConfirmation: e.target.value })
-                }
-              />
+            <div className="box__password">
+              <div className="form__box-field">
+                <label htmlFor="password" className="form__label">
+                  Senha
+                </label>
+                <input
+                  className="form__input"
+                  id="password"
+                  type="password"
+                  placeholder="Digite sua senha"
+                  value={form.password}
+                  onChange={(e) =>
+                    setForm({ ...form, password: e.target.value })
+                  }
+                />
+              </div>
+              <div className="form__box-field">
+                <label htmlFor="password-confirmation" className="form__label">
+                  Confirmar senha
+                </label>
+                <input
+                  className="form__input"
+                  id="password-confirmation"
+                  type="password"
+                  placeholder="Confirme sua senha"
+                  value={form.passwordConfirmation}
+                  onChange={(e) =>
+                    setForm({ ...form, passwordConfirmation: e.target.value })
+                  }
+                />
+              </div>
             </div>
 
             <button className="form__btn" type="submit">
@@ -113,7 +117,7 @@ const Register = () => {
           <div className="register__redirect-login">
             <span>Já tem cadastro? </span>
             <Link className="redirect__link" to="/">
-              Clique aqui!
+              Fazer login!
             </Link>
           </div>
         </section>

@@ -3,7 +3,7 @@
 .container__register {
   width: 100vw;
   height: 100vh;
-  padding: 40px 100px;
+  padding: 4rem 18rem;
   display: flex;
   flex-direction: column;
   background: linear-gradient(
@@ -25,8 +25,7 @@
 }
 
 .register__card {
-  width: 48rem;
-  height: 52rem;
+  width: 46rem;
   padding: 4rem 4rem;
   background-color: #ffffff;
   border-radius: 0.4rem;
@@ -83,6 +82,11 @@
   font-size: 1.4rem;
   font-weight: 300;
 }
+.box__password {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
 
 .form__btn {
   all: unset;
@@ -107,13 +111,14 @@
 }
 
 .register__redirect-login {
-  margin-top: 1.5rem;
+  margin-top: 2rem;
   color: var(--violet-700);
 }
 
 .redirect__link {
   color: var(--violet-800);
   text-decoration: none;
+  font-weight: 500;
 }
 
 .redirect__link:hover {

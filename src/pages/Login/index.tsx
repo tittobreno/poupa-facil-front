@@ -70,14 +70,11 @@ const Login = () => {
             Simplifique sua vida financeira e economize dinheiro de forma
             inteligente. Experimente agora mesmo o Poupa Fácil!
           </h2>
-          <Link to="/cadastrar" className="login__btn--register">
-            Cadastre-se
-          </Link>
         </div>
 
         <section className="login__right-page">
           <div className="login__card">
-            <h1 className="login__card-title">Seja bem vindo(a)!</h1>
+            <h1 className="login__card-title">Acesse sua conta</h1>
 
             <form onSubmit={handleLogin} className="login__form">
               <div className="login__section-input">
@@ -138,6 +135,12 @@ const Login = () => {
                 Entrar
               </button>
             </form>
+            <div className="register__redirect-login">
+              <span>Ainda não tem conta? </span>
+              <Link className="redirect__link" to="/cadastrar">
+                Fazer cadastro!
+              </Link>
+            </div>
           </div>
         </section>
       </main>
