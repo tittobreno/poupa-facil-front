@@ -16,6 +16,7 @@
   border-radius: 1rem;
   background-color: var(--violet-100);
   box-shadow: 0px 1px 6px rgba(0, 0, 0, 0.3);
+  font-family: "Rubik";
 }
 .dashboard__align {
   position: relative;
@@ -27,8 +28,8 @@
 
 .columns__item {
   width: 30%;
-  font-weight: 700;
-  font-size: 1.6rem;
+  color: var(--violet-700);
+  font-weight: 500;
 }
 
 .item__date {
@@ -38,7 +39,6 @@
 }
 
 .item__date-title {
-  cursor: pointer;
   transition: transform 0.1s ease-in-out;
 }
 

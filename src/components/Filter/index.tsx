@@ -1,20 +1,32 @@
-import { useEffect, useState } from "react";
+import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import { HiFilter, HiPlusSm } from "react-icons/hi";
-import "./styles.css";
-import { useGlobal } from "../../contexts/GlobalContext";
-import { Category } from "../../types";
-const Filter = () => {
-  const [openFilter, setOpenFilter] = useState(false);
-  const [selectedCategories, setSelectedCategories] = useState<Category[]>([]);
-  const [selectedTab, setSelectedTab] = useState(1);
-  const {
-    handleGetRegisters,
-    transactions,
-    setTransactions,
-    categories,
-    getCategories,
-  } = useGlobal();
+import { MdOutlineArrowDropDownCircle } from "react-icons/md";
+import { HiBarsArrowDown, HiBarsArrowUp } from "react-icons/hi2";
 
+import { useGlobal } from "../../contexts/GlobalContext";
+import transactionsService from "../../services/transactions";
+import { Category } from "../../types";
+import { ParamsType } from "../Dashboard";
+import "./styles.css";
+
+interface FilterProps {
+  params: ParamsType;
+  setParams: Dispatch<SetStateAction<ParamsType>>;
+  fetchData: any;
+  setTotalItems: any;
+  currentPage: any;
+}
+
+const Filter = ({
+  params,
+  setParams,
+  fetchData,
+  setTotalItems,
+  currentPage,
+}: FilterProps) => {
+  const [openFilter, setOpenFilter] = useState(false);
+  const [selectedTab, setSelectedTab] = useState(1);
+  const { setTransactions, categories, getCategories } = useGlobal();
   const handleOpenFilter = (status: boolean) => {
     if (!status) {
       setOpenFilter(true);
@@ -26,33 +38,33 @@ const Filter = () => {
   };
 
   const handleCategoryClick = (category: Category) => {
-    if (selectedCategories.includes(category)) {
-      setSelectedCategories(selectedCategories.filter((c) => c !== category));
+    if (params.categories.includes(category.id)) {
+      setParams({
+        ...params,
+        categories: params.categories.filter((id) => id !== category.id),
+      });
     } else {
-      setSelectedCategories([...selectedCategories, category]);
+      setParams({
+        ...params,
+        categories: [...params.categories, category.id],
+      });
     }
   };
 
-  const handleCleanFilter = () => {
-    setSelectedCategories([]);
-    handleGetRegisters();
+  const handleCleanFilter = async () => {
+    setParams({
+      skip: 0,
+      take: 10,
+      categories: [],
+    });
+    const data = await transactionsService.getAll({
+      skip: (currentPage - 1) * 10,
+      take: 10,
+    });
+
+    setTransactions(data);
+    setTotalItems(data.total);
   };
-
-  const handleApplyFilter = () => {
-    const listFilteredTransactions = transactions.filter((transaction) =>
-      selectedCategories.some(
-        (selected) => selected.id === transaction.category_id
-      )
-    );
-
-    if (listFilteredTransactions.length) {
-      setTransactions(listFilteredTransactions);
-    } else {
-      handleGetRegisters();
-    }
-  };
-
-  const handleToggleTab = () => {};
 
   useEffect(() => {
     getCategories();
@@ -65,8 +77,11 @@ const Filter = () => {
           onClick={() => handleOpenFilter(openFilter)}
           className="filter__btn"
         >
-          <HiFilter className="filter__btn-icon" />
-          <h2 className="filter__btn-label">Filtro</h2>
+          {openFilter ? (
+            <HiBarsArrowUp size={25} className="filter__btn-icon" />
+          ) : (
+            <HiBarsArrowDown size={25} className="filter__btn-icon" />
+          )}
         </button>
       </div>
 
@@ -105,7 +120,7 @@ const Filter = () => {
                       onClick={() => handleCategoryClick(category)}
                       key={category.id}
                       className={
-                        selectedCategories.includes(category)
+                        params.categories.includes(category.id)
                           ? "category__item--selected"
                           : "filter__main-category-item"
                       }
@@ -127,13 +142,13 @@ const Filter = () => {
               onClick={() => handleCleanFilter()}
               className="filter__control control__clean"
             >
-              Limpar Filtros
+              Limpar
             </button>
             <button
-              onClick={() => handleApplyFilter()}
+              onClick={() => fetchData()}
               className="filter__control control__apply"
             >
-              Aplicar Filtros
+              Aplicar
             </button>
           </section>
         </div>

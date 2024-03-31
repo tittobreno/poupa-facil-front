@@ -5,18 +5,19 @@ import api from "../../lib/api";
 import { getItem } from "../../utils/storage";
 import { ChangeEvent, FormEvent, useEffect, useState } from "react";
 import { convertToCents } from "../../utils/utilities";
+import transactionsService from "../../services/transactions";
 const RegisterModal = () => {
   const {
     setIsOpenRegisterModal,
     typeRegisterModal,
     handleShowToast,
-    handleGetRegisters,
     formRegister,
     setFormRegister,
     getCategories,
     categories,
     handleClear,
     typeTransaction,
+    setTransactions,
   } = useGlobal();
 
   const handleSubmitRegister = async (event: FormEvent) => {
@@ -49,7 +50,8 @@ const RegisterModal = () => {
       }
 
       handleClear();
-      handleGetRegisters();
+      const data = await transactionsService.getAll({ skip: 0, take: 10 });
+      setTransactions(data);
     } catch (error) {
       console.error(error);
     }

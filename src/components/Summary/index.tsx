@@ -9,7 +9,7 @@ import { HiMinus, HiOutlinePlus } from "react-icons/hi";
 import { BsEye, BsEyeSlash } from "react-icons/bs";
 
 const Summary = () => {
-  const [isValueVisible, setValueIsVisible] = useState(false);
+  const [isValueVisible, setValueIsVisible] = useState(true);
   const [summary, setSummary] = useState<SummaryValues>({
     balance: 0,
     earnings: 0,
@@ -97,13 +97,13 @@ const Summary = () => {
         onClick={() => handleAddRegister("entry")}
         className="financial__summary-btn-revenue"
       >
-        <HiOutlinePlus size={30} />
+        <HiOutlinePlus size={30} color="#6d28d9" />
       </button>
       <button
         onClick={() => handleAddRegister("output")}
         className="financial__summary-btn-expense"
       >
-        <HiMinus size={30} />
+        <HiMinus size={30} color="#f97316" />
       </button>
     </div>
   );

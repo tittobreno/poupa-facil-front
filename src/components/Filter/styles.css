@@ -8,17 +8,19 @@
   top: 0;
   left: -320px;
   width: 30rem;
+  font-family: "Rubik";
 }
 
 .filter__section-button {
   display: flex;
+  align-items: center;
   justify-content: end;
   width: 100%;
 }
 
 .filter__btn {
   all: unset;
-  padding: 1rem 2rem;
+  padding: 1.5rem 1.5rem;
 
   background-color: var(--violet-100);
   box-shadow: 0px 1px 6px rgba(0, 0, 0, 0.3);
@@ -26,7 +28,6 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 0.5rem;
   cursor: pointer;
   transition: all 0.2s ease-in-out;
 }
@@ -41,25 +42,25 @@
 }
 
 .filter__btn-icon {
-  color: var(--violet-500);
+  color: var(--violet-800);
 }
 
 .filter__btn-label {
   font-family: "Lato", sans-serif;
   font-weight: 700;
   font-size: 1.5rem;
+  color: var(--violet-700);
 }
 
 .filter__main {
   width: 30rem;
   background-color: var(--violet-100);
   border-radius: 0.8rem;
-  font-family: "Rubik";
 
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  margin-top: 2.5rem;
+  margin-top: 1rem;
 }
 .filter__content {
   padding: 2rem;
@@ -94,9 +95,6 @@
   border-top-right-radius: 0.8rem;
 }
 
-.filter__content {
-}
-
 .active-tab {
   color: var(--violet-700);
   border-bottom: 2px solid var(--violet-700);
@@ -119,7 +117,7 @@
   font-weight: 400;
   font-size: 1.3rem;
 
-  background-color: var(--violet-100);
+  background-color: #faf5ff;
   box-shadow: 0px 1px 6px rgba(0, 0, 0, 0.3);
   border-radius: 0.8rem;
   cursor: pointer;
@@ -161,7 +159,7 @@
   font-weight: 700;
   font-size: 1.5rem;
   line-height: 14px;
-  padding: 0.8rem 1rem;
+  padding: 1rem 1.5rem;
   border-radius: 0.8rem;
   box-shadow: 0px 1px 6px rgba(0, 0, 0, 0.3);
   cursor: pointer;
@@ -169,6 +167,7 @@
 
 .control__clean {
   transition: background-color 0.1s ease-in-out;
+  color: var(--violet-500);
 }
 
 .control__clean:active {
@@ -210,7 +209,7 @@
 @keyframes descend {
   from {
     opacity: 0;
-    transform: translateY(-20px);
+    transform: translateY(-10px);
   }
   to {
     opacity: 1;
@@ -225,6 +224,6 @@
   }
   to {
     opacity: 0;
-    transform: translateY(-20px);
+    transform: translateY(-10px);
   }
 }

@@ -34,15 +34,19 @@ const Pagination = ({
 
   return (
     <div className="pagination">
-      <div className="pagination__previous" onClick={() => prevPage()}>
-        <IoIosArrowBack />
-        Anterior
-      </div>
+      {pageItems.length > 1 && (
+        <button className="pagination__previous" onClick={() => prevPage()}>
+          <IoIosArrowBack />
+          Anterior
+        </button>
+      )}
       {pageItems}
-      <div className="pagination__next" onClick={() => nextPage()}>
-        Próximo
-        <IoIosArrowForward />
-      </div>
+      {pageItems.length > 1 && (
+        <button className="pagination__next" onClick={() => nextPage()}>
+          Próximo
+          <IoIosArrowForward />
+        </button>
+      )}
     </div>
   );
 };

@@ -8,7 +8,11 @@ import usePagination from "../../hooks/usePagination";
 import transactionsService from "../../services/transactions";
 import Filter from "../Filter";
 import Pagination from "../Pagination";
-
+export interface ParamsType {
+  skip: number;
+  take: number;
+  categories: number[];
+}
 const Dashboard = () => {
   const [order, setOrder] = useState(false);
   const { transactions, setTransactions } = useGlobal();
@@ -21,33 +25,53 @@ const Dashboard = () => {
     goToPage,
   } = usePagination();
 
+  const [params, setParams] = useState<ParamsType>({
+    skip: 0,
+    take: 10,
+    categories: [],
+  });
+
+  const fetchData = async () => {
+    const data = await transactionsService.getAll(params);
+    setTransactions(data);
+    setTotalItems(data.total);
+  };
+
   useEffect(() => {
-    const skip = (currentPage - 1) * 10;
-    const take = 10;
-
-    const fetchData = async () => {
-      const data = await transactionsService.getAll({ skip, take });
-      setTransactions(data);
-      setTotalItems(data.total);
-    };
-
     fetchData();
-  }, [currentPage, setTotalItems]);
+  }, [setTotalItems, params.skip, params.take]);
+
+  useEffect(() => {
+    setParams((prevParams) => ({
+      ...prevParams,
+      skip: (currentPage - 1) * prevParams.take,
+    }));
+  }, [currentPage]);
+
+  const handleNextPage = () => {
+    setParams({ ...params, categories: [] });
+    nextPage();
+  };
+
+  const handlePrevPage = () => {
+    setParams({ ...params, categories: [] });
+    prevPage();
+  };
 
   return (
     <div className="dashboard__container">
       <div className="dashboard__align">
-        <Filter />
+        <Filter
+          params={params}
+          setParams={setParams}
+          fetchData={fetchData}
+          setTotalItems={setTotalItems}
+          currentPage={currentPage}
+        />
 
         <section className="dashboard__columns">
           <div className="columns__item item__date">
-            <span className="item__date-title" onClick={() => setOrder(!order)}>
-              Data
-            </span>
-            <HiChevronDoubleDown
-              size={14}
-              className={`item__date-icon ${order ? "rotate" : ""}`}
-            />
+            <span className="item__date-title">Data</span>
           </div>
           <span className="columns__item">Dia da semana</span>
           <span className="columns__item">Descrição</span>
@@ -61,19 +85,17 @@ const Dashboard = () => {
         {transactions.listUserTransactions.map((transaction) => (
           <Register key={transaction.id} transaction={transaction} />
         ))}
-        {transactions.total === 0 ? (
+        {transactions.total === 0 && (
           <div className="register__not-found">
-            <strong>Ops! Ainda não há registros aqui.</strong>
+            <strong>Ops! Nenhum registro encontrado.</strong>
           </div>
-        ) : (
-          ""
         )}
       </ul>
       <Pagination
         currentPage={currentPage}
         totalPages={totalPages}
-        nextPage={nextPage}
-        prevPage={prevPage}
+        nextPage={handleNextPage}
+        prevPage={handlePrevPage}
         goToPage={goToPage}
       />
     </div>
