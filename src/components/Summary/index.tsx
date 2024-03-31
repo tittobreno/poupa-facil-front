@@ -6,8 +6,10 @@ import "./styles.css";
 import { SummaryValues } from "../../types";
 import { convertToCurrency } from "../../utils/utilities";
 import { HiMinus, HiOutlinePlus } from "react-icons/hi";
+import { BsEye, BsEyeSlash } from "react-icons/bs";
 
 const Summary = () => {
+  const [isValueVisible, setValueIsVisible] = useState(false);
   const [summary, setSummary] = useState<SummaryValues>({
     balance: 0,
     earnings: 0,
@@ -52,19 +54,44 @@ const Summary = () => {
     handleGetSummary();
   }, [transactions]);
 
+  const toggleVisibleValue = () => {
+    setValueIsVisible(!isValueVisible);
+  };
+
   return (
     <div className="financial__summary">
       <section className="financial__summary-card">
         <h3 className="financial__summary-title">Receitas</h3>
-        <p className="revenue-value">{convertToCurrency(summary.earnings)}</p>
+        <p className="revenue-value">
+          {isValueVisible ? convertToCurrency(summary.earnings) : "R$ ******"}
+        </p>
       </section>
       <section className="financial__summary-card ">
         <h3 className="financial__summary-title">Despesas</h3>
-        <p className="expense-value">{convertToCurrency(summary.expenses)}</p>
+        <p className="expense-value">
+          {isValueVisible ? convertToCurrency(summary.expenses) : "R$ ******"}
+        </p>
       </section>
-      <section className="financial__summary-card ">
-        <h3 className="financial__summary-title">Saldo</h3>
-        <p className="balance-value">{convertToCurrency(summary.balance)}</p>
+      <section className="summary-balance-value">
+        <div className="summary-balance-value-text">
+          <h3 className="financial__summary-title">Saldo</h3>
+          <p className="balance-value">
+            {isValueVisible ? convertToCurrency(summary.balance) : "R$ ******"}
+          </p>
+        </div>
+        {isValueVisible ? (
+          <BsEye
+            size={25}
+            className="summary-balance-eye-icon"
+            onClick={() => toggleVisibleValue()}
+          />
+        ) : (
+          <BsEyeSlash
+            size={25}
+            className="summary-balance-eye-icon"
+            onClick={() => toggleVisibleValue()}
+          />
+        )}
       </section>
       <button
         onClick={() => handleAddRegister("entry")}
