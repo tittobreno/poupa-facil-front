@@ -1,6 +1,6 @@
 import { FormEvent, useEffect, useState } from "react";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
-import Logo from "../../assets/logo-pf.png";
+import Logo from "../../assets/logo-w.png";
 import "./styles.css";
 import { Link, useNavigate } from "react-router-dom";
 import { useUser } from "../../contexts/UserContext";
@@ -8,7 +8,7 @@ import api from "../../lib/api";
 import { AxiosError } from "axios";
 import { getItem, removeItem, setItem } from "../../utils/storage";
 import { isTokenExpired } from "../../utils/auth";
-
+import { motion } from "framer-motion";
 const Login = () => {
   const { form, handleChangeForm } = useUser();
   const [showPassword, setShowPassword] = useState(false);
@@ -61,19 +61,36 @@ const Login = () => {
 
   return (
     <div className="container__login">
-      <img className="login__logo" src={Logo} alt="Logo da página!" />
+      <motion.img
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.8 }}
+        className="login__logo-img"
+        src={Logo}
+        alt="Logo da página!"
+      />
 
       <main className="login__main">
-        <div className="login__left-page">
+        <motion.div
+          initial={{ opacity: 0, y: 50 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          className="login__left-page"
+        >
           <h1>Gerenciar seu dinheiro nunca foi tão fácil.</h1>
           <h2>
             Simplifique sua vida financeira e economize dinheiro de forma
             inteligente. Experimente agora mesmo o Poupa Fácil!
           </h2>
-        </div>
+        </motion.div>
 
         <section className="login__right-page">
-          <div className="login__card">
+          <motion.div
+            initial={{ opacity: 0, x: -50 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8 }}
+            className="login__card"
+          >
             <h1 className="login__card-title">Acesse sua conta</h1>
 
             <form onSubmit={handleLogin} className="login__form">
@@ -141,7 +158,7 @@ const Login = () => {
                 Fazer cadastro!
               </Link>
             </div>
-          </div>
+          </motion.div>
         </section>
       </main>
     </div>

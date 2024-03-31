@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
-import Logo from "../../assets/logo-pf.png";
+import Logo from "../../assets/logo-l.png";
 import { useGlobal } from "../../contexts/GlobalContext";
 import api from "../../lib/api";
 import { clearLocalStorage, getItem, setItem } from "../../utils/storage";
 import "./styles.css";
 import { HiUserCircle, HiOutlineLogout } from "react-icons/hi";
 import { useUser } from "../../contexts/UserContext";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 const Header = () => {
   const { setIsOpenUserModal, imageUser, setImageUser } = useGlobal();
   const { setForm } = useUser();

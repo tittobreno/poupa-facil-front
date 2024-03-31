@@ -1,10 +1,11 @@
 import { Link, useNavigate } from "react-router-dom";
-import Logo from "../../assets/logo-pf.png";
+import Logo from "../../assets/logo-w.png";
 import { useGlobal } from "../../contexts/GlobalContext";
 import "./styles.css";
 import { FormEvent, FormEventHandler } from "react";
 import { useUser } from "../../contexts/UserContext";
 import api from "../../lib/api";
+import { motion } from "framer-motion";
 
 const Register = () => {
   const { handleChangeForm, form, setForm } = useUser();
@@ -45,9 +46,16 @@ const Register = () => {
 
   return (
     <div className="container__register">
-      <img className="login__logo" src={Logo} alt="Logo da página!" />
+      <Link to="/">
+        <img className="register__logo-img" src={Logo} alt="Logo da página!" />
+      </Link>
       <main className="register__main">
-        <section className="register__card">
+        <motion.section
+          initial={{ opacity: 0, x: 50 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.8 }}
+          className="register__card"
+        >
           <h1 className="register__title">Crie sua conta</h1>
           <form onSubmit={handleRegister} className="register__form">
             <div className="form__box-field">
@@ -120,7 +128,7 @@ const Register = () => {
               Fazer login!
             </Link>
           </div>
-        </section>
+        </motion.section>
       </main>
     </div>
   );
