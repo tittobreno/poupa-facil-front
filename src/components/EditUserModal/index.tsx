@@ -15,6 +15,7 @@ const EditUserModal = () => {
   const [editData, setEditData] = useState(false);
   const [imageToChange, setImageToChange] = useState("");
   const [editPassword, setEditPassword] = useState(false);
+  const [userPhoto, setUserPhoto] = useState("");
   const { setIsOpenUserModal, handleShowToast, imageUser, setImageUser } =
     useGlobal();
 
@@ -66,6 +67,17 @@ const EditUserModal = () => {
     }
   };
 
+  useEffect(() => {
+    if (imageToChange) {
+      setUserPhoto(imageToChange);
+      return;
+    }
+
+    if (imageUser) {
+      setUserPhoto(imageUser);
+    }
+  }, [imageToChange, imageUser]);
+
   return (
     <div className="overlay">
       <div className="edit-user-modal__container">
@@ -94,7 +106,7 @@ const EditUserModal = () => {
               <section className="edit-user-modal__section-avatar">
                 {imageUser ? (
                   <img
-                    src={imageToChange ?? imageUser}
+                    src={userPhoto}
                     alt="Preview"
                     className="custom-img-preview"
                   />

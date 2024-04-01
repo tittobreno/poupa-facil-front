@@ -14,3 +14,12 @@ export const convertToCents = (value: string | number): number => {
 
   return parseInt(formattedValue, 10);
 };
+
+export const convertToBrl = (value: string | number): string => {
+  const numericValue =
+    typeof value === "number"
+      ? value.toFixed(2)
+      : parseFloat(value.replace(",", ".")).toFixed(2);
+  const stringValue = numericValue.replace(".", ",");
+  return `R$ ${stringValue}`;
+};

@@ -39,7 +39,7 @@ const Toast = () => {
   return (
     <div className="toast__container">
       <button onClick={() => handleCloseToast()} className="toast__close">
-        <HiOutlineX size={20} />
+        <HiOutlineX size={15} />
       </button>
       <h4 className="toast__title">{messageToast}</h4>
       <div className="toast__progress-bar"></div>

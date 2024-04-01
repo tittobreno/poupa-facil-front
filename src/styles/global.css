@@ -9,6 +9,13 @@ body {
 
   --disabled: #94a3b8;
 
+--bg-light-50: #f9fafb;
+--bg-light-100: #f1f5f9;
+
+--border-light-300: #cbd5e1;
+
+--slate-700: #334155;
+
 
   --shadow-: box-shadow: 0px 2px 6px rgba(0,0,0,0.3);
 }

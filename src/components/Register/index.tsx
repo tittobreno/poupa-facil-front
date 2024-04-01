@@ -4,7 +4,7 @@ import { useGlobal } from "../../contexts/GlobalContext";
 import api from "../../lib/api";
 import { Category, Transaction } from "../../types";
 import { getItem } from "../../utils/storage";
-import { convertToCurrency } from "../../utils/utilities";
+import { convertToBrl, convertToCurrency } from "../../utils/utilities";
 import DeleteRegister from "../Popups/DeleteRegister";
 import "./styles.css";
 
@@ -29,6 +29,7 @@ const Register = ({ transaction }: PropsRegister) => {
     formRegister,
     setFormRegister,
     handleClear,
+    setTypeTransaction,
   } = useGlobal();
 
   const handleOpenEditModal = async () => {
@@ -44,6 +45,13 @@ const Register = ({ transaction }: PropsRegister) => {
         `transacao/detalhar/${transaction.id}`,
         { headers }
       );
+      if (register.type === "entry") {
+        setTypeTransaction("receita");
+      }
+
+      if (register.type === "output") {
+        setTypeTransaction("despesa");
+      }
 
       if (register.category_id) {
         const { data: categories } = await api.get(`categorias`, { headers });
@@ -56,11 +64,15 @@ const Register = ({ transaction }: PropsRegister) => {
         }));
       }
 
+      const formattedValue = convertToBrl(register.value);
+
+      const formattedDateString = register.date.substring(0, 10);
+
       const updatedForm = {
         description: register.description,
-        value: register.value,
+        value: formattedValue,
         category_id: register.category_id,
-        date: register.date,
+        date: formattedDateString,
         type: register.type,
         user_id: register.user_id,
         id: register.id,

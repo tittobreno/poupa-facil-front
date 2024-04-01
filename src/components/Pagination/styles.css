@@ -4,7 +4,7 @@
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
-  color: var(--violet-800);
+  color: var(--slate-700);
 }
 
 .pagination__previous,
@@ -32,9 +32,9 @@
 .pagination__previous:hover,
 .pagination__next:hover,
 .pagination-item:hover {
-  background-color: var(--violet-100);
+  background-color: var(--bg-light-100);
 }
 
 .selected-item {
-  border: 1px solid var(--violet-300);
+  border: 1px solid #cbd5e1;
 }

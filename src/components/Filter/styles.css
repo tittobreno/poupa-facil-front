@@ -22,7 +22,7 @@
   all: unset;
   padding: 1.5rem 1.5rem;
 
-  background-color: var(--violet-100);
+  background-color: var(--bg-light-50);
   box-shadow: 0px 1px 6px rgba(0, 0, 0, 0.3);
   border-radius: 0.8rem;
   display: flex;
@@ -38,7 +38,7 @@
 }
 
 .filter__btn:hover {
-  background-color: var(--violet-300);
+  background-color: var(--bg-light-100);
 }
 
 .filter__btn-icon {
@@ -54,13 +54,16 @@
 
 .filter__main {
   width: 30rem;
-  background-color: var(--violet-100);
+  background-color: var(--bg-light-50);
   border-radius: 0.8rem;
 
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   margin-top: 1rem;
+
+  border: 1px solid var(--border-light-300);
+  box-shadow: 0px 1px 6px rgba(0, 0, 0, 0.3);
 }
 .filter__content {
   padding: 2rem;
@@ -76,13 +79,13 @@
 .filter__tab {
   all: unset;
   box-sizing: border-box;
-  width: 50%;
+  width: 100%;
   text-align: center;
   font-weight: 500;
   font-size: 1.5rem;
   padding: 1rem;
   cursor: pointer;
-  background-color: var(--violet-100);
+  background-color: var(--bg-light-50);
   color: var(--disabled);
   border-bottom: 1px solid var(--disabled);
 }
@@ -96,8 +99,8 @@
 }
 
 .active-tab {
-  color: var(--violet-700);
-  border-bottom: 2px solid var(--violet-700);
+  color: #334155;
+  border-bottom: 1px solid var(--disabled);
 }
 
 .filter__main-list-categories {
@@ -117,7 +120,7 @@
   font-weight: 400;
   font-size: 1.3rem;
 
-  background-color: #faf5ff;
+  background-color: #fff;
   box-shadow: 0px 1px 6px rgba(0, 0, 0, 0.3);
   border-radius: 0.8rem;
   cursor: pointer;
@@ -175,7 +178,7 @@
 }
 
 .control__clean:hover {
-  background-color: var(--violet-300);
+  background-color: var(--bg-light-100);
 }
 
 .control__apply {

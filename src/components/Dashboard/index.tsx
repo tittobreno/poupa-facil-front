@@ -3,7 +3,7 @@ import { HiChevronDoubleDown } from "react-icons/hi";
 import { useGlobal } from "../../contexts/GlobalContext";
 import Register from "../Register";
 import "./styles.css";
-
+import Search from "../../assets/search.png";
 import usePagination from "../../hooks/usePagination";
 import transactionsService from "../../services/transactions";
 import Filter from "../Filter";
@@ -87,7 +87,8 @@ const Dashboard = () => {
         ))}
         {transactions.total === 0 && (
           <div className="register__not-found">
-            <strong>Ops! Nenhum registro encontrado.</strong>
+            <img src={Search} alt="Imagem" className="not-found-img" />
+            <span>Nenhum registro encontrado!</span>
           </div>
         )}
       </ul>

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import Logo from "../../assets/logo-l.png";
+import Logo from "../../assets/logo-x.png";
 import { useGlobal } from "../../contexts/GlobalContext";
 import api from "../../lib/api";
 import { clearLocalStorage, getItem, setItem } from "../../utils/storage";
@@ -69,7 +69,7 @@ const Header = () => {
           className="header__nav-icon"
           aria-label="Sair da aplicação"
         >
-          <HiOutlineLogout size={38} />
+          <HiOutlineLogout size={30} className="logout-icon" />
         </button>
       </nav>
     </header>

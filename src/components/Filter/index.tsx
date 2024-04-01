@@ -99,7 +99,7 @@ const Filter = ({
               Categorias
             </button>
 
-            <button
+            {/* <button
               onClick={() => setSelectedTab(2)}
               className={
                 selectedTab === 2
@@ -108,7 +108,7 @@ const Filter = ({
               }
             >
               Outros..
-            </button>
+            </button> */}
           </section>
 
           <div className="filter__content">
