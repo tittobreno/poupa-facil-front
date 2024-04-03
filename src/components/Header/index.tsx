@@ -7,6 +7,7 @@ import "./styles.css";
 import { HiUserCircle, HiOutlineLogout } from "react-icons/hi";
 import { useUser } from "../../contexts/UserContext";
 import { Link, useNavigate } from "react-router-dom";
+import ToggleTheme from "../ToggleTheme";
 const Header = () => {
   const { setIsOpenUserModal, imageUser, setImageUser } = useGlobal();
   const { setForm } = useUser();
@@ -62,6 +63,8 @@ const Header = () => {
             onClick={() => setIsOpenUserModal(true)}
             src={imageUser ?? <HiUserCircle size={44} />}
           />
+
+          <ToggleTheme />
         </div>
 
         <button

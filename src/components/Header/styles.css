@@ -6,10 +6,12 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background: linear-gradient(117deg, #020617 0%, #5b21b6 100%);
+  /* background: linear-gradient(117deg, #020617 0%, #5b21b6 100%);
+   */
 
   /* Cor de fundo */
-  background-color: #f8fafc;
+  background-color: var(--body-background);
+  color: var(--body-color);
   font-family: "Rubik", sans-serif;
 }
 
