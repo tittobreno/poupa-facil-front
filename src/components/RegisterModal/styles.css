@@ -6,7 +6,7 @@
   justify-content: center;
   width: 100vw;
   height: 100vh;
-  background: rgba(219, 222, 255, 0.48);
+  /* background: rgba(219, 222, 255, 0.48); */
   backdrop-filter: blur(4px);
   -webkit-backdrop-filter: blur(4px);
 
@@ -15,6 +15,7 @@
   left: 0;
   right: 0;
   bottom: 0;
+  z-index: 998;
 }
 
 .register__container {
@@ -25,16 +26,17 @@
   width: 48rem;
   padding: 3.5rem 5.6rem;
   border-radius: 1rem;
-  background-color: #ffffff;
+  background-color: var(--bg-color);
 
   font-family: "Rubik", sans-serif;
   z-index: 999;
+  border: 1px solid var(--input-border);
 }
 
 .register-modal__title {
   font-weight: 500;
   font-size: 2rem;
-  color: #000000;
+  color: var(--heading-color);
   margin-bottom: 3rem;
 }
 
@@ -45,12 +47,12 @@
   position: absolute;
   top: 2rem;
   right: 2rem;
-
+  color: var(--font-color);
   transition: all 0.2s ease-in-out;
 }
 
 .register__close:hover {
-color: rgb(197, 27, 18);
+  color: rgb(197, 27, 18);
 }
 
 .register__types {
@@ -62,7 +64,7 @@ color: rgb(197, 27, 18);
   all: unset;
   box-sizing: border-box;
   text-align: center;
-  color: #fff;
+  color: var(--font-color);
   width: 50%;
   padding: 14px 47px;
   cursor: pointer;
@@ -74,13 +76,13 @@ color: rgb(197, 27, 18);
 }
 
 .types__input {
-  background-color: var(--violet-700);
+  background-color: var(--primary-color);
   border-top-left-radius: 1rem;
   border-bottom-left-radius: 1rem;
 }
 
 .types__output {
-  background-color: #484848;
+  background-color: var(--bg-color);
   border-top-right-radius: 1rem;
   border-bottom-right-radius: 1rem;
 }
@@ -102,7 +104,7 @@ color: rgb(197, 27, 18);
 .register__form-label {
   font-weight: 400;
   font-size: 1.5rem;
-  color: #484848;
+  color: var(--font-color);
 }
 
 .register-modal__input {
@@ -110,33 +112,40 @@ color: rgb(197, 27, 18);
   box-sizing: border-box;
   width: 100%;
   padding: 1rem 1.4rem;
-  border: 1px solid var(--violet-500);
+  border: 2px solid var(--input-border);
   border-radius: 0.6rem;
+  color: var(--font-color);
 
   font-size: 1.4rem;
-
 
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  background-color: var(--bg-input);
 }
 
 .register-modal__input:focus {
   outline: none;
-  box-shadow: 0 0 0 0.1rem var(--violet-500);
+  box-shadow: 0 0 0 0.2rem var(--secondary-color);
 }
+
+/* .register-modal__input-select,
+.register-modal__input-date {
+  background-color: var(--bg-color);
+} */
 
 .form__btn {
   width: 100%;
-  background-color: var(--violet-500);
+  background-color: var(--secondary-color);
   border-radius: 1rem;
+  padding: 1rem;
+  margin-top: 2rem;
 }
 
 .form__section-content-wrapper {
   width: 100%;
-  display:flex;
+  display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 0.5rem;
 }
-

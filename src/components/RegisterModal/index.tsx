@@ -86,7 +86,7 @@ const RegisterModal = () => {
             handleClear();
           }}
         >
-          <HiOutlineX size={30} />
+          <HiOutlineX size={20} />
         </button>
 
         <h1 className="register-modal__title">
@@ -114,9 +114,8 @@ const RegisterModal = () => {
               <label className="register__form-label">Categoria</label>
               <select
                 name="category_id"
-                className="register-modal__input"
+                className="register-modal__input register-modal__input-select"
                 value={formRegister.category_id}
-                placeholder="asdasdas"
                 onChange={(event) =>
                   setFormRegister({
                     ...formRegister,
@@ -141,7 +140,7 @@ const RegisterModal = () => {
               </label>
               <input
                 name="data"
-                className="register-modal__input"
+                className="register-modal__input register-modal__input-date"
                 id="date"
                 type="date"
                 value={formRegister.date}

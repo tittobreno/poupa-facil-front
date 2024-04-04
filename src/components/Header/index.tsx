@@ -12,7 +12,6 @@ const Header = () => {
   const { setIsOpenUserModal, imageUser, setImageUser } = useGlobal();
   const { setForm } = useUser();
   const Navigate = useNavigate();
-  const [userName, setUserName] = useState("");
 
   useEffect(() => {
     const fetchData = async () => {
@@ -34,7 +33,6 @@ const Header = () => {
 
         const imageUrl = URL.createObjectURL(blob);
 
-        setUserName(data.name);
         setImageUser(imageUrl);
       } catch (error: any) {
         console.log(error.message);
@@ -55,13 +53,11 @@ const Header = () => {
       <img className="header__logo" src={Logo} alt="" />
       <nav className="header__nav">
         <div className="header__profile">
-          <span className="header__nav-username">{userName}</span>
-
           <img
-            className=" profile "
+            className="profile"
             aria-label="Perfil de usuário"
             onClick={() => setIsOpenUserModal(true)}
-            src={imageUser ?? <HiUserCircle size={44} />}
+            src={imageUser ?? <HiUserCircle size={25} />}
           />
 
           <ToggleTheme />

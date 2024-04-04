@@ -4,7 +4,7 @@
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
-  color: var(--slate-700);
+  color: var(--font-color);
 }
 
 .pagination__previous,
@@ -32,7 +32,7 @@
 .pagination__previous:hover,
 .pagination__next:hover,
 .pagination-item:hover {
-  background-color: var(--bg-light-100);
+  background-color: var(--bg-color);
 }
 
 .selected-item {

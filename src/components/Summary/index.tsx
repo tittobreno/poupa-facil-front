@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useGlobal } from "../../contexts/GlobalContext";
 import api from "../../lib/api";
-import { getItem } from "../../utils/storage";
+import { getItem, setItem } from "../../utils/storage";
 import "./styles.css";
 import { SummaryValues } from "../../types";
 import { convertToCurrency } from "../../utils/utilities";
@@ -52,10 +52,21 @@ const Summary = () => {
 
   useEffect(() => {
     handleGetSummary();
+    const isVisibleSelected = getItem("isValueVisible");
+    if (isVisibleSelected === "false") {
+      setValueIsVisible(false);
+    }
   }, [transactions]);
 
   const toggleVisibleValue = () => {
     setValueIsVisible(!isValueVisible);
+    if (!isValueVisible === true) {
+      setItem("isValueVisible", "true");
+    }
+
+    if (!isValueVisible === false) {
+      setItem("isValueVisible", "false");
+    }
   };
 
   return (
