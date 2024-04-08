@@ -15,23 +15,6 @@ const UserFormUpdate = ({
 
   return (
     <>
-      <button
-        onClick={() => {
-          setEditData(false);
-          setForm({
-            name: "",
-            email: "",
-            currentPassword: "",
-            newPassword: "",
-            passwordConfirmation: "",
-          });
-        }}
-        className="edit-user-modal__back"
-      >
-        <HiOutlineArrowSmLeft size={30} />
-        Voltar
-      </button>
-
       <section className="edit-user-modal__form-section">
         <label htmlFor="name" className="edit-user-modal__label">
           Nome
@@ -59,13 +42,31 @@ const UserFormUpdate = ({
           onChange={(event) => setForm({ ...form, email: event.target.value })}
         />
       </section>
-      <button
-        className="edit-user-modal__btn"
-        type="button"
-        onClick={() => handleEditUser(form)}
-      >
-        Alterar
-      </button>
+
+      <div className="password-box">
+        <button
+          onClick={() => {
+            setEditData(false);
+            setForm({
+              name: "",
+              email: "",
+              currentPassword: "",
+              newPassword: "",
+              passwordConfirmation: "",
+            });
+          }}
+          className="edit-user-modal__back"
+        >
+          Voltar
+        </button>
+        <button
+          className="edit-user-modal__btn"
+          type="button"
+          onClick={() => handleEditUser(form)}
+        >
+          Confirmar
+        </button>
+      </div>
     </>
   );
 };

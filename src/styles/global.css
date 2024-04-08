@@ -8,6 +8,7 @@
   --primary-color: #6d28d9;
   --secondary-color: #8b5cf6;
   --font-color: #334155;
+  --secondary-font-color: #f1f5f9;
   --bg-color: #e2e8f0;
   --bg-hover: #e2e8f0;
   --bg-input: #f1f5f9;
@@ -15,6 +16,7 @@
   --heading-color: #1e293b;
   
   --input-border: #cbd5e1;
+  --drop-shadow-color: rgba(0, 0, 0, 0.3); 
   
 }
 
@@ -33,6 +35,8 @@
 
 --heading-color: #f1f5f9;
 --input-border: #3f3f46;
+
+--drop-shadow-color: rgba(63, 63, 70, 0.3);
 
 
 }

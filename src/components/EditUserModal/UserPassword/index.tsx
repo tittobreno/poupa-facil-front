@@ -15,22 +15,6 @@ const UserPassword = ({
   const { form, setForm } = useUser();
   return (
     <main className="edit-password__container">
-      <button
-        onClick={(event) => {
-          setEditPassword(false);
-          setForm({
-            name: "",
-            email: "",
-            currentPassword: "",
-            newPassword: "",
-            passwordConfirmation: "",
-          });
-        }}
-        className="edit-user-modal__back"
-      >
-        <HiOutlineArrowSmLeft size={30} />
-        Voltar
-      </button>
       <section className="edit-user-modal__form-section">
         <label htmlFor="current-password" className="edit-user-modal__label">
           Senha atual
@@ -81,13 +65,30 @@ const UserPassword = ({
         </section>
       </section>
 
-      <button
-        onClick={() => handleEditUser(form)}
-        type="button"
-        className="edit-user-modal__btn"
-      >
-        Confirmar
-      </button>
+      <div className="password-box">
+        <button
+          onClick={(event) => {
+            setEditPassword(false);
+            setForm({
+              name: "",
+              email: "",
+              currentPassword: "",
+              newPassword: "",
+              passwordConfirmation: "",
+            });
+          }}
+          className="edit-user-modal__back"
+        >
+          Voltar
+        </button>
+        <button
+          onClick={() => handleEditUser(form)}
+          type="button"
+          className="edit-user-modal__btn"
+        >
+          Confirmar
+        </button>
+      </div>
     </main>
   );
 };

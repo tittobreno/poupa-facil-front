@@ -63,12 +63,12 @@ const UserData = ({ setEditData, setEditPassword }: UserDataProps) => {
       <img src={image} alt="" />
       <section className="edit-user-modal__user-data-section">
         <strong className="edit-user-modal__user-data-label">Nome</strong>
-        <span>{localUser.name}</span>
+        <span className="edit-user-modal__value">{localUser.name}</span>
       </section>
 
       <section className="edit-user-modal__user-data-section">
         <strong className="edit-user-modal__user-data-label">Email</strong>
-        <span>{localUser.email}</span>
+        <span className="edit-user-modal__value">{localUser.email}</span>
       </section>
 
       <section className="edit-user-modal__user-container-btn">

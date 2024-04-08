@@ -1,12 +1,18 @@
 .edit-password__container {
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
 }
 
 .edit-user-modal__form-compare-password {
-    display:flex;
-    align-items: center;
-    gap: 1rem;
-    width: 100%;
-    margin-bottom: 2rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  width: 100%;
+  margin-bottom: 2rem;
+}
+
+.password-box {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }

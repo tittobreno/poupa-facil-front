@@ -8,8 +8,8 @@
   flex-direction: column;
   padding: 3.5rem 5.6rem;
   border-radius: 1rem;
-  background-color: #ffffff;
-
+  background-color: var(--body-background);
+  border: 2px solid var(--input-border);
   font-family: "Runik", sans-serif;
   z-index: 10;
 }
@@ -20,19 +20,13 @@
   right: 20px;
   cursor: pointer;
   transition: transform 0.1s ease-in-out;
+  color: var(--font-color);
 }
 
 .edit-user-modal__title {
   font-size: 2rem;
   margin-bottom: 2rem;
-}
-
-.edit-user-modal__close:hover {
-  transform: scale(1.1);
-}
-
-.edit-user-modal__close:active {
-  transform: scale(0.95);
+  color: var(--heading-color);
 }
 
 .edit-user-modal__form {
@@ -64,17 +58,16 @@
   border-radius: 1rem;
   padding: 1rem;
   cursor: pointer;
-  background-color: var(--violet-100);
+  background-color: var(--bg-color);
   transition: all 0.2s ease-in-out;
 }
 
 .section-avatar__btn:hover {
-  background-color: var(--violet-500);
-  color: #fff;
+  background-color: var(--bg-hover);
 }
 
 .section-avatar__img {
-  color: var(--violet-700);
+  color: var(--primary-color);
 }
 
 .edit-user-modal__form-section {
@@ -88,7 +81,7 @@
 .edit-user-modal__label {
   font-weight: 500;
   font-size: 1.5rem;
-  color: #484848;
+  color: var(--font-color);
 }
 
 .edit-user-modal__input {
@@ -96,51 +89,53 @@
   box-sizing: border-box;
   width: 100%;
   padding: 0.8rem 1.4rem;
-  border: 1px solid var(--violet-500);
+  border: 1px solid var(--input-border);
   border-radius: 0.6rem;
+  color: var(--font-color);
 }
 
 .edit-user-modal__input:focus {
-  box-shadow: 0 0 0 0.1rem var(--violet-500);
+  box-shadow: 0 0 0 0.2rem var(--violet-500);
 }
 
 .edit-user-modal__btn {
   all: unset;
   box-sizing: border-box;
-  padding: 1.6rem 10rem;
+  padding: 1rem 2rem;
   border-radius: 1rem;
   text-align: center;
-  background-color: var(--violet-700);
+  background-color: var(--primary-color);
   cursor: pointer;
   transition: all 0.2s ease-in-out;
-  color: white;
-}
-
-.edit-user-modal__btn:hover {
-  background-color: var(--violet-800);
-}
-
-.edit-user-modal__btn:active {
-  transform: scale(0.98);
+  color: var(--font-color);
 }
 
 .edit-user-modal__back {
   all: unset;
   display: flex;
   align-items: center;
-  gap: 0.4rem;
-  width: 8rem;
-  border-radius: 0.8rem;
+  box-sizing: border-box;
+  padding: 1rem 2rem;
+  border-radius: 1rem;
+  text-align: center;
+  background-color: var(--bg-color);
   cursor: pointer;
-  color: #000;
-  background-color: var(--violet-100);
-  font-size: 1.4rem;
-  margin-bottom: 2rem;
+  transition: all 0.2s ease-in-out;
+  color: var(--font-color);
+  border: 1px solid var(--input-border);
+  box-shadow: 0px 1px 6px rgba(0, 0, 0, 0.3);
 }
 
 .edit-user-modal__back:hover {
-  background-color: var(--violet-500);
-  color: #fff;
+  background-color: var(--bg-hover);
+}
+
+.edit-user-modal__btn:hover {
+  opacity: 0.8;
+}
+
+.edit-user-modal__btn:active {
+  transform: scale(0.98);
 }
 
 .edit-user-modal-question-password {
@@ -159,14 +154,16 @@
   border-radius: 0.8rem;
   padding: 1rem;
   cursor: pointer;
-  color: var(--bg-light-50);
-  background-color: var(--slate-700);
+  color: var(--font-color);
+  background-color: var(--bg-color);
   font-size: 1.6rem;
   transition: all 0.2s ease-in-out;
+  border: 1px solid var(--input-border);
+  box-shadow: 0px 1px 6px rgba(0, 0, 0, 0.3);
 }
 
 .question-password-button-label {
-  color: #b8b8b8;
+  color: var(--font-color);
   font-weight: 500;
   font-size: 1.8rem;
 }
@@ -198,10 +195,10 @@
   border-radius: 1rem;
   padding: 0.7rem;
   cursor: pointer;
-  background-color: var(--slate-700);
-  color: var(--bg-light-50);
+  background-color: var(--bg-color);
+  color: var(--font-color);
   transition: all 0.2s ease-in-out;
-  border: 1px solid var(--border-light-300);
+  border: 2px solid var(--input-border);
   box-shadow: 0px 1px 6px rgba(0, 0, 0, 0.3);
 
   position: absolute;
@@ -209,15 +206,11 @@
   left: 55%;
 }
 
-.custom-file-button:hover {
-  opacity: 0.9;
-}
-
 .custom-img-preview {
   width: 15rem;
   height: 15rem;
   border-radius: 50%;
 
-  border: 1px solid var(--border-light-300);
-  box-shadow: 0px 1px 6px rgba(0, 0, 0, 0.3);
+  border: 2px solid var(--input-border);
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.5);
 }

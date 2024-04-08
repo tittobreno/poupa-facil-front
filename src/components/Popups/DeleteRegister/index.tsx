@@ -3,7 +3,7 @@ import { useGlobal } from "../../../contexts/GlobalContext";
 import "./styles.css";
 import api from "../../../lib/api";
 import { getItem } from "../../../utils/storage";
-
+import { IoCaretUp } from "react-icons/io5";
 type DeleteRegisterProps = {
   registerId: number;
   setShowPopUp: (newValue: boolean) => void;
@@ -16,7 +16,7 @@ const DeleteRegister = ({
   showPopUp,
 }: DeleteRegisterProps) => {
   const refDeleteRegister = useRef<HTMLDivElement>(null);
-  const { handleShowToast, handleGetRegisters } = useGlobal();
+  const { handleShowToast } = useGlobal();
   const [isPopupOpened, setIsPopupOpened] = useState(false);
 
   const handleClickOutside = (event: MouseEvent) => {
@@ -52,29 +52,33 @@ const DeleteRegister = ({
 
       handleShowToast("Registro deletado com sucesso!");
       setShowPopUp(false);
-      handleGetRegisters();
     } catch (error) {
       console.log(error);
     }
   };
 
   return (
-    <div ref={refDeleteRegister} className="delete-register__container">
-      <span className="delete-register__title">Apagar item?</span>
-      <section className="delete-register__buttons">
-        <button
-          className="delete-register__buttons-btn delete-register__buttons-yes"
-          onClick={() => handleDelete(registerId)}
-        >
-          Sim
-        </button>
-        <button
-          className="delete-register__buttons-btn delete-register__buttons-not"
-          onClick={() => setShowPopUp(false)}
-        >
-          Não
-        </button>
-      </section>
+    <div className="delete-register-indicate">
+      <div ref={refDeleteRegister} className="delete-register__container">
+        <span className="delete-register__title">Apagar item?</span>
+
+        <section className="delete-register__buttons">
+          <button
+            className="delete-register__buttons-btn delete-register__buttons-not"
+            onClick={() => setShowPopUp(false)}
+          >
+            Não
+          </button>
+
+          <button
+            className="delete-register__buttons-btn delete-register__buttons-yes"
+            onClick={() => handleDelete(registerId)}
+          >
+            Sim
+          </button>
+        </section>
+        <IoCaretUp size={18} className="caret-down-indicate" />
+      </div>
     </div>
   );
 };
