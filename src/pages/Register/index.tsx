@@ -4,7 +4,7 @@ import { useGlobal } from "../../contexts/GlobalContext";
 import "./styles.css";
 import { FormEvent, FormEventHandler } from "react";
 import { useUser } from "../../contexts/UserContext";
-import api from "../../lib/api";
+import api from "../../lib/axios";
 import { motion } from "framer-motion";
 
 const Register = () => {

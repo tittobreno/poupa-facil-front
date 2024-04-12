@@ -1,11 +1,11 @@
 import { HiOutlineX } from "react-icons/hi";
 import { useGlobal } from "../../contexts/GlobalContext";
 import "./styles.css";
-import api from "../../lib/api";
+import api from "../../lib/axios";
 import { getItem } from "../../utils/storage";
 import { ChangeEvent, FormEvent, useEffect, useState } from "react";
 import { convertToCents } from "../../utils/utilities";
-import transactionsService from "../../services/transactions";
+import transactionsService from "../../services";
 const RegisterModal = () => {
   const {
     setIsOpenRegisterModal,

@@ -28,3 +28,8 @@ export type SummaryValues = {
   expenses: number;
   balance: number;
 };
+
+export interface TransactionsList {
+  total: number;
+  listUserTransactions: Transaction[];
+}

@@ -5,7 +5,7 @@ import {
   useContext,
   useState,
 } from "react";
-import api from "../lib/api";
+import api from "../lib/axios";
 import { Category, Transaction } from "../types";
 import { getItem } from "../utils/storage";
 

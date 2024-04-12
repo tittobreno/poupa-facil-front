@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { useGlobal } from "../../../contexts/GlobalContext";
 import "./styles.css";
-import api from "../../../lib/api";
+import api from "../../../lib/axios";
 import { getItem } from "../../../utils/storage";
 import { IoCaretUp } from "react-icons/io5";
 type DeleteRegisterProps = {

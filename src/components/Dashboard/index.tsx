@@ -5,9 +5,11 @@ import Register from "../Register";
 import "./styles.css";
 import Search from "../../assets/search.png";
 import usePagination from "../../hooks/usePagination";
-import transactionsService from "../../services/transactions";
+import transactionsService from "../../services";
 import Filter from "../Filter";
 import Pagination from "../Pagination";
+import { useGetAll } from "../../services/query";
+import { TransactionsList } from "../../types";
 export interface ParamsType {
   skip: number;
   take: number;
@@ -31,14 +33,17 @@ const Dashboard = () => {
     categories: [],
   });
 
-  const fetchData = async () => {
-    const data = await transactionsService.getAll(params);
-    setTransactions(data);
-    setTotalItems(data.total);
-  };
+  const { data, refetch } = useGetAll<TransactionsList>({
+    url: "transacao/listar",
+    params,
+  });
 
   useEffect(() => {
-    fetchData();
+    if (data) {
+      setTransactions(data);
+      setTotalItems(data?.total);
+    }
+    refetch();
   }, [setTotalItems, params.skip, params.take]);
 
   useEffect(() => {
@@ -64,7 +69,7 @@ const Dashboard = () => {
         <Filter
           params={params}
           setParams={setParams}
-          fetchData={fetchData}
+          refetch={refetch}
           setTotalItems={setTotalItems}
           currentPage={currentPage}
         />
@@ -82,23 +87,26 @@ const Dashboard = () => {
         </section>
       </div>
       <ul className="dashboard__registers">
-        {transactions.listUserTransactions.map((transaction) => (
-          <Register key={transaction.id} transaction={transaction} />
-        ))}
-        {transactions.total === 0 && (
+        {data && data?.total > 0 ? (
+          data.listUserTransactions.map((transaction) => (
+            <Register key={transaction.id} transaction={transaction} />
+          ))
+        ) : (
           <div className="register__not-found">
             <img src={Search} alt="Imagem" className="not-found-img" />
             <span>Nenhum registro encontrado!</span>
           </div>
         )}
       </ul>
-      <Pagination
-        currentPage={currentPage}
-        totalPages={totalPages}
-        nextPage={handleNextPage}
-        prevPage={handlePrevPage}
-        goToPage={goToPage}
-      />
+      {data && data?.total > 0 && (
+        <Pagination
+          currentPage={currentPage}
+          totalPages={totalPages}
+          nextPage={handleNextPage}
+          prevPage={handlePrevPage}
+          goToPage={goToPage}
+        />
+      )}
     </div>
   );
 };

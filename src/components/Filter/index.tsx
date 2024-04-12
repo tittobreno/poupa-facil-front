@@ -4,29 +4,25 @@ import { MdOutlineArrowDropDownCircle } from "react-icons/md";
 import { HiBarsArrowDown, HiBarsArrowUp } from "react-icons/hi2";
 
 import { useGlobal } from "../../contexts/GlobalContext";
-import transactionsService from "../../services/transactions";
+import transactionsService from "../../services";
 import { Category } from "../../types";
 import { ParamsType } from "../Dashboard";
 import "./styles.css";
+import { useQueryClient } from "@tanstack/react-query";
 
 interface FilterProps {
   params: ParamsType;
   setParams: Dispatch<SetStateAction<ParamsType>>;
-  fetchData: any;
+  refetch: any;
   setTotalItems: any;
   currentPage: any;
 }
 
-const Filter = ({
-  params,
-  setParams,
-  fetchData,
-  setTotalItems,
-  currentPage,
-}: FilterProps) => {
+const Filter = ({ params, setParams, refetch }: FilterProps) => {
   const [openFilter, setOpenFilter] = useState(false);
   const [selectedTab, setSelectedTab] = useState(1);
-  const { setTransactions, categories, getCategories } = useGlobal();
+  const { categories, getCategories } = useGlobal();
+  const queryClient = useQueryClient();
   const handleOpenFilter = (status: boolean) => {
     if (!status) {
       setOpenFilter(true);
@@ -57,13 +53,8 @@ const Filter = ({
       take: 10,
       categories: [],
     });
-    const data = await transactionsService.getAll({
-      skip: (currentPage - 1) * 10,
-      take: 10,
-    });
-
-    setTransactions(data);
-    setTotalItems(data.total);
+    await queryClient.invalidateQueries({ queryKey: ["transacao/listar"] });
+    refetch();
   };
 
   useEffect(() => {
@@ -145,7 +136,7 @@ const Filter = ({
               Limpar
             </button>
             <button
-              onClick={() => fetchData()}
+              onClick={() => refetch()}
               className="filter__control control__apply"
             >
               Aplicar

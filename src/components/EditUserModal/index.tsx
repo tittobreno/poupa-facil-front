@@ -2,7 +2,7 @@ import "./styles.css";
 import { HiOutlineArrowSmLeft, HiOutlineX, HiUserCircle } from "react-icons/hi";
 import { HiOutlinePencilSquare } from "react-icons/hi2";
 import { useGlobal } from "../../contexts/GlobalContext";
-import api from "../../lib/api";
+import api from "../../lib/axios";
 import { ChangeEvent, FormEvent, MouseEvent, useEffect, useState } from "react";
 import { useUser } from "../../contexts/UserContext";
 import { getItem } from "../../utils/storage";
