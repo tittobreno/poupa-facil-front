@@ -6,7 +6,7 @@ import {
   useState,
 } from "react";
 import api from "../lib/axios";
-import { Category, Transaction } from "../types";
+import { Category, Transaction } from "../models";
 import { getItem } from "../utils/storage";
 
 interface TransactionsType {

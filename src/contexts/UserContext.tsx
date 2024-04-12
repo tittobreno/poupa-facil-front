@@ -2,7 +2,7 @@ import { ChangeEvent, createContext, useContext, useState } from "react";
 import api from "../lib/axios";
 import { getItem } from "../utils/storage";
 import { useGlobal } from "./GlobalContext";
-import { User } from "../types";
+import { User } from "../models";
 
 interface DataUser {
   name: string;

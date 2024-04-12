@@ -1,14 +1,12 @@
-import { Dispatch, SetStateAction, useEffect, useState } from "react";
-import { HiFilter, HiPlusSm } from "react-icons/hi";
-import { MdOutlineArrowDropDownCircle } from "react-icons/md";
+import { Dispatch, SetStateAction, useState } from "react";
+import { HiPlusSm } from "react-icons/hi";
 import { HiBarsArrowDown, HiBarsArrowUp } from "react-icons/hi2";
 
-import { useGlobal } from "../../contexts/GlobalContext";
-import transactionsService from "../../services";
-import { Category } from "../../types";
+import { useQueryClient } from "@tanstack/react-query";
+import { useGetAll } from "../../services/query";
+import { Category } from "../../models";
 import { ParamsType } from "../Dashboard";
 import "./styles.css";
-import { useQueryClient } from "@tanstack/react-query";
 
 interface FilterProps {
   params: ParamsType;
@@ -21,8 +19,10 @@ interface FilterProps {
 const Filter = ({ params, setParams, refetch }: FilterProps) => {
   const [openFilter, setOpenFilter] = useState(false);
   const [selectedTab, setSelectedTab] = useState(1);
-  const { categories, getCategories } = useGlobal();
   const queryClient = useQueryClient();
+
+  const { data } = useGetAll<Category[]>({ url: "categorias" });
+
   const handleOpenFilter = (status: boolean) => {
     if (!status) {
       setOpenFilter(true);
@@ -56,10 +56,6 @@ const Filter = ({ params, setParams, refetch }: FilterProps) => {
     await queryClient.invalidateQueries({ queryKey: ["transacao/listar"] });
     refetch();
   };
-
-  useEffect(() => {
-    getCategories();
-  }, []);
 
   return (
     <div className="filter__container">
@@ -106,20 +102,21 @@ const Filter = ({ params, setParams, refetch }: FilterProps) => {
             {selectedTab === 1 ? (
               <div>
                 <section className="filter__main-list-categories">
-                  {categories.map((category) => (
-                    <button
-                      onClick={() => handleCategoryClick(category)}
-                      key={category.id}
-                      className={
-                        params.categories.includes(category.id)
-                          ? "category__item--selected"
-                          : "filter__main-category-item"
-                      }
-                    >
-                      {category.title}
-                      <HiPlusSm />
-                    </button>
-                  ))}
+                  {data &&
+                    data.map((category) => (
+                      <button
+                        onClick={() => handleCategoryClick(category)}
+                        key={category.id}
+                        className={
+                          params.categories.includes(category.id)
+                            ? "category__item--selected"
+                            : "filter__main-category-item"
+                        }
+                      >
+                        {category.title}
+                        <HiPlusSm />
+                      </button>
+                    ))}
                 </section>
               </div>
             ) : (

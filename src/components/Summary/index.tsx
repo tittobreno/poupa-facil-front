@@ -3,7 +3,7 @@ import { useGlobal } from "../../contexts/GlobalContext";
 import api from "../../lib/axios";
 import { getItem, setItem } from "../../utils/storage";
 import "./styles.css";
-import { SummaryValues } from "../../types";
+import { SummaryValues } from "../../models";
 import { convertToCurrency } from "../../utils/utilities";
 import { HiMinus, HiOutlinePlus } from "react-icons/hi";
 import { BsEye, BsEyeSlash } from "react-icons/bs";

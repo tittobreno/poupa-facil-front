@@ -1,5 +1,4 @@
 import api from "../lib/axios";
-import { Transaction } from "../types";
 import { getItem } from "../utils/storage";
 
 interface ParamsType {

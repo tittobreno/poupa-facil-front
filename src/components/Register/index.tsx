@@ -2,7 +2,7 @@ import { useState } from "react";
 import { HiOutlinePencilSquare, HiOutlineTrash } from "react-icons/hi2";
 import { useGlobal } from "../../contexts/GlobalContext";
 import api from "../../lib/axios";
-import { Category, Transaction } from "../../types";
+import { Category, Transaction } from "../../models";
 import { getItem } from "../../utils/storage";
 import { convertToBrl, convertToCurrency } from "../../utils/utilities";
 import DeleteRegister from "../Popups/DeleteRegister";

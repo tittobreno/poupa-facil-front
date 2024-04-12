@@ -1,7 +1,7 @@
 import { HiOutlinePencilSquare } from "react-icons/hi2";
 import { useUser } from "../../../contexts/UserContext";
 import { HiOutlineArrowSmLeft } from "react-icons/hi";
-import { User } from "../../../types";
+import { User } from "../../../models";
 import "./styles.css";
 interface UserPasswordProps {
   setEditPassword: (newState: boolean) => void;

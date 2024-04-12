@@ -1,6 +1,6 @@
 import { HiOutlineArrowSmLeft } from "react-icons/hi";
 import { useUser } from "../../../contexts/UserContext";
-import { User } from "../../../types";
+import { User } from "../../../models";
 
 interface UserFormUpdateProps {
   setEditData: (newState: boolean) => void;

@@ -9,7 +9,7 @@ import { getItem } from "../../utils/storage";
 import UserData from "./UserData";
 import UserPassword from "./UserPassword";
 import UserFormUpdate from "./UserFormUpdate";
-import { User } from "../../types";
+import { User } from "../../models";
 
 const EditUserModal = () => {
   const [editData, setEditData] = useState(false);

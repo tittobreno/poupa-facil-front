@@ -1,15 +1,13 @@
 import { useEffect, useState } from "react";
-import { HiChevronDoubleDown } from "react-icons/hi";
+import Search from "../../assets/search-file.svg";
 import { useGlobal } from "../../contexts/GlobalContext";
-import Register from "../Register";
-import "./styles.css";
-import Search from "../../assets/search.png";
 import usePagination from "../../hooks/usePagination";
-import transactionsService from "../../services";
+import { TransactionsList } from "../../models";
+import { useGetAll } from "../../services/query";
 import Filter from "../Filter";
 import Pagination from "../Pagination";
-import { useGetAll } from "../../services/query";
-import { TransactionsList } from "../../types";
+import Register from "../Register";
+import "./styles.css";
 export interface ParamsType {
   skip: number;
   take: number;
@@ -17,7 +15,7 @@ export interface ParamsType {
 }
 const Dashboard = () => {
   const [order, setOrder] = useState(false);
-  const { transactions, setTransactions } = useGlobal();
+  const { setTransactions } = useGlobal();
   const {
     currentPage,
     totalPages,
