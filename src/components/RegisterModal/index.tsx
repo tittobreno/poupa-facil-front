@@ -1,32 +1,32 @@
+import { ChangeEvent, FormEvent, useEffect } from "react";
 import { HiOutlineX } from "react-icons/hi";
 import { useGlobal } from "../../contexts/GlobalContext";
-import "./styles.css";
-import api from "../../lib/axios";
-import { getItem } from "../../utils/storage";
-import { ChangeEvent, FormEvent, useEffect, useState } from "react";
-import { convertToCents } from "../../utils/utilities";
-import transactionsService from "../../services";
 import { useTransaction } from "../../services/query";
-import { useToast } from "../../hooks/useToast";
+import { convertToCents } from "../../utils/utilities";
+import "./styles.css";
 const RegisterModal = () => {
-  const { create } = useTransaction;
+  const queryKey = ["transacao/listar"];
+  const { create, edit } = useTransaction;
+
+  const { mutate: editMutate } = edit<any>({
+    url: "/transacao/editar/",
+    queryKey,
+  });
 
   const { mutate } = create<any>({
     url: "/transacao/cadastrar",
-    queryKey: ["transacao/listar"],
+    queryKey,
   });
 
   const {
     setIsOpenRegisterModal,
     typeRegisterModal,
-    handleShowToast,
     formRegister,
     setFormRegister,
     getCategories,
     categories,
     handleClear,
     typeTransaction,
-    setTransactions,
   } = useGlobal();
 
   const handleSubmitRegister = async (event: FormEvent) => {
@@ -42,17 +42,8 @@ const RegisterModal = () => {
         category_id: Number(formRegister.category_id),
       };
 
-      const config = {
-        headers: { Authorization: `Bearer ${getItem("token")}` },
-      };
-
       if (typeRegisterModal === "Editar") {
-        await api.put(
-          `/transacao/editar/${formRegister.id}`,
-          commonData,
-          config
-        );
-        handleShowToast("Registro editado com sucesso!");
+        editMutate({ data: commonData, id: formRegister.id });
       } else if (typeRegisterModal === "Adicionar") {
         mutate(commonData);
       }

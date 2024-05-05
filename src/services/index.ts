@@ -17,6 +17,12 @@ interface CreateProps {
   data: any;
 }
 
+interface Editprops {
+  url: string;
+  data: any;
+  id: number;
+}
+
 interface DeleteProps {
   url: string;
   id: number;
@@ -39,6 +45,12 @@ const transactionService = {
 
   create: async <T>({ url, data }: CreateProps) => {
     const res = await api.post<T>(url, data, { headers });
+
+    return res.data;
+  },
+
+  edit: async <T>({ url, data, id }: Editprops) => {
+    const res = await api.put<T>(`${url}${id}`, data, { headers });
 
     return res.data;
   },

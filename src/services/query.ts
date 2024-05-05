@@ -58,6 +58,27 @@ export const useTransaction = {
     });
   },
 
+  edit: <T>({ url, queryKey }: CreateProps) => {
+    const toast = useToast();
+
+    const queryClient = useQueryClient();
+
+    return useMutation({
+      mutationFn: async ({ data, id }: any) => {
+        const res = await transactionService.edit<T>({ url, data, id });
+
+        return res;
+      },
+      onError: (error) => {
+        toast.error(`Erro ao editar um registro: ${error}`);
+      },
+      onSuccess: () => {
+        queryClient.invalidateQueries({ queryKey });
+        toast.success("Registro editado com sucesso!");
+      },
+    });
+  },
+
   delete: ({ url, queryKey }: DeleteProps) => {
     const queryClient = useQueryClient();
     const toast = useToast();
