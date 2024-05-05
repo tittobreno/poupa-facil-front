@@ -17,6 +17,11 @@ interface CreateProps {
   data: any;
 }
 
+interface DeleteProps {
+  url: string;
+  id: number;
+}
+
 const headers = {
   Authorization: `Bearer ${getItem("token")}`,
 };
@@ -34,6 +39,14 @@ const transactionService = {
 
   create: async <T>({ url, data }: CreateProps) => {
     const res = await api.post<T>(url, data, { headers });
+
+    return res.data;
+  },
+
+  delete: async ({ url, id }: DeleteProps) => {
+    const res = await api.delete(`${url}${id}`, {
+      headers,
+    });
 
     return res.data;
   },

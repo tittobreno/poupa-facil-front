@@ -14,6 +14,11 @@ interface CreateProps {
   queryKey: string[];
 }
 
+interface DeleteProps {
+  url: string;
+  queryKey: string[];
+}
+
 export const useTransaction = {
   getAll: <T>({
     url,
@@ -44,11 +49,31 @@ export const useTransaction = {
         return res;
       },
       onError: (error) => {
-        console.log(error);
+        toast.error(`Erro ao adicionar um registro: ${error}`);
       },
       onSuccess: () => {
         queryClient.invalidateQueries({ queryKey });
         toast.success("Registro adicionado com sucesso!");
+      },
+    });
+  },
+
+  delete: ({ url, queryKey }: DeleteProps) => {
+    const queryClient = useQueryClient();
+    const toast = useToast();
+
+    return useMutation({
+      mutationFn: async (id: number) => {
+        const res = await transactionService.delete({ url, id });
+
+        return res;
+      },
+      onError: async (error) => {
+        toast.error(`Erro ao deletar o registro: ${error.message}`);
+      },
+      onSuccess: () => {
+        queryClient.invalidateQueries({ queryKey });
+        toast.success("Registro deletado com sucesso!");
       },
     });
   },

@@ -1,23 +1,21 @@
 import { useEffect, useRef, useState } from "react";
-import { useGlobal } from "../../../contexts/GlobalContext";
-import "./styles.css";
-import api from "../../../lib/axios";
-import { getItem } from "../../../utils/storage";
 import { IoCaretUp } from "react-icons/io5";
+import { useTransaction } from "../../../services/query";
+import "./styles.css";
 type DeleteRegisterProps = {
   registerId: number;
   setShowPopUp: (newValue: boolean) => void;
   showPopUp: boolean;
 };
 
-const DeleteRegister = ({
-  registerId,
-  setShowPopUp,
-  showPopUp,
-}: DeleteRegisterProps) => {
+const DeleteRegister = ({ registerId, setShowPopUp }: DeleteRegisterProps) => {
   const refDeleteRegister = useRef<HTMLDivElement>(null);
-  const { handleShowToast } = useGlobal();
   const [isPopupOpened, setIsPopupOpened] = useState(false);
+
+  const { mutate } = useTransaction.delete({
+    url: "transacao/deletar/",
+    queryKey: ["transacao/listar"],
+  });
 
   const handleClickOutside = (event: MouseEvent) => {
     if (
@@ -43,18 +41,8 @@ const DeleteRegister = ({
   }, [isPopupOpened]);
 
   const handleDelete = async (id: number) => {
-    try {
-      await api.delete(`/transacao/deletar/${id}`, {
-        headers: {
-          Authorization: `Bearer ${getItem("token")}`,
-        },
-      });
-
-      handleShowToast("Registro deletado com sucesso!");
-      setShowPopUp(false);
-    } catch (error) {
-      console.log(error);
-    }
+    mutate(id);
+    setShowPopUp(false);
   };
 
   return (
