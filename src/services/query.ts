@@ -19,8 +19,8 @@ interface DeleteProps {
   queryKey: string[];
 }
 
-export const useTransaction = {
-  getAll: <T>({
+export const useTransaction = () => {
+  const getAll = <T>({
     url,
     params,
     enabled = true,
@@ -35,9 +35,9 @@ export const useTransaction = {
       enabled,
       refetchOnWindowFocus,
     });
-  },
+  };
 
-  create: <T>({ url, queryKey }: CreateProps) => {
+  const create = <T>({ url, queryKey }: CreateProps) => {
     const toast = useToast();
 
     const queryClient = useQueryClient();
@@ -56,9 +56,9 @@ export const useTransaction = {
         toast.success("Registro adicionado com sucesso!");
       },
     });
-  },
+  };
 
-  edit: <T>({ url, queryKey }: CreateProps) => {
+  const edit = <T>({ url, queryKey }: CreateProps) => {
     const toast = useToast();
 
     const queryClient = useQueryClient();
@@ -77,9 +77,9 @@ export const useTransaction = {
         toast.success("Registro editado com sucesso!");
       },
     });
-  },
+  };
 
-  delete: ({ url, queryKey }: DeleteProps) => {
+  const remove = ({ url, queryKey }: DeleteProps) => {
     const queryClient = useQueryClient();
     const toast = useToast();
 
@@ -97,5 +97,12 @@ export const useTransaction = {
         toast.success("Registro deletado com sucesso!");
       },
     });
-  },
+  };
+
+  return {
+    getAll,
+    create,
+    edit,
+    remove,
+  };
 };

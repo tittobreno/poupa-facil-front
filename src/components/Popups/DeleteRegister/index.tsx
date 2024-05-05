@@ -12,7 +12,9 @@ const DeleteRegister = ({ registerId, setShowPopUp }: DeleteRegisterProps) => {
   const refDeleteRegister = useRef<HTMLDivElement>(null);
   const [isPopupOpened, setIsPopupOpened] = useState(false);
 
-  const { mutate } = useTransaction.delete({
+  const { remove } = useTransaction();
+
+  const { mutate } = remove({
     url: "transacao/deletar/",
     queryKey: ["transacao/listar"],
   });

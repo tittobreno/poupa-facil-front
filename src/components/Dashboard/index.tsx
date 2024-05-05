@@ -27,7 +27,7 @@ const Dashboard = () => {
     goToPage,
   } = usePagination();
 
-  const { getAll } = useTransaction;
+  const { getAll } = useTransaction();
 
   const [params, setParams] = useState<ParamsType>({
     skip: 0,

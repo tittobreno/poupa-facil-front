@@ -21,7 +21,7 @@ const Filter = ({ params, setParams, refetch }: FilterProps) => {
   const [selectedTab, setSelectedTab] = useState(1);
   const queryClient = useQueryClient();
 
-  const { getAll } = useTransaction;
+  const { getAll } = useTransaction();
 
   const { data } = getAll<Category[]>({ url: "categorias" });
 

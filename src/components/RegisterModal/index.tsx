@@ -6,7 +6,7 @@ import { convertToCents } from "../../utils/utilities";
 import "./styles.css";
 const RegisterModal = () => {
   const queryKey = ["transacao/listar"];
-  const { create, edit } = useTransaction;
+  const { create, edit } = useTransaction();
 
   const { mutate: editMutate } = edit<any>({
     url: "/transacao/editar/",
