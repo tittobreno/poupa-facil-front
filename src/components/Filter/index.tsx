@@ -3,7 +3,7 @@ import { HiPlusSm } from "react-icons/hi";
 import { HiBarsArrowDown, HiBarsArrowUp } from "react-icons/hi2";
 
 import { useQueryClient } from "@tanstack/react-query";
-import { useGetAll } from "../../services/query";
+import { useTransaction } from "../../services/query";
 import { Category } from "../../models";
 import { ParamsType } from "../Dashboard";
 import "./styles.css";
@@ -21,7 +21,9 @@ const Filter = ({ params, setParams, refetch }: FilterProps) => {
   const [selectedTab, setSelectedTab] = useState(1);
   const queryClient = useQueryClient();
 
-  const { data } = useGetAll<Category[]>({ url: "categorias" });
+  const { getAll } = useTransaction;
+
+  const { data } = getAll<Category[]>({ url: "categorias" });
 
   const handleOpenFilter = (status: boolean) => {
     if (!status) {

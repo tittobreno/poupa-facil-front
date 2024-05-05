@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import saveEaseService from ".";
+import transactionService from ".";
 interface useGetAllProps {
   url: string;
   params?: any;
@@ -7,19 +7,21 @@ interface useGetAllProps {
   refetchOnWindowFocus?: boolean;
 }
 
-export const useGetAll = <T>({
-  url,
-  params,
-  enabled = true,
-  refetchOnWindowFocus = false,
-}: useGetAllProps) => {
-  return useQuery<T>({
-    queryKey: [url],
-    queryFn: async () => {
-      const res = await saveEaseService.getAll<T>({ url, params });
-      return res;
-    },
-    enabled,
-    refetchOnWindowFocus,
-  });
+export const useTransaction = {
+  getAll: <T>({
+    url,
+    params,
+    enabled = true,
+    refetchOnWindowFocus = false,
+  }: useGetAllProps) => {
+    return useQuery<T>({
+      queryKey: [url],
+      queryFn: async () => {
+        const res = await transactionService.getAll<T>({ url, params });
+        return res;
+      },
+      enabled,
+      refetchOnWindowFocus,
+    });
+  },
 };

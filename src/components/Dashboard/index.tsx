@@ -3,7 +3,7 @@ import Search from "../../assets/search-file.svg";
 import { useGlobal } from "../../contexts/GlobalContext";
 import usePagination from "../../hooks/usePagination";
 import { TransactionsList } from "../../models";
-import { useGetAll } from "../../services/query";
+import { useTransaction } from "../../services/query";
 import Filter from "../Filter";
 import Pagination from "../Pagination";
 import Register from "../Register";
@@ -25,13 +25,15 @@ const Dashboard = () => {
     goToPage,
   } = usePagination();
 
+  const { getAll } = useTransaction;
+
   const [params, setParams] = useState<ParamsType>({
     skip: 0,
     take: 10,
     categories: [],
   });
 
-  const { data, refetch } = useGetAll<TransactionsList>({
+  const { data, refetch } = getAll<TransactionsList>({
     url: "transacao/listar",
     params,
   });

@@ -12,18 +12,25 @@ interface GetAllProps {
   url: string;
 }
 
-const saveEaseService = {
+interface CreateProps {
+  url: string;
+  data: any;
+}
+
+const headers = {
+  Authorization: `Bearer ${getItem("token")}`,
+};
+
+const transactionService = {
   getAll: async <T>({ params, url }: GetAllProps): Promise<T> => {
     const res = await api.get<T>(url, {
       params: {
         ...params,
       },
-      headers: {
-        Authorization: `Bearer ${getItem("token")}`,
-      },
+      headers,
     });
     return res.data;
   },
 };
 
-export default saveEaseService;
+export default transactionService;
