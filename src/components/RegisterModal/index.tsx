@@ -6,7 +6,16 @@ import { getItem } from "../../utils/storage";
 import { ChangeEvent, FormEvent, useEffect, useState } from "react";
 import { convertToCents } from "../../utils/utilities";
 import transactionsService from "../../services";
+import { useTransaction } from "../../services/query";
+import { useToast } from "../../hooks/useToast";
 const RegisterModal = () => {
+  const { create } = useTransaction;
+
+  const { mutate } = create<any>({
+    url: "/transacao/cadastrar",
+    queryKey: ["transacao/listar"],
+  });
+
   const {
     setIsOpenRegisterModal,
     typeRegisterModal,
@@ -45,13 +54,10 @@ const RegisterModal = () => {
         );
         handleShowToast("Registro editado com sucesso!");
       } else if (typeRegisterModal === "Adicionar") {
-        await api.post("/transacao/cadastrar", commonData, config);
-        handleShowToast("Registro adicionado com sucesso!");
+        mutate(commonData);
       }
 
       handleClear();
-      const data = await transactionsService.getAll({ skip: 0, take: 10 });
-      setTransactions(data);
     } catch (error) {
       console.error(error);
     }

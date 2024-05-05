@@ -31,6 +31,12 @@ const transactionService = {
     });
     return res.data;
   },
+
+  create: async <T>({ url, data }: CreateProps) => {
+    const res = await api.post<T>(url, data, { headers });
+
+    return res.data;
+  },
 };
 
 export default transactionService;

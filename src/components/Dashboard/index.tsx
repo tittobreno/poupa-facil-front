@@ -8,6 +8,7 @@ import Filter from "../Filter";
 import Pagination from "../Pagination";
 import Register from "../Register";
 import "./styles.css";
+import { useToast } from "../../hooks/useToast";
 export interface ParamsType {
   skip: number;
   take: number;
@@ -16,6 +17,7 @@ export interface ParamsType {
 const Dashboard = () => {
   const [order, setOrder] = useState(false);
   const { setTransactions } = useGlobal();
+  const toast = useToast();
   const {
     currentPage,
     totalPages,
