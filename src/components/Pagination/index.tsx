@@ -1,3 +1,4 @@
+import React from "react";
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 import "./styles.css";
 
@@ -16,7 +17,7 @@ const Pagination = ({
   prevPage,
   goToPage,
 }: PaginationProps) => {
-  const pageItems: JSX.Element[] = [];
+  const pageItems: React.JSX.Element[] = [];
 
   for (let i = 1; i <= totalPages; i++) {
     pageItems.push(
