@@ -52,7 +52,7 @@ const Toast = ({ message, type, id }: ToastProps) => {
   const { icon, iconClass } = toastTypes[type];
   const toast = useToast();
 
-  const timerID = useRef<NodeJS.Timeout | null>(null);
+  const timerID = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const handleDismiss = () => {
     toast.remove(id);
