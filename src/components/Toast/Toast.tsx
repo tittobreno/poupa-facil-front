@@ -6,7 +6,7 @@ import {
   IoIosInformationCircleOutline,
   IoIosWarning,
 } from "react-icons/io";
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence, motion, type Variants } from "framer-motion";
 import { useToast } from "../../hooks/useToast";
 import "./styles.css";
 
@@ -52,7 +52,7 @@ const Toast = ({ message, type, id }: ToastProps) => {
   const { icon, iconClass } = toastTypes[type];
   const toast = useToast();
 
-  const timerID = useRef<NodeJS.Timeout | null>(null);
+  const timerID = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const handleDismiss = () => {
     toast.remove(id);
@@ -70,7 +70,7 @@ const Toast = ({ message, type, id }: ToastProps) => {
     };
   }, []);
 
-  const variants = {
+  const variants: Variants = {
     initial: { y: "100%", opacity: 0 },
     animate: {
       y: 0,
